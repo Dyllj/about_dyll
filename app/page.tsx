@@ -1,9 +1,13 @@
 import Image from "next/image";
+import TogglButton from "./toggle_button/toggl_button";
 
 export default function Home() {
   return (
     <main className="min-h-screen items-center justify-center bg-zinc-100 p-6">
-      <section className="flex flex-col items-center justify-center gap-4 rounded-lg bg-white p-6 shadow-md">
+      <section className="relative flex flex-col items-center justify-center gap-4 rounded-lg bg-white p-6 shadow-md">
+        <div className="absolute right-4 top-4">
+          <TogglButton />
+        </div>
         <Image
           src="/about_dyll_assets/LOGO.svg"
           alt="About Dyll logo"
