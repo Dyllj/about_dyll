@@ -3,24 +3,23 @@ import TogglButton from "./toggle_button/toggl_button";
 
 export default function Home() {
   return (
-    <main className="min-h-screen items-center justify-center bg-zinc-100 p-6">
-      <section className="relative flex items-center justify-between gap-4">
-        <div className="absolute right-4 top-4">
+    <main className="min-h-screen items-center justify-center bg-white">
+      <section className="relative flex mt-5 items-center justify-between gap-4">
+        <div className="absolute right-7 top-4">
           <TogglButton />
         </div>
-        <Image
-          src="/about_dyll_assets/LOGO.svg"
-          alt="About Dyll logo"
-          width={220}
-          height={220}
-          className="h-52 w-52 rounded-full object-cover"
-        />
+        <div className="flex h-60 w-60 ml-60 items-center justify-center rounded-full bg-white">
+          <Image
+            src="/about_dyll_assets/LOGO.svg"
+            alt="About Dyll logo"
+            width={200}
+            height={200}
+            className="h-40 w-40"
+          />
+        </div>
       </section>
-      <section className="mt-6 flex flex-col items-center justify-center gap-4 rounded-lg bg-white p-6 shadow-md">
-        <h2 className="text-xl font-bold text-zinc-800">Getting Started</h2>
-        <p className="text-zinc-600">
-          To get started, edit the <code>app/page.tsx</code> file and save to reload.
-        </p>
+      <section className="mt-6 ml-60 flex flex-col gap-4">
+        <h6 className="text-lg font-semibold text-zinc-400">Full Stack Developer | Cebu City</h6>
       </section>
     </main>
   );
