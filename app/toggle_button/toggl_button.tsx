@@ -17,8 +17,8 @@ const Switch = () => {
 const StyledWrapper = styled.div`
   .toggle-switch {
     position: relative;
-    width: 100px;
-    height: 50px;
+    width: 64px;
+    height: 32px;
     --light: #d8dbe0;
     --dark: #28292c;
     --link: rgb(27, 129, 112);
@@ -28,9 +28,9 @@ const StyledWrapper = styled.div`
   .switch-label {
     position: absolute;
     width: 100%;
-    height: 50px;
+    height: 32px;
     background-color: var(--dark);
-    border-radius: 25px;
+    border-radius: 16px;
     cursor: pointer;
     border: none;
   }
@@ -56,22 +56,22 @@ const StyledWrapper = styled.div`
   .slider::before {
     content: "";
     position: absolute;
-    top: 10px;
-    left: 10px;
-    width: 25px;
-    height: 25px;
+    top: 6px;
+    left: 6px;
+    width: 18px;
+    height: 18px;
     border-radius: 50%;
-    -webkit-box-shadow: inset 12px -4px 0px 0px var(--light);
-    box-shadow: inset 12px -4px 0px 0px var(--light);
+    -webkit-box-shadow: inset 8px -3px 0px 0px var(--light);
+    box-shadow: inset 8px -3px 0px 0px var(--light);
     background-color: var(--dark);
     -webkit-transition: 0.3s;
     transition: 0.3s;
   }
 
   .checkbox:checked ~ .slider::before {
-    -webkit-transform: translateX(50px);
-    -ms-transform: translateX(50px);
-    transform: translateX(50px);
+    -webkit-transform: translateX(32px);
+    -ms-transform: translateX(32px);
+    transform: translateX(32px);
     background-color: var(--dark);
     -webkit-box-shadow: none;
     box-shadow: none;
