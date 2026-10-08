@@ -24,3 +24,48 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.btn-progress {
+  width: 9em;
+  height: 3em;
+  border: 2px solid #1d4ed8;
+  border-radius: 30em;
+  background: #1d4ed8;
+  color: #ffffff;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 15px;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  transition: color 0.5s ease;
+}
+
+.btn-progress::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 3em;
+  border-radius: 30em;
+  background: #ffffff;
+  transition: width 0.5s ease;
+  display: block;
+  z-index: -1;
+}
+
+.btn-progress:hover::before {
+  width: 9em;
+}
+
+.btn-progress:hover {
+  color: #1d4ed8;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-progress,
+  .btn-progress::before {
+    transition: none;
+  }
+}
