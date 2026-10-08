@@ -21,7 +21,7 @@ export default function Home() {
       <section className="mt-6 ml-30 flex flex-col gap-4">
         <div className=" w-200">
           <h6
-            className="text-lg font-semibold text-zinc-400"
+            className="text-md font-semibold text-zinc-400"
             style={{ fontFamily: "var(--font-noto-sans-hebrew), sans-serif" }}
           >
             Full Stack Developer | Cebu City
@@ -40,7 +40,7 @@ export default function Home() {
             </svg>
           </button>
         </div>
-
+        <div className=""></div>
       </section>
     </main>
   );
