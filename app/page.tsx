@@ -21,10 +21,7 @@ export default function Home() {
       <section className="mt-6 ml-60 flex flex-col gap-4">
         <div className=" w-100 bg-amber-200">
           <h6 className="text-lg font-semibold text-zinc-400">Full Stack Developer | Cebu City</h6>
-        <h1 className="text-5xl font-bold text-zinc-900">Hi, I’m Dyll.</h1>
-        <p className="text-lg text-zinc-600">
-          I’m a full stack developer with a passion for creating innovative and user-friendly web applications. I specialize in building scalable and efficient solutions that meet the needs of businesses and users alike.
-        </p>
+          <h1 className="text-5xl font-bold text-zinc-900">Combining Technology, Creativity, and Continous learning to turn ideas into practical solutions.</h1>
         </div>
         
       </section>
