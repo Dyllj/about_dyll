@@ -27,7 +27,7 @@ export default function Home() {
             Full Stack Developer | Cebu City
           </h6>
           <h1
-            className="text-4xl font-bold text-zinc-900"
+            className="mt-5 text-4xl font-bold text-zinc-900"
             style={{ fontFamily: "var(--font-space-grotesk), sans-serif" }}
           >
             Combining Technology, Creativity, and Continous learning to turn ideas into <span className="text-blue-700">practical solutions.</span>
