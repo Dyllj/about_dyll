@@ -1,9 +1,11 @@
 import Image from "next/image";
-import TogglButton from "./toggle_button/toggl_button";
+import TogglButton from "./components/toggle_button/toggl_button";
+import Nav from "./components/nav/nav";
 
 export default function Home() {
   return (
     <main className="min-h-screen items-center justify-center bg-white">
+      <Nav />
       <section className="relative flex mt-5 items-center justify-between gap-4">
         <div className="absolute right-7 top-4">
           <TogglButton />
@@ -18,7 +20,7 @@ export default function Home() {
           />
         </div>
       </section>
-      <section className="mt-6 ml-30 flex flex-col gap-4">
+      <section id="about" className="mt-6 ml-30 flex flex-col gap-4">
         <div className=" w-200">
           <h6
             className="text-md font-semibold text-zinc-400"

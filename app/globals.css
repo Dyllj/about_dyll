@@ -25,6 +25,52 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+@keyframes nav-pixel-reveal {
+  0% {
+    transform: scale(0);
+  }
+
+  72% {
+    transform: scale(1.15);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+.nav-pixel-button {
+  background-color: #ffffff;
+  transition: background-color 180ms ease;
+}
+
+.group:hover .nav-pixel-button,
+.group:focus-visible .nav-pixel-button {
+  background-color: #2563eb;
+  transition-delay: 700ms;
+}
+
+.nav-pixel-overlay {
+  opacity: 1;
+  transition: opacity 180ms ease;
+}
+
+.group:hover .nav-pixel-overlay,
+.group:focus-visible .nav-pixel-overlay {
+  opacity: 0;
+  transition-delay: 700ms;
+}
+
+.nav-pixel-cell {
+  transform: scale(0);
+  transform-origin: center;
+}
+
+.group:hover .nav-pixel-cell,
+.group:focus-visible .nav-pixel-cell {
+  animation: nav-pixel-reveal 360ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
 .btn-progress {
   width: 9em;
   height: 3em;
@@ -64,6 +110,22 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .nav-pixel-button {
+    transition: none;
+  }
+
+  .group:hover .nav-pixel-overlay,
+  .group:focus-visible .nav-pixel-overlay {
+    opacity: 0;
+    transition: none;
+  }
+
+  .group:hover .nav-pixel-cell,
+  .group:focus-visible .nav-pixel-cell {
+    animation: none;
+    transform: scale(0);
+  }
+
   .btn-progress,
   .btn-progress::before {
     transition: none;
