@@ -1,7 +1,7 @@
 const navigationItems = [
   {
     label: "About",
-    href: "#about",
+    href: "/about",
     icon: (
       <>
         <circle cx="12" cy="8" r="3.25" />
