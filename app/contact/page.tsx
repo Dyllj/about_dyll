@@ -25,7 +25,7 @@ export default function ContactPage() {
     <div className="min-h-screen bg-white">
       <header className="mx-auto flex w-full flex-col gap-5 px-5 pt-5 sm:flex-row sm:items-center sm:justify-between sm:px-8 sm:pt-6 lg:px-10">
         <Logo className="sm:ml-40" />
-        <div className="ml-auto flex flex-wrap items-center justify-end gap-3">
+        <div className="ml-auto flex flex-wrap items-center justify-end gap-10">
           <PageNav />
           <TogglButton />
         </div>

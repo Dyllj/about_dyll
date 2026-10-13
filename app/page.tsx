@@ -8,13 +8,13 @@ export default function Home() {
     <div className="min-h-screen bg-white">
       <Nav />
       <header className="relative flex min-h-24 items-center justify-between px-5 pt-4 sm:min-h-32 sm:px-8">
-        <figure className="m-0 flex size-20 items-center justify-center rounded-full bg-white sm:size-28">
+        <figure className="m-0 ml-40 flex size-20 items-center justify-center rounded-full bg-white sm:size-28">
           <Image
             src="/about_dyll_assets/LOGO.svg"
             alt="About Dyll logo"
             width={200}
             height={200}
-            className="size-16 sm:size-24"
+            className="size-20 sm:size-28 rounded-full"
             priority
           />
         </figure>

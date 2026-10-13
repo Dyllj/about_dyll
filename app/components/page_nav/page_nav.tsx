@@ -15,7 +15,7 @@ export default function PageNav() {
   return (
     <nav
       aria-label="Page navigation"
-      className="rounded-full border border-zinc-200 bg-white/90 px-3 py-2 shadow-sm backdrop-blur-sm sm:px-4"
+      className="rounded-full border border-zinc-200 bg-white/90 px-50 py-3 shadow-sm backdrop-blur-sm sm:px-15"
     >
       <ul className="flex items-center gap-2 text-xs font-medium text-zinc-700 sm:gap-5 sm:text-sm lg:gap-8">
         {navigationItems.map(({ label, href }) => {
