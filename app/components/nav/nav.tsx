@@ -11,7 +11,7 @@ const navigationItems = [
   },
   {
     label: "Work",
-    href: "#work",
+    href: "/work",
     icon: (
       <>
         <rect x="3.5" y="7.5" width="17" height="12" rx="2" />
@@ -21,7 +21,7 @@ const navigationItems = [
   },
   {
     label: "Contact",
-    href: "#contact",
+    href: "/contact",
     icon: (
       <>
         <rect x="3.5" y="5.5" width="17" height="13" rx="2" />
