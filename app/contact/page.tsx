@@ -22,16 +22,17 @@ const contactMethods = [
 
 export default function ContactPage() {
   return (
-    <main className="min-h-screen bg-white">
-      <header className="absolute left-80 top-3 z-40">
+    <div className="min-h-screen bg-white">
+      <header className="mx-auto flex w-full max-w-6xl flex-col gap-5 px-5 pt-5 sm:flex-row sm:items-center sm:justify-between sm:px-8 sm:pt-6">
         <Logo />
+        <div className="flex flex-wrap items-center gap-3">
+          <PageNav />
+          <TogglButton />
+        </div>
       </header>
-      <div className="absolute right-20 top-6 z-40 flex items-center gap-15">
-        <PageNav />
-        <TogglButton />
-      </div>
-      <section className="mt-15 mx-auto max-w-5xl px-6 pb-16 pt-20 md:px-10 lg:px-12">
-        <div className="max-w-2xl">
+      <main className="mx-auto w-full max-w-6xl px-5 pb-16 pt-12 sm:px-8 sm:pt-16 lg:pt-20">
+        <section aria-labelledby="contact-heading">
+          <header className="max-w-2xl">
           <p
             className="text-sm font-semibold uppercase tracking-[0.18em] text-blue-700"
             style={{ fontFamily: "var(--font-noto-sans-hebrew), sans-serif" }}
@@ -39,6 +40,7 @@ export default function ContactPage() {
             Contact
           </p>
           <h1
+            id="contact-heading"
             className="mt-4 text-4xl font-bold text-zinc-900 md:text-5xl"
             style={{ fontFamily: "var(--font-space-grotesk), sans-serif" }}
           >
@@ -47,25 +49,27 @@ export default function ContactPage() {
           <p className="mt-5 text-lg leading-relaxed text-zinc-600">
             Whether you&apos;re looking for a product partner, a new teammate, or a developer to turn an idea into a working experience, I&apos;d love to hear from you.
           </p>
-        </div>
+          </header>
 
-        <div className="mt-12 grid gap-5 md:grid-cols-3">
+        <ul className="mt-12 grid list-none gap-5 p-0 md:grid-cols-2 lg:grid-cols-3">
           {contactMethods.map((method) => (
-            <a
-              key={method.title}
-              href={method.href}
-              target={method.href.startsWith("http") ? "_blank" : undefined}
-              rel={method.href.startsWith("http") ? "noreferrer" : undefined}
-              className="rounded-3xl border border-zinc-200 bg-zinc-50 p-6 transition-colors duration-300 hover:border-blue-300 hover:bg-blue-50"
-            >
-              <p className="text-sm font-medium uppercase tracking-[0.12em] text-zinc-500">
-                {method.title}
-              </p>
-              <p className="mt-4 text-xl font-semibold text-zinc-900">{method.value}</p>
-            </a>
+            <li key={method.title}>
+              <a
+                href={method.href}
+                target={method.href.startsWith("http") ? "_blank" : undefined}
+                rel={method.href.startsWith("http") ? "noreferrer" : undefined}
+                className="block h-full wrap-break-word rounded-3xl border border-zinc-200 bg-zinc-50 p-6 transition-colors duration-300 hover:border-blue-300 hover:bg-blue-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
+              >
+                <h2 className="text-sm font-medium uppercase tracking-[0.12em] text-zinc-500">
+                  {method.title}
+                </h2>
+                <p className="mt-4 text-lg font-semibold text-zinc-900 sm:text-xl">{method.value}</p>
+              </a>
+            </li>
           ))}
-        </div>
-      </section>
-    </main>
+        </ul>
+        </section>
+      </main>
+    </div>
   );
 }

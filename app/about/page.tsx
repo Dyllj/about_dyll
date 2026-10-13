@@ -4,34 +4,35 @@ import TogglButton from "../components/toggle_button/toggl_button";
 
 export default function AboutPage() {
   return (
-    <main className="min-h-screen bg-white">
-      <header className="absolute left-80 top-3 z-40">
+    <div className="min-h-screen bg-white">
+      <header className="mx-auto flex w-full max-w-6xl flex-col gap-5 px-5 pt-5 sm:flex-row sm:items-center sm:justify-between sm:px-8 sm:pt-6">
         <Logo />
+        <div className="flex flex-wrap items-center gap-3">
+          <PageNav />
+          <TogglButton />
+        </div>
       </header>
-      <div className="absolute right-20 top-6 z-40 flex items-center gap-15">
-        <PageNav />
-        <TogglButton />
-      </div>
-      <section className="mt-28 ml-30 flex flex-col gap-4 pt-16 pr-24">
-        <div className="w-200">
-          <h6
-            className="text-lg font-semibold text-zinc-400"
+      <main className="mx-auto w-full max-w-6xl px-5 pb-16 pt-16 sm:px-8 sm:pt-24 lg:pt-32">
+        <section aria-labelledby="about-heading" className="max-w-3xl">
+          <p
+            className="text-base font-semibold text-zinc-400 sm:text-lg"
             style={{ fontFamily: "var(--font-noto-sans-hebrew), sans-serif" }}
           >
             Full Stack Developer | Cebu City
-          </h6>
+          </p>
           <h1
-            className="mt-5 text-4xl font-bold text-zinc-900"
+            id="about-heading"
+            className="mt-4 text-3xl font-bold text-zinc-900 sm:mt-5 sm:text-4xl lg:text-5xl"
             style={{ fontFamily: "var(--font-space-grotesk), sans-serif" }}
           >
             About Me
           </h1>
-          <p className="mt-6 max-w-3xl text-lg leading-relaxed text-zinc-600">
+          <p className="mt-5 text-base leading-relaxed text-zinc-600 sm:mt-6 sm:text-lg">
             Hello! I am a passionate Full Stack Developer based in Cebu City, Philippines.
             I combine technology, creativity, and continuous learning to turn ideas into practical solutions.
           </p>
-        </div>
-      </section>
-    </main>
+        </section>
+      </main>
+    </div>
   );
 }

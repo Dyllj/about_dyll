@@ -28,16 +28,17 @@ const projects = [
 
 export default function WorkPage() {
   return (
-    <main className="min-h-screen bg-white">
-      <header className="absolute left-80 top-3 z-40">
+    <div className="min-h-screen bg-white">
+      <header className="mx-auto flex w-full max-w-6xl flex-col gap-5 px-5 pt-5 sm:flex-row sm:items-center sm:justify-between sm:px-8 sm:pt-6">
         <Logo />
+        <div className="flex flex-wrap items-center gap-3">
+          <PageNav />
+          <TogglButton />
+        </div>
       </header>
-      <div className="absolute right-20 top-6 z-40 flex items-center gap-15">
-        <PageNav />
-        <TogglButton />
-      </div>
-      <section className="mt-15 mx-auto max-w-5xl px-6 pb-16 pt-20 md:px-10 lg:px-12">
-        <div className="max-w-2xl">
+      <main className="mx-auto w-full max-w-6xl px-5 pb-16 pt-12 sm:px-8 sm:pt-16 lg:pt-20">
+        <section aria-labelledby="work-heading">
+          <header className="max-w-2xl">
           <p
             className="text-sm font-semibold uppercase tracking-[0.18em] text-blue-700"
             style={{ fontFamily: "var(--font-noto-sans-hebrew), sans-serif" }}
@@ -45,6 +46,7 @@ export default function WorkPage() {
             Selected Work
           </p>
           <h1
+            id="work-heading"
             className="mt-4 text-4xl font-bold text-zinc-900 md:text-5xl"
             style={{ fontFamily: "var(--font-space-grotesk), sans-serif" }}
           >
@@ -53,32 +55,32 @@ export default function WorkPage() {
           <p className="mt-5 text-lg leading-relaxed text-zinc-600">
             I work across product, design, and engineering to turn ideas into reliable software that feels intuitive for real people.
           </p>
-        </div>
+          </header>
 
-        <div className="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+        <ul className="mt-12 grid list-none gap-6 p-0 md:grid-cols-2 xl:grid-cols-3">
           {projects.map((project) => (
-            <article
-              key={project.title}
-              className="rounded-3xl border border-zinc-200 bg-zinc-50 p-6 shadow-sm transition-transform duration-300 hover:-translate-y-1"
-            >
-              <div className={`mb-6 inline-flex rounded-full px-3 py-1 text-xs font-medium ${project.accent}`}>
-                {project.title}
-              </div>
-              <p className="text-base leading-7 text-zinc-700">{project.description}</p>
-              <div className="mt-6 flex flex-wrap gap-2">
-                {project.stack.map((item) => (
-                  <span
-                    key={item}
-                    className="rounded-full border border-zinc-200 bg-white px-2.5 py-1 text-xs font-medium text-zinc-600"
-                  >
-                    {item}
-                  </span>
-                ))}
-              </div>
-            </article>
+            <li key={project.title}>
+              <article className="h-full rounded-3xl border border-zinc-200 bg-zinc-50 p-6 shadow-sm transition-transform duration-300 hover:-translate-y-1">
+                <h2 className={`mb-6 inline-flex rounded-full px-3 py-1 text-xs font-medium ${project.accent}`}>
+                  {project.title}
+                </h2>
+                <p className="text-base leading-7 text-zinc-700">{project.description}</p>
+                <ul aria-label={`${project.title} technologies`} className="mt-6 flex list-none flex-wrap gap-2 p-0">
+                  {project.stack.map((item) => (
+                    <li
+                      key={item}
+                      className="rounded-full border border-zinc-200 bg-white px-2.5 py-1 text-xs font-medium text-zinc-600"
+                    >
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </article>
+            </li>
           ))}
-        </div>
-      </section>
-    </main>
+        </ul>
+        </section>
+      </main>
+    </div>
   );
 }
