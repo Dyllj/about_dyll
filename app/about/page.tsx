@@ -14,7 +14,7 @@ export default function AboutPage() {
         </div>
       </header>
       <main className="w-full -mt-20 max-w-6xl px-5 pb-16 pt-16 sm:px-8 sm:pt-24 lg:pt-32">
-        <section className="mx-auto max-w-4xl text-left">
+        <section className="mx-auto max-w-4xl text-left flex gap-5">
           <div className="flex h-130 w-90 flex-col items-center justify-start rounded-4xl bg-zinc-300">
             <div className="relative mt-5 h-110 w-80 overflow-hidden rounded-2xl bg-zinc-100">
               <Image
@@ -29,6 +29,9 @@ export default function AboutPage() {
               <h2 className="text-2xl font-bold text-zinc-800">Wendyll Jay Tautoan</h2>
               <h4 className="text-lg text-zinc-600">Full Stack Developer</h4>
             </div>
+          </div>
+          <div className="w-50 h-50">
+            <h1 className="text-zinc-800 text-3xl font-extrabold">About <span className="text-blue-700">Me</span></h1>
           </div>
         </section>
       </main>
