@@ -22,8 +22,8 @@ export default function Home() {
           <TogglButton />
         </div>
       </header>
-      <main className="mx-auto w-full max-w-6xl px-5 pb-16 pt-8 sm:px-8 sm:pt-12 lg:pt-16">
-        <section aria-labelledby="home-heading" className="max-w-4xl">
+      <main className="ml-25 mt-10 w-full max-w-6xl px-5 pb-16 pt-8 sm:px-8 sm:pt-12 lg:pt-16">
+        <section aria-labelledby="home-heading" className="max-w-4xl text-left">
           <p
             className="text-sm font-semibold text-zinc-400 sm:text-base"
             style={{ fontFamily: "var(--font-noto-sans-hebrew), sans-serif" }}

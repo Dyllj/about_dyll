@@ -12,25 +12,15 @@ export default function AboutPage() {
           <TogglButton />
         </div>
       </header>
-      <main className="mx-auto w-full max-w-6xl px-5 pb-16 pt-16 sm:px-8 sm:pt-24 lg:pt-32">
-        <section aria-labelledby="about-heading" className="max-w-3xl">
-          <p
-            className="text-base font-semibold text-zinc-400 sm:text-lg"
-            style={{ fontFamily: "var(--font-noto-sans-hebrew), sans-serif" }}
-          >
-            Full Stack Developer | Cebu City
-          </p>
-          <h1
-            id="about-heading"
-            className="mt-4 text-3xl font-bold text-zinc-900 sm:mt-5 sm:text-4xl lg:text-5xl"
-            style={{ fontFamily: "var(--font-space-grotesk), sans-serif" }}
-          >
-            About Me
-          </h1>
-          <p className="mt-5 text-base leading-relaxed text-zinc-600 sm:mt-6 sm:text-lg">
-            Hello! I am a passionate Full Stack Developer based in Cebu City, Philippines.
-            I combine technology, creativity, and continuous learning to turn ideas into practical solutions.
-          </p>
+      <main className="w-full -mt-20 max-w-6xl px-5 pb-16 pt-16 sm:px-8 sm:pt-24 lg:pt-32">
+        <section className="mx-auto max-w-4xl text-left">
+          <div className="flex h-130 w-100 flex-col items-center justify-start rounded-2xl bg-zinc-300">
+            <div className="mt-8 flex h-90 w-90 items-center justify-center rounded-md bg-zinc-100" />
+            <div className="mt-6 -ml-30">
+              <h2 className="text-2xl font-bold text-zinc-800">Wendyll Jay Tautoan</h2>
+              <h4 className="text-lg text-zinc-600">Full Stack Developer</h4>
+            </div>
+          </div>
         </section>
       </main>
     </div>

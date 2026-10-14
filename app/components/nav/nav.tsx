@@ -35,7 +35,7 @@ export default function Nav() {
   return (
     <nav
       aria-label="Main navigation"
-      className="fixed right-10 top-1/2 z-40 -translate-y-1/2"
+      className="fixed right-12 top-1/2 z-40 -translate-y-1/2 sm:right-14"
     >
       <div className="relative">
         <span
