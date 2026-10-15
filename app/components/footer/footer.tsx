@@ -1,9 +1,10 @@
-import Link from "next/link";
+"use client";
 
 const links = [
-  { label: "About", href: "/about" },
-  { label: "Work", href: "/work" },
-  { label: "Contact", href: "/contact" },
+  { label: "Home", href: "/" },
+  { label: "About", href: "/#about" },
+  { label: "Work", href: "/#work" },
+  { label: "Contact", href: "/#contact" },
 ];
 
 const socials = [
@@ -22,7 +23,7 @@ export default function Footer() {
             <ul className="flex gap-9 text-[15px] font-medium text-[#0b0b0b]">
               {links.map(({ label, href }) => (
                 <li key={label}>
-                  <Link href={href}>{label}</Link>
+                  <a href={href}>{label}</a>
                 </li>
               ))}
             </ul>

@@ -43,7 +43,7 @@ export default function PageNav({ onNavigate }: { onNavigate?: (view: View) => v
   return (
     <nav
       aria-label="Page navigation"
-      className="inline-flex rounded-full border border-[#e1e4ea] bg-[#eef0f3] p-1.5"
+      className="inline-flex rounded-full border border-[#e1e4ea] bg-[#eef0f3] p-1.5 sm:p-2.5"
     >
       <ul className="flex items-center gap-1" role="tablist">
         {navigationItems.map(({ label, view }) => {

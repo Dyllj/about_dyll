@@ -7,7 +7,7 @@ import TogglButton from "../toggle_button/toggl_button";
 export default function Header() {
   return (
     <header
-      className="mx-auto w-full max-w-[1160px] px-5 sm:px-8 xl:px-0 grid grid-cols-[1fr_auto_1fr] items-center py-6"
+      className="mx-auto w-full max-w-290 px-5 sm:px-8 xl:px-0 grid grid-cols-[1fr_auto_1fr] items-center py-6"
     >
       <Logo />
       <PageNav />

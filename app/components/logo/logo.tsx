@@ -1,10 +1,15 @@
+"use client";
+
 import Image from "next/image";
-import Link from "next/link";
 
 export default function Logo({ className = "" }: { className?: string }) {
+  const navigateToLanding = () => {
+    window.location.hash = "";
+  };
+
   return (
-    <Link
-      href="/"
+    <button
+      onClick={navigateToLanding}
       className={`inline-flex items-center ${className}`}
       aria-label="About Dyll home"
     >
@@ -15,6 +20,6 @@ export default function Logo({ className = "" }: { className?: string }) {
         height={50}
         className="h-20 w-20 rounded-full"
       />
-    </Link>
+    </button>
   );
 }
