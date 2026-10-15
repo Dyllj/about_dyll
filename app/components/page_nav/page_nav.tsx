@@ -1,40 +1,72 @@
 "use client";
 
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { useEffect, useState, useCallback } from "react";
 
-const navigationItems = [
-  { label: "About", href: "/about" },
-  { label: "Work", href: "/work" },
-  { label: "Contact", href: "/contact" },
+type View = "about" | "work" | "contact";
+
+const navigationItems: { label: string; view: View }[] = [
+  { label: "About", view: "about" },
+  { label: "Work", view: "work" },
+  { label: "Contact", view: "contact" },
 ];
 
-export default function PageNav() {
-  const pathname = usePathname();
+const getViewFromHash = (): View => {
+  if (typeof window === "undefined") return "about";
+  const hash = window.location.hash.slice(1);
+  return (["about", "work", "contact"] as View[]).includes(hash as View)
+    ? (hash as View)
+    : "about";
+};
+
+export default function PageNav({ onNavigate }: { onNavigate?: (view: View) => void }) {
+  const [activeView, setActiveView] = useState<View>(getViewFromHash);
+
+  useEffect(() => {
+    const handleHashChange = () => {
+      const view = getViewFromHash();
+      setActiveView(view);
+      onNavigate?.(view);
+    };
+
+    window.addEventListener("hashchange", handleHashChange);
+    return () => window.removeEventListener("hashchange", handleHashChange);
+  }, [onNavigate]);
+
+  const navigate = useCallback((view: View) => {
+    if (typeof window !== "undefined" && window.location.hash !== `#${view}`) {
+      window.location.hash = view;
+    } else {
+      onNavigate?.(view);
+    }
+  }, [onNavigate]);
 
   return (
     <nav
       aria-label="Page navigation"
-      className="rounded-full border border-zinc-200 bg-white/90 px-50 py-1.5 shadow-sm backdrop-blur-sm sm:px-15"
+      className="inline-flex rounded-full border border-[#e1e4ea] bg-[#eef0f3] p-1.5"
     >
-      <ul className="flex items-center gap-2 text-xs font-medium text-zinc-700 sm:gap-5 sm:text-sm lg:gap-8">
-        {navigationItems.map(({ label, href }) => {
-          const isActive = pathname === href;
+      <ul className="flex items-center gap-1" role="tablist">
+        {navigationItems.map(({ label, view }) => {
+          const isActive = activeView === view;
 
           return (
-          <li key={label}>
-            <Link
-              href={href}
-              aria-current={isActive ? "page" : undefined}
-              className={`inline-flex rounded-full px-2 py-1 transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 sm:px-5 ${
-                isActive
-                  ? "bg-blue-600 text-white shadow-sm"
-                  : "hover:bg-blue-50 hover:text-blue-700"
-              }`}
-            >
-              {label}
-            </Link>
-          </li>
+            <li key={label} role="presentation">
+              <button
+                type="button"
+                role="tab"
+                aria-selected={isActive}
+                aria-controls={`${view}-view`}
+                id={`${view}-tab`}
+                onClick={() => navigate(view)}
+                className={`inline-flex rounded-full px-4 py-2 text-sm font-medium transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0047ff] sm:px-7 sm:py-2.5 sm:text-[15px] ${
+                  isActive
+                    ? "bg-[#0047ff] text-white"
+                    : "text-[#0b0b0b] hover:bg-white"
+                }`}
+              >
+                {label}
+              </button>
+            </li>
           );
         })}
       </ul>
