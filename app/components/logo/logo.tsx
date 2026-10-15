@@ -10,7 +10,7 @@ export default function Logo({ className = "" }: { className?: string }) {
   return (
     <button
       onClick={navigateToLanding}
-      className={`inline-flex items-center ${className}`}
+      className={`inline-flex items-center cursor-pointer ${className}`}
       aria-label="About Dyll home"
     >
       <Image
