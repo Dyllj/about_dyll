@@ -32,15 +32,9 @@ const hasValidCanvasHash = (): boolean => {
   return (["about", "work", "contact"] as CanvasView[]).includes(hash as CanvasView);
 };
 
-const isClient = typeof window !== "undefined";
-
 export default function Home() {
-  const [activeView, setActiveView] = useState<CanvasView>(() =>
-    isClient ? getCanvasViewFromHash() : "about"
-  );
-  const [isCanvasMode, setIsCanvasMode] = useState(() =>
-    isClient ? hasValidCanvasHash() : false
-  );
+  const [activeView, setActiveView] = useState<CanvasView>("about");
+  const [isCanvasMode, setIsCanvasMode] = useState(false);
 
   useEffect(() => {
     const handleHashChange = () => {
@@ -51,23 +45,12 @@ export default function Home() {
       }
     };
 
+    handleHashChange();
     window.addEventListener("hashchange", handleHashChange);
     return () => window.removeEventListener("hashchange", handleHashChange);
   }, []);
 
   const ViewComponent = canvasViewComponents[activeView];
-
-  if (!isClient) {
-    return (
-      <div className="min-h-screen bg-white font-(family-name:--font-space-grotesk) text-[#0b0b0b]">
-        <Header />
-        <main className="mx-auto w-full max-w-290 px-5 sm:px-8 xl:px-0">
-          <div aria-hidden="true" className="h-96" />
-        </main>
-        <Footer />
-      </div>
-    );
-  }
 
   if (!isCanvasMode) {
     return <LandingView />;

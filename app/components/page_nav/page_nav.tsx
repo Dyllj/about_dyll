@@ -19,7 +19,7 @@ const getViewFromHash = (): View => {
 };
 
 export default function PageNav({ onNavigate }: { onNavigate?: (view: View) => void }) {
-  const [activeView, setActiveView] = useState<View>(getViewFromHash);
+  const [activeView, setActiveView] = useState<View>("about");
 
   useEffect(() => {
     const handleHashChange = () => {
@@ -28,6 +28,7 @@ export default function PageNav({ onNavigate }: { onNavigate?: (view: View) => v
       onNavigate?.(view);
     };
 
+    handleHashChange();
     window.addEventListener("hashchange", handleHashChange);
     return () => window.removeEventListener("hashchange", handleHashChange);
   }, [onNavigate]);
