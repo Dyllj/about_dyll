@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 
 type View = "about" | "work" | "contact";
 
@@ -20,6 +20,22 @@ const getViewFromHash = (): View => {
 
 export default function PageNav({ onNavigate }: { onNavigate?: (view: View) => void }) {
   const [activeView, setActiveView] = useState<View>("about");
+  const listRef = useRef<HTMLUListElement>(null);
+  const itemRefs = useRef<Partial<Record<View, HTMLButtonElement | null>>>({});
+  const [indicator, setIndicator] = useState<{ left: number; width: number } | null>(null);
+
+  // slide the blue pill under whichever tab is active; re-measure whenever the
+  // nav changes size (font loading, breakpoints) so it never drifts
+  useLayoutEffect(() => {
+    const measure = () => {
+      const el = itemRefs.current[activeView];
+      if (el) setIndicator({ left: el.offsetLeft, width: el.offsetWidth });
+    };
+    measure();
+    const observer = new ResizeObserver(measure);
+    if (listRef.current) observer.observe(listRef.current);
+    return () => observer.disconnect();
+  }, [activeView]);
 
   useEffect(() => {
     const handleHashChange = () => {
@@ -44,9 +60,16 @@ export default function PageNav({ onNavigate }: { onNavigate?: (view: View) => v
   return (
     <nav
       aria-label="Page navigation"
-      className="inline-flex rounded-full border border-[#e1e4ea] bg-[#eef0f3] p-1.5 sm:p-2.5"
+      className="inline-flex rounded-full border border-[#e1e4ea] bg-[#eef0f3] p-1.5"
     >
-      <ul className="flex items-center gap-1" role="tablist">
+      <ul ref={listRef} className="relative flex items-center gap-1 sm:gap-2" role="tablist">
+        {indicator && (
+          <span
+            aria-hidden="true"
+            className="absolute inset-y-0 rounded-full bg-[#0047ff] shadow-[0_8px_20px_-8px_rgba(0,71,255,0.7)] transition-[left,width] duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] motion-reduce:transition-none"
+            style={{ left: indicator.left, width: indicator.width }}
+          />
+        )}
         {navigationItems.map(({ label, view }) => {
           const isActive = activeView === view;
 
@@ -58,11 +81,14 @@ export default function PageNav({ onNavigate }: { onNavigate?: (view: View) => v
                 aria-selected={isActive}
                 aria-controls={`${view}-view`}
                 id={`${view}-tab`}
+                ref={(el) => {
+                  itemRefs.current[view] = el;
+                }}
                 onClick={() => navigate(view)}
-                className={`inline-flex rounded-full px-4 py-2 text-sm font-medium transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0047ff] sm:px-7 sm:py-2.5 sm:text-[15px] ${
+                className={`relative z-10 inline-flex rounded-full px-3 py-2 text-sm font-medium transition-colors duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0047ff] sm:px-7 sm:py-2.5 sm:text-[15px] ${
                   isActive
-                    ? "bg-[#0047ff] text-white"
-                    : "text-[#0b0b0b] hover:bg-white"
+                    ? `text-white ${indicator ? "" : "bg-[#0047ff]"}`
+                    : "text-[#0b0b0b] hover:bg-white/70"
                 }`}
               >
                 {label}
@@ -73,4 +99,4 @@ export default function PageNav({ onNavigate }: { onNavigate?: (view: View) => v
       </ul>
     </nav>
   );
-}
+} 

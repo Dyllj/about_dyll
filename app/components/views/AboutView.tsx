@@ -41,7 +41,7 @@ const achievements: Achievement[] = [
 export default function AboutView() {
   return (
     <main className={container} id="about-view">
-      <section className="grid gap-6 lg:grid-cols-[340px_1fr] mt-5">
+      <section className="grid gap-6 lg:grid-cols-[340px_1fr] mt-15">
         <div className={`${surface} p-5 lg:row-span-3 h-150`}>
           <div className="relative h-95 overflow-hidden rounded-[20px] border border-[#e1e4ea] bg-white">
             <Image
