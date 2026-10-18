@@ -1,10 +1,13 @@
 "use client";
 
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 export default function Logo({ className = "" }: { className?: string }) {
+  const router = useRouter();
+  
   const navigateToLanding = () => {
-    window.location.hash = "";
+    router.push("/");
   };
 
   return (
