@@ -66,7 +66,7 @@ export default function PageNav({ onNavigate }: { onNavigate?: (view: View) => v
         {indicator && (
           <span
             aria-hidden="true"
-            className="absolute inset-y-0 rounded-full bg-[#0047ff] shadow-[0_8px_20px_-8px_rgba(0,71,255,0.7)] transition-[left,width] duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] motion-reduce:transition-none"
+            className="absolute inset-y-0 rounded-full bg-brand shadow-[0_8px_20px_-8px_rgba(0,71,255,0.7)] transition-[left,width] duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] motion-reduce:transition-none"
             style={{ left: indicator.left, width: indicator.width }}
           />
         )}
@@ -85,9 +85,9 @@ export default function PageNav({ onNavigate }: { onNavigate?: (view: View) => v
                   itemRefs.current[view] = el;
                 }}
                 onClick={() => navigate(view)}
-                className={`relative z-10 inline-flex rounded-full px-3 py-2 text-sm font-medium transition-colors duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0047ff] sm:px-10 sm:py-2.5 sm:text-[15px] ${
+                className={`relative z-10 inline-flex rounded-full px-3 py-2 text-sm font-medium transition-colors duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand sm:px-10 sm:py-2.5 sm:text-[15px] ${
                   isActive
-                    ? `text-white ${indicator ? "" : "bg-[#0047ff]"}`
+                    ? `text-white ${indicator ? "" : "bg-brand"}`
                     : "text-[#0b0b0b] hover:bg-white/70"
                 }`}
               >

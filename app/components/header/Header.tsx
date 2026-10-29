@@ -53,7 +53,7 @@ export default function Header() {
           <span
             ref={progressRef}
             style={{ "--progress": 0 } as CSSProperties}
-            className="absolute inset-x-0 bottom-0 h-0.75 origin-left scale-x-(--progress) bg-[#0047ff]"
+            className="absolute inset-x-0 bottom-0 h-0.75 origin-left scale-x-(--progress) bg-brand"
           />
         </span>
 
