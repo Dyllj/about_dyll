@@ -4,7 +4,7 @@ import type { MouseEvent } from "react";
 import Backdrop from "../landing/Backdrop";
 import HeroCopy from "../landing/HeroCopy";
 import Portrait from "../landing/Portrait";
-import TechMarquee from "../landing/TechMarquee";
+import AchievementsMarquee from "../landing/AchievementsMarquee";
 
 const styles = {
   page: "relative flex min-h-screen flex-col overflow-hidden bg-white",
@@ -37,7 +37,7 @@ export default function LandingView() {
         </div>
       </main>
 
-      <TechMarquee />
+      <AchievementsMarquee />
     </div>
   );
 }
