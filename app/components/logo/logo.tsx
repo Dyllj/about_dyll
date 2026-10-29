@@ -19,7 +19,7 @@ export default function Logo({ className = "" }: { className?: string }) {
     <button
       type="button"
       onClick={goToLanding}
-      className={`inline-flex items-center cursor-pointer ${className}`}
+      className={`inline-flex cursor-pointer items-center rounded-full border-2 border-brand/25 p-0.5 transition-colors duration-300 hover:border-brand focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand ${className}`}
       aria-label="About Dyll home"
     >
       <Image

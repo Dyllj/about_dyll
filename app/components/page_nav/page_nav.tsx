@@ -62,7 +62,7 @@ export default function PageNav({ onNavigate }: { onNavigate?: (view: View) => v
       aria-label="Page navigation"
       className="inline-flex rounded-full border border-[#e1e4ea] bg-[#eef0f3] p-1.5"
     >
-      <ul ref={listRef} className="relative flex items-center gap-1 sm:gap-2" role="tablist">
+      <ul ref={listRef} className="relative flex items-center gap-1 sm:gap-3" role="tablist">
         {indicator && (
           <span
             aria-hidden="true"
@@ -85,7 +85,7 @@ export default function PageNav({ onNavigate }: { onNavigate?: (view: View) => v
                   itemRefs.current[view] = el;
                 }}
                 onClick={() => navigate(view)}
-                className={`relative z-10 inline-flex rounded-full px-3 py-2 text-sm font-medium transition-colors duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0047ff] sm:px-7 sm:py-2.5 sm:text-[15px] ${
+                className={`relative z-10 inline-flex rounded-full px-3 py-2 text-sm font-medium transition-colors duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0047ff] sm:px-10 sm:py-2.5 sm:text-[15px] ${
                   isActive
                     ? `text-white ${indicator ? "" : "bg-[#0047ff]"}`
                     : "text-[#0b0b0b] hover:bg-white/70"
@@ -99,4 +99,4 @@ export default function PageNav({ onNavigate }: { onNavigate?: (view: View) => v
       </ul>
     </nav>
   );
-} 
+}
