@@ -1,6 +1,15 @@
 "use client";
 
-import Image from "next/image";
+import Image, { type StaticImageData } from "next/image";
+
+// Static imports (instead of "/path.jpg" strings) let Next.js read each file's
+// size at build time (no layout shift), generate a tiny blur placeholder, and
+// serve it from a fingerprinted URL that browsers can cache for a long time.
+import profilePhoto from "@/public/about_dyll_assets/e.jpg";
+import cumLaudeImg from "@/public/about_dyll_assets/Cum Laude.png";
+import bestPaperImg from "@/public/about_dyll_assets/Best Paper.png";
+import raiseImg from "@/public/about_dyll_assets/RAISE seminar.jpg";
+import researcherImg from "@/public/about_dyll_assets/Researcher of the Year.jpg";
 
 const container = "mx-auto w-full max-w-[1160px] px-5 sm:px-8 xl:px-0";
 const surface = "rounded-[28px] border border-[#e1e4ea] bg-[#eef0f3]";
@@ -18,11 +27,19 @@ const techStack = [
   { short: "Sb", name: "Supabase" },
 ];
 
+type AchievementImage = {
+  src: StaticImageData;
+  /** Describes what is in the picture (not just the award name). */
+  alt: string;
+  /** CSS object-position, to keep the important part inside the square crop. */
+  position?: string;
+};
+
 type Achievement = {
   category: string;
   title: string;
   description?: string;
-  image?: string;
+  image?: AchievementImage;
 };
 
 const achievements: Achievement[] = [
@@ -30,24 +47,41 @@ const achievements: Achievement[] = [
     category: "Education",
     title: "Cum Laude Graduate (2025–2026)",
     description:
-      "Graduated with Latin honors, recognized for consistent academic excellence throughout the 2025–2026 academic year.",
+      "Graduated cum laude with a Bachelor of Science in Information Technology, earning Latin honors for consistent academic excellence.",
+    image: {
+      src: cumLaudeImg,
+      alt: "Latin Honors banner for Wendyll Jay H. Tautoan, Bachelor of Science in Information Technology, Cum Laude",
+      position: "10% 50%",
+    },
   },
   {
     category: "Research",
     title: "Best Paper Award",
     description:
       "Won Best Paper at the 6th International Research Congress, hosted by St. Michael's College, Inc. in Iligan City, for AlerTech, a mobile incident reporting app built as a capstone project. I served as Project Coordinator.",
+    image: {
+      src: bestPaperImg,
+      alt: "Receiving the Best Paper certificate at the 6th International Research Congress",
+    },
   },
   {
     category: "Competition",
     title: "Seminar R.A.I.S.E. — 1st Place",
     description: "Took first place in the Seminar R.A.I.S.E. competition.",
+    image: {
+      src: raiseImg,
+      alt: "Three students at the Seminar R.A.I.S.E. event, one speaking into a microphone",
+    },
   },
   {
     category: "Research",
     title: "Researcher of the Year",
     description:
       "Named Researcher of the Year in recognition of outstanding research work.",
+    image: {
+      src: researcherImg,
+      alt: "Congratulations graphic for Wendyll Tautoan, Best Paper at the 6th International Research Congress",
+    },
   },
 ];
 
@@ -65,9 +99,11 @@ export default function AboutView() {
         <div className={`${surface} p-5 lg:row-span-3 h-150`}>
           <div className="relative h-95 overflow-hidden rounded-[20px] border border-[#e1e4ea] bg-white">
             <Image
-              src="/about_dyll_assets/e.jpg"
+              src={profilePhoto}
               alt="Wendyll Jay Tautoan"
               fill
+              priority
+              placeholder="blur"
               sizes="340px"
               className="object-cover object-top"
             />
@@ -150,11 +186,13 @@ export default function AboutView() {
               <div className="relative size-37.5 shrink-0 overflow-hidden rounded-[20px] border border-[#e1e4ea] bg-white">
                 {image && (
                   <Image
-                    src={image}
-                    alt={title}
+                    src={image.src}
+                    alt={image.alt}
                     fill
+                    placeholder="blur"
                     sizes="150px"
                     className="object-cover"
+                    style={{ objectPosition: image.position }}
                   />
                 )}
               </div>
