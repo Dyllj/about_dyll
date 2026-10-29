@@ -8,12 +8,6 @@ const chip =
   "inline-flex items-center rounded-full border border-[#e1e4ea] bg-white px-3.5 py-1.5 text-[13px] font-medium";
 const muted = "text-[#5b6270]";
 
-const stats = [
-  { value: "00", label: "Projects" },
-  { value: "00", label: "Years of experience" },
-  { value: "00", label: "Achievements" },
-];
-
 const techStack = [
   { short: "R", name: "React" },
   { short: "JS", name: "JavaScript" },
@@ -32,10 +26,36 @@ type Achievement = {
 };
 
 const achievements: Achievement[] = [
-  { category: "Education", title: "Cum Laude Graduate (2025–2026)" },
-  { category: "Research", title: "Best Paper Award" },
-  { category: "Competition", title: "Seminar R.A.I.S.E. — 1st Place" },
-  { category: "Research", title: "Researcher of the Year" },
+  {
+    category: "Education",
+    title: "Cum Laude Graduate (2025–2026)",
+    description:
+      "Graduated with Latin honors, recognized for consistent academic excellence throughout the 2025–2026 academic year.",
+  },
+  {
+    category: "Research",
+    title: "Best Paper Award",
+    description:
+      "Won Best Paper at the 6th International Research Congress, hosted by St. Michael's College, Inc. in Iligan City, for AlerTech, a mobile incident reporting app built as a capstone project. I served as Project Coordinator.",
+  },
+  {
+    category: "Competition",
+    title: "Seminar R.A.I.S.E. — 1st Place",
+    description: "Took first place in the Seminar R.A.I.S.E. competition.",
+  },
+  {
+    category: "Research",
+    title: "Researcher of the Year",
+    description:
+      "Named Researcher of the Year in recognition of outstanding research work.",
+  },
+];
+
+// Derived from the list above so the number never goes out of date
+const stats = [
+  { value: "00", label: "Projects" },
+  { value: "00", label: "Years of experience" },
+  { value: String(achievements.length).padStart(2, "0"), label: "Achievements" },
 ];
 
 export default function AboutView() {
@@ -67,13 +87,13 @@ export default function AboutView() {
 
         <div className={` px-10 py-9`}>
           <h1 className="text-4xl font-bold tracking-tight">
-            About <span className="text-[#0047ff]">me</span>
+            About <span className="text-brand">me</span>
           </h1>
           <p className="mt-4 max-w-180 text-[17px] leading-[1.7]">
             I&apos;m a software developer focused on building intuitive,
             practical, and engaging digital experiences. My work spans web
             development, IoT, and real-world applications, using{" "}
-            <span className="font-medium text-[#0047ff]">
+            <span className="font-medium text-brand">
               AI-assisted development
             </span>{" "}
             to turn ideas into working solutions.
@@ -119,7 +139,7 @@ export default function AboutView() {
             id="achievements-heading"
             className="text-4xl font-bold tracking-tight"
           >
-            My <span className="text-[#0047ff]">achievements</span>
+            My <span className="text-brand">achievements</span>
           </h2>
           <span className={muted}>{achievements.length}</span>
         </div>
@@ -139,7 +159,7 @@ export default function AboutView() {
                 )}
               </div>
               <div className="min-w-0 flex-1">
-                <span className="inline-block rounded-full bg-[#0047ff] px-3.5 py-1.5 text-[13px] font-medium text-white">
+                <span className="inline-block rounded-full bg-brand px-3.5 py-1.5 text-[13px] font-medium text-white">
                   {category}
                 </span>
                 <h3 className="mb-3.5 mt-2 text-[21px] font-bold leading-tight">

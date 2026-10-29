@@ -53,16 +53,12 @@ export default function Header() {
           <span
             ref={progressRef}
             style={{ "--progress": 0 } as CSSProperties}
-            className="absolute inset-x-0 bottom-0 h-0.75 origin-left scale-x-(--progress) bg-[#0047ff]"
+            className="absolute inset-x-0 bottom-0 h-0.75 origin-left scale-x-(--progress) bg-brand"
           />
         </span>
 
-        {/* Logo badge with a slow blue arc: the landing page's ring in miniature */}
-        <div className="relative grid size-12 shrink-0 place-items-center sm:size-14">
-          <span
-            aria-hidden="true"
-            className="absolute inset-0 rounded-full border-2 border-[#0047ff]/15 border-t-[#0047ff] [animation-duration:6s] motion-safe:animate-spin"
-          />
+        {/* Logo badge */}
+        <div className="grid size-12 shrink-0 place-items-center sm:size-14">
           <div className="[&_img]:size-9 sm:[&_img]:size-11">
             <Logo />
           </div>

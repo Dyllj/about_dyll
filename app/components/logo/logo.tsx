@@ -1,18 +1,24 @@
 "use client";
 
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 
 export default function Logo({ className = "" }: { className?: string }) {
-  const router = useRouter();
-  
-  const navigateToLanding = () => {
-    router.push("/");
+  // page.tsx shows LandingView whenever the URL has no #about / #work / #contact
+  // hash, and it reacts to the `hashchange` event. router.push("/") and
+  // history.pushState() change the URL without firing that event, so the view
+  // never switched. Clear the hash ourselves and fire the event manually.
+  const goToLanding = () => {
+    if (window.location.hash) {
+      window.history.pushState(null, "", window.location.pathname + window.location.search);
+      window.dispatchEvent(new HashChangeEvent("hashchange"));
+    }
+    window.scrollTo({ top: 0 });
   };
 
   return (
     <button
-      onClick={navigateToLanding}
+      type="button"
+      onClick={goToLanding}
       className={`inline-flex items-center cursor-pointer ${className}`}
       aria-label="About Dyll home"
     >
