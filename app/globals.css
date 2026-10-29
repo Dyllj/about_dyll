@@ -12,6 +12,42 @@
   --font-mono: var(--font-geist-mono);
 }
 
+/* Landing page design tokens: brand blue and entrance / ambient animations */
+@theme {
+  --color-brand: #0047ff;
+
+  --animate-rise: rise 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-marquee: marquee 32s linear infinite;
+
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(24px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  @keyframes marquee {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
@@ -74,9 +110,9 @@ body {
 .btn-progress {
   width: 9em;
   height: 3em;
-  border: 2px solid #1d4ed8;
+  border: 2px solid var(--color-brand);
   border-radius: 30em;
-  background: #1d4ed8;
+  background: var(--color-brand);
   color: #ffffff;
   cursor: pointer;
   font-family: inherit;
@@ -106,7 +142,24 @@ body {
 }
 
 .btn-progress:hover {
-  color: #1d4ed8;
+  color: var(--color-brand);
+}
+
+/* Highlighter underline that wraps with the text and draws itself in */
+.hero-underline {
+  background-image: linear-gradient(rgb(0 71 255 / 0.16), rgb(0 71 255 / 0.16));
+  background-repeat: no-repeat;
+  background-position: 0 92%;
+  background-size: 100% 0.32em;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  animation: underline-grow 1s 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+@keyframes underline-grow {
+  from {
+    background-size: 0% 0.32em;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -129,5 +182,9 @@ body {
   .btn-progress,
   .btn-progress::before {
     transition: none;
+  }
+
+  .hero-underline {
+    animation: none;
   }
 }
