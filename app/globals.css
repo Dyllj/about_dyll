@@ -19,6 +19,9 @@
   --animate-rise: rise 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) both;
   --animate-float: float 6s ease-in-out infinite;
   --animate-marquee: marquee 32s linear infinite;
+  /* Both use the same duration so the counter-rotation exactly cancels the orbit */
+  --animate-orbit: orbit 36s linear infinite;
+  --animate-orbit-counter: orbit 36s linear infinite reverse;
 
   @keyframes rise {
     from {
@@ -44,6 +47,12 @@
   @keyframes marquee {
     to {
       transform: translateX(-50%);
+    }
+  }
+
+  @keyframes orbit {
+    to {
+      transform: rotate(360deg);
     }
   }
 }
@@ -145,20 +154,19 @@ body {
   color: var(--color-brand);
 }
 
-/* Highlighter underline that wraps with the text and draws itself in */
+/* Thin underline for the heading accent; it wraps with the text and fades in */
 .hero-underline {
-  background-image: linear-gradient(rgb(0 71 255 / 0.16), rgb(0 71 255 / 0.16));
-  background-repeat: no-repeat;
-  background-position: 0 92%;
-  background-size: 100% 0.32em;
-  -webkit-box-decoration-break: clone;
-  box-decoration-break: clone;
-  animation: underline-grow 1s 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  text-decoration: underline;
+  text-decoration-color: var(--color-brand);
+  text-decoration-thickness: 0.07em;
+  text-underline-offset: 0.16em;
+  text-decoration-skip-ink: auto;
+  animation: underline-fade 1s 0.9s ease-out both;
 }
 
-@keyframes underline-grow {
+@keyframes underline-fade {
   from {
-    background-size: 0% 0.32em;
+    text-decoration-color: transparent;
   }
 }
 

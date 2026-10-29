@@ -1,17 +1,25 @@
 import { NAV_ITEMS } from "../nav/nav-items";
 
-/** Where each item sits on the portrait ring, in degrees clockwise from the top. */
+/**
+ * Where each item starts on the portrait ring, in degrees clockwise from the top.
+ * Keep the gaps equal (360 / number of items = 120) so the spacing stays symmetrical
+ * while the ring turns.
+ */
 const RING_ANGLES: Record<string, number> = {
-  About: 315,
-  Work: 45,
-  Contact: 135,
+  About: 300,
+  Work: 60,
+  Contact: 180,
 };
 
 const styles = {
+  // The turning ring. It ignores the pointer itself so only the icons catch hovers,
+  // and it pauses while an icon is hovered or focused so it is easy to click.
+  ring: "group/orbit pointer-events-none absolute inset-0 list-none animate-orbit hover:[animation-play-state:paused] focus-within:[animation-play-state:paused] motion-reduce:animate-none",
   item: "absolute -translate-x-1/2 -translate-y-1/2",
-  link: "group relative block rounded-full focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand",
-  // Gently bobs up and down; the label rides along with it
-  floating: "animate-float relative block motion-reduce:animate-none",
+  link: "pointer-events-auto group relative block rounded-full focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand",
+  // Turns the opposite way at the same speed so the icon and label stay upright
+  upright:
+    "animate-orbit-counter block group-hover/orbit:[animation-play-state:paused] group-focus-within/orbit:[animation-play-state:paused] motion-reduce:animate-none",
   circle:
     "flex size-12 items-center justify-center rounded-full border-2 border-brand/20 bg-white/90 text-zinc-700 shadow-lg shadow-brand/10 backdrop-blur-md transition-[transform,color,background-color,border-color] duration-300 ease-in-out sm:size-14 " +
     "group-hover:scale-110 group-hover:border-brand group-hover:bg-brand group-hover:text-white " +
@@ -35,19 +43,15 @@ function pointOnRing(angle: number) {
   };
 }
 
-/** The site navigation, laid out as icon buttons orbiting the portrait. */
+/** The site navigation: icon buttons that revolve around the portrait. */
 export default function OrbitNav() {
   return (
     <nav aria-label="Main navigation">
-      <ol className="list-none">
-        {NAV_ITEMS.map(({ label, href, icon }, index) => (
-          <li
-            key={label}
-            style={pointOnRing(RING_ANGLES[label] ?? 0)}
-            className={styles.item}
-          >
+      <ol className={styles.ring}>
+        {NAV_ITEMS.map(({ label, href, icon }) => (
+          <li key={label} style={pointOnRing(RING_ANGLES[label] ?? 0)} className={styles.item}>
             <a href={href} className={styles.link}>
-              <span style={{ animationDelay: `${-index * 2}s` }} className={styles.floating}>
+              <span className={styles.upright}>
                 <span className={styles.circle}>
                   <svg
                     aria-hidden="true"
