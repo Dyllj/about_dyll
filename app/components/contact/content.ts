@@ -1,0 +1,55 @@
+export const TOPICS = ["A project", "A job opportunity", "Collaboration", "Just saying hi"] as const;
+export type Topic = (typeof TOPICS)[number];
+
+export const MESSAGE_MAX = 1000;
+
+export const CONTACT = {
+  // TODO: replace with your real address. The email card and the form's
+  // "open my email app" fallback both use it.
+  email: "hello@aboutdyll.com",
+  location: "Cebu City, Philippines",
+  timeZone: "Asia/Manila",
+  status: "Available",
+};
+
+export type ChannelIcon = "mail" | "github" | "linkedin";
+
+export type Channel = {
+  id: string;
+  title: string;
+  /** Text shown on the card. */
+  value: string;
+  href: string;
+  icon: ChannelIcon;
+  /** Adds a "copy" button next to the card. */
+  copyable?: boolean;
+};
+
+const ALL_CHANNELS: Channel[] = [
+  {
+    id: "email",
+    title: "Email",
+    value: CONTACT.email,
+    href: `mailto:${CONTACT.email}`,
+    icon: "mail",
+    copyable: true,
+  },
+  {
+    id: "github",
+    title: "GitHub",
+    value: "github.com/Dyllj",
+    href: "https://github.com/Dyllj",
+    icon: "github",
+  },
+  {
+    // TODO: fill in your real LinkedIn address. The card stays hidden until href is set.
+    id: "linkedin",
+    title: "LinkedIn",
+    value: "",
+    href: "",
+    icon: "linkedin",
+  },
+];
+
+// Channels without a link are hidden, so visitors never see a dead card.
+export const CHANNELS = ALL_CHANNELS.filter((channel) => channel.href);
