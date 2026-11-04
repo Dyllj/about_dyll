@@ -1,75 +1,91 @@
 "use client";
 
-const projects = [
-  {
-    title: "Commerce Experience",
-    description:
-      "Designed and built a polished online storefront experience focused on conversion, usability, and product storytelling.",
-    stack: ["Next.js", "TypeScript", "Stripe"],
-    accent: "bg-blue-50 text-blue-700",
-  },
-  {
-    title: "Operations Dashboard",
-    description:
-      "Created a data-rich dashboard to monitor performance, uncover bottlenecks, and turn operational insights into faster decisions.",
-    stack: ["React", "Node.js", "PostgreSQL"],
-    accent: "bg-slate-100 text-slate-700",
-  },
-  {
-    title: "Workflow Automation",
-    description:
-      "Built internal tools that streamlined repetitive tasks, reduced manual work, and improved consistency across the team.",
-    stack: ["Python", "APIs", "Automation"],
-    accent: "bg-indigo-50 text-indigo-700",
-  },
-];
+import Reveal from "../about/Reveal";
+import Backdrop from "../landing/Backdrop";
+import FeaturedProject from "../work/FeaturedProject";
+import ProjectList from "../work/ProjectList";
+import ProjectModal from "../work/ProjectModal";
+import WorkHeader from "../work/WorkHeader";
+import { useWorkBrowser } from "../work/useWorkBrowser";
+
+const styles = {
+  page: "relative isolate overflow-hidden",
+  // The same dot grid and soft blobs as the landing page, limited to the top
+  backdrop: "absolute inset-x-0 top-0 -z-10 h-176",
+  main: "relative mx-auto w-full max-w-[1160px] px-5 pb-8 pt-10 sm:px-8 sm:pt-14 xl:px-0",
+  // Featured card on the left, "More projects" on the right
+  grid: "mt-10 grid items-start gap-6 lg:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)]",
+};
 
 export default function WorkView() {
-  return (
-    <main className="mx-auto w-full max-w-6xl px-5 pb-16 pt-12 sm:px-8 sm:pt-16 lg:pt-20" id="work-view">
-      <section aria-labelledby="work-heading">
-        <header className="max-w-2xl">
-          <p
-            className="text-sm font-semibold uppercase tracking-[0.18em] text-blue-700"
-            style={{ fontFamily: "var(--font-noto-sans-hebrew), sans-serif" }}
-          >
-            Selected Work
-          </p>
-          <h1
-            id="work-heading"
-            className="mt-4 text-4xl font-bold text-zinc-900 md:text-5xl"
-            style={{ fontFamily: "var(--font-space-grotesk), sans-serif" }}
-          >
-            Building thoughtful digital experiences.
-          </h1>
-          <p className="mt-5 text-lg leading-relaxed text-zinc-600">
-            I work across product, design, and engineering to turn ideas into reliable software that feels intuitive for real people.
-          </p>
-        </header>
+  const work = useWorkBrowser();
+  const { filtered, active, openProject } = work;
 
-        <ul className="mt-12 grid list-none gap-6 p-0 md:grid-cols-2 xl:grid-cols-3">
-          {projects.map((project) => (
-            <li key={project.title}>
-              <article className="h-full rounded-3xl border border-zinc-200 bg-zinc-50 p-6 shadow-sm transition-transform duration-300 hover:-translate-y-1">
-                <h2 className={`mb-6 inline-flex rounded-full px-3 py-1 text-xs font-medium ${project.accent}`}>
-                  {project.title}
-                </h2>
-                <p className="text-base leading-7 text-zinc-700">{project.description}</p>
-                <ul aria-label={`${project.title} technologies`} className="mt-6 flex list-none flex-wrap gap-2 p-0">
-                  {project.stack.map((item) => (
-                    <li
-                      key={item}
-                      className="rounded-full border border-zinc-200 bg-white px-2.5 py-1 text-xs font-medium text-zinc-600"
-                    >
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </article>
-            </li>
-          ))}
-        </ul>
-      </section>
-    </main>
+  // The clicked list item disappears when it becomes the featured project,
+  // so move keyboard focus to the new featured title instead of losing it.
+  const select = (id: string) => {
+    work.select(id);
+    requestAnimationFrame(() =>
+      document.getElementById("featured-title")?.focus({ preventScroll: true }),
+    );
+  };
+
+  const openIndex = openProject ? filtered.findIndex((p) => p.id === openProject.id) : -1;
+  const titleAt = (offset: number) =>
+    openIndex < 0 ? "" : filtered[(openIndex + offset + filtered.length) % filtered.length].title;
+
+  return (
+    <div className={styles.page}>
+      <div className={styles.backdrop}>
+        <Backdrop />
+      </div>
+
+      {/* id is referenced by the Work tab in PageNav (aria-controls) */}
+      <main className={styles.main} id="work-view">
+        <Reveal>
+          <WorkHeader
+            count={filtered.length}
+            filter={work.filter}
+            onFilterChange={work.changeFilter}
+          />
+        </Reveal>
+
+        {active && (
+          <div className={styles.grid}>
+            <Reveal delay={100}>
+              <FeaturedProject
+                project={active}
+                index={work.activeIndex}
+                total={filtered.length}
+                onStep={work.stepActive}
+                onOpen={() => work.open(active.id)}
+              />
+            </Reveal>
+
+            <Reveal delay={200}>
+              <ProjectList
+                projects={work.visible}
+                page={work.currentPage}
+                pageCount={work.pageCount}
+                resetKey={`${work.filter}-${work.currentPage}`}
+                onPage={work.changePage}
+                onSelect={select}
+                onOpen={work.open}
+              />
+            </Reveal>
+          </div>
+        )}
+      </main>
+
+      <ProjectModal
+        project={openProject}
+        index={openIndex}
+        total={filtered.length}
+        previousTitle={titleAt(-1)}
+        nextTitle={titleAt(1)}
+        onClose={work.close}
+        onStep={work.stepOpen}
+      />
+    </div>
   );
 }
