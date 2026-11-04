@@ -1,5 +1,7 @@
 "use client";
 
+import { FaGithub, FaLinkedin, FaInstagram, FaFacebook } from "react-icons/fa";
+
 const links = [
   { label: "Home", href: "/" },
   { label: "About", href: "/#about" },
@@ -8,10 +10,10 @@ const links = [
 ];
 
 const socials = [
-  { label: "GitHub", short: "GH", href: "https://github.com/Dyllj" },
-  { label: "LinkedIn", short: "in", href: "#" },
-  { label: "Instagram", short: "IG", href: "#" },
-  { label: "Facebook", short: "f", href: "#" },
+  { label: "GitHub", href: "https://github.com/Dyllj", icon: FaGithub },
+  { label: "LinkedIn", href: "https://www.linkedin.com", icon: FaLinkedin },
+  { label: "Instagram", href: "https://www.instagram.com", icon: FaInstagram },
+  { label: "Facebook", href: "https://www.facebook.com", icon: FaFacebook },
 ];
 
 export default function Footer() {
@@ -29,16 +31,16 @@ export default function Footer() {
             </ul>
           </nav>
           <ul className="flex gap-3">
-            {socials.map(({ label, short, href }) => (
+            {socials.map(({ label, icon: Icon, href }) => (
               <li key={label}>
                 <a
                   href={href}
                   aria-label={label}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex size-10 items-center justify-center rounded-full bg-[#0047ff] text-xs font-bold text-white"
+                  className="social-icon group flex size-10 items-center justify-center rounded-full bg-brand text-white transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-brand/30"
                 >
-                  {short}
+                  <Icon className="size-5 transition-transform duration-300 group-hover:rotate-12 group-hover:scale-125" />
                 </a>
               </li>
             ))}

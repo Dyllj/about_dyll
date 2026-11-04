@@ -46,7 +46,7 @@ function IoTArt() {
           stroke="white"
           strokeWidth="2"
           style={{ animationDelay: `${delay}s` }}
-          className={`animate-pulse-ring origin-center [transform-box:fill-box] ${still}`}
+          className={`animate-pulse-ring origin-center [transform-fill ${still}`}
         />
       ))}
       <rect x="288" y="118" width="64" height="64" rx="18" fill="white" />
