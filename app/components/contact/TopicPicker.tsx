@@ -1,71 +1,33 @@
-import type { DeliveryMode } from "./UseContactForm";
+import { TOPICS, type Topic } from "./content";
 
-type FormSuccessProps = {
-  mode: DeliveryMode;
-  onReset: () => void;
+type TopicPickerProps = {
+  value: Topic;
+  onChange: (topic: Topic) => void;
 };
 
-const COPY: Record<DeliveryMode, { title: string; text: string }> = {
-  service: {
-    title: "Message sent!",
-    text: "Thanks for reaching out. I'll get back to you by email.",
-  },
-  "email-app": {
-    title: "Almost there!",
-    text: "Your email app should have opened with the message ready. Press send there to finish.",
-  },
-};
-
-/** Replaces the form after sending: pulsing rings and a check mark that draws itself. */
-export default function FormSuccess({ mode, onReset }: FormSuccessProps) {
-  const { title, text } = COPY[mode];
-
+/** Chips for what the message is about. Real radio inputs, so keyboards and screen readers just work. */
+export default function TopicPicker({ value, onChange }: TopicPickerProps) {
   return (
-    <div
-      role="status"
-      className="relative flex min-h-136 animate-swap-in flex-col items-center justify-center rounded-4xl border border-[#e1e4ea] bg-white p-8 text-center shadow-2xl shadow-brand/10 motion-reduce:animate-none sm:p-12"
-    >
-      <div className="relative grid size-28 place-items-center">
-        {[0, 1.3].map((delay) => (
-          <span
-            key={delay}
-            aria-hidden="true"
-            style={{ animationDelay: `${delay}s` }}
-            className="absolute inset-4 animate-pulse-ring rounded-full border-2 border-brand/40 motion-reduce:animate-none"
-          />
-        ))}
-        <span className="grid size-20 animate-pop place-items-center rounded-full bg-brand text-white shadow-xl shadow-brand/40 motion-reduce:animate-none">
-          <svg
-            aria-hidden="true"
-            viewBox="0 0 24 24"
-            width="40"
-            height="40"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            {/* pathLength=1 lets the "draw" animation work for any path length */}
-            <path
-              d="M20 6 9 17l-5-5"
-              pathLength={1}
-              className="animate-draw [stroke-dasharray:1] motion-reduce:animate-none"
+    <fieldset>
+      <legend className="text-sm font-semibold text-zinc-900">What&apos;s this about?</legend>
+
+      <div className="mt-3 flex flex-wrap gap-2">
+        {TOPICS.map((topic) => (
+          <label key={topic} className="cursor-pointer">
+            <input
+              type="radio"
+              name="topic"
+              value={topic}
+              checked={value === topic}
+              onChange={() => onChange(topic)}
+              className="peer sr-only"
             />
-          </svg>
-        </span>
+            <span className="inline-flex rounded-full border border-zinc-200 bg-white px-4 py-2 text-sm font-medium text-zinc-700 transition duration-300 hover:border-brand/50 hover:text-brand peer-checked:border-brand peer-checked:bg-brand peer-checked:text-white peer-checked:shadow-md peer-checked:shadow-brand/30 peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-brand">
+              {topic}
+            </span>
+          </label>
+        ))}
       </div>
-
-      <h2 className="mt-8 text-3xl font-bold tracking-tight text-zinc-900">{title}</h2>
-      <p className="mt-3 max-w-sm text-base leading-relaxed text-zinc-600">{text}</p>
-
-      <button
-        type="button"
-        onClick={onReset}
-        className="mt-8 inline-flex h-12 items-center rounded-full border-2 border-zinc-200 px-6 text-[15px] font-semibold text-zinc-800 transition-colors duration-300 hover:border-brand hover:text-brand focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand"
-      >
-        Send another message
-      </button>
-    </div>
+    </fieldset>
   );
 }

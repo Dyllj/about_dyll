@@ -1,25 +1,9 @@
-import type { DeliveryMode } from "./UseContactForm";
-
 type FormSuccessProps = {
-  mode: DeliveryMode;
   onReset: () => void;
 };
 
-const COPY: Record<DeliveryMode, { title: string; text: string }> = {
-  service: {
-    title: "Message sent!",
-    text: "Thanks for reaching out. I'll get back to you by email.",
-  },
-  "email-app": {
-    title: "Almost there!",
-    text: "Your email app should have opened with the message ready. Press send there to finish.",
-  },
-};
-
 /** Replaces the form after sending: pulsing rings and a check mark that draws itself. */
-export default function FormSuccess({ mode, onReset }: FormSuccessProps) {
-  const { title, text } = COPY[mode];
-
+export default function FormSuccess({ onReset }: FormSuccessProps) {
   return (
     <div
       role="status"
@@ -56,8 +40,8 @@ export default function FormSuccess({ mode, onReset }: FormSuccessProps) {
         </span>
       </div>
 
-      <h2 className="mt-8 text-3xl font-bold tracking-tight text-zinc-900">{title}</h2>
-      <p className="mt-3 max-w-sm text-base leading-relaxed text-zinc-600">{text}</p>
+      <h2 className="mt-8 text-3xl font-bold tracking-tight text-zinc-900">Message sent!</h2>
+      <p className="mt-3 max-w-sm text-base leading-relaxed text-zinc-600">Thanks for reaching out. I&apos;ll get back to you by email.</p>
 
       <button
         type="button"

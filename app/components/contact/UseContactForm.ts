@@ -1,12 +1,10 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
-import { CONTACT, TOPICS, type Topic } from "./content";
+import { CONTACT, FORM_ENDPOINT, TOPICS, type Topic } from "./content";
 
 export type FieldName = "name" | "email" | "message";
 export type Status = "idle" | "sending" | "sent" | "error";
-/** "service" = sent through a form service, "email-app" = opens the visitor's mail app. */
-export type DeliveryMode = "service" | "email-app";
 
 type Values = {
   name: string;
@@ -18,11 +16,6 @@ type Values = {
 };
 
 type Errors = Partial<Record<FieldName, string>>;
-
-// Optional. Set NEXT_PUBLIC_CONTACT_ENDPOINT (e.g. a Formspree URL) in .env.local and
-// in Vercel to receive messages straight in your inbox. Without it, the form opens
-// the visitor's email app with the message already written.
-const ENDPOINT = process.env.NEXT_PUBLIC_CONTACT_ENDPOINT;
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const FIELD_ORDER: FieldName[] = ["name", "email", "message"];
@@ -37,20 +30,32 @@ function validate(values: Values): Errors {
   return errors;
 }
 
-async function postToService(url: string, values: Values) {
-  const response = await fetch(url, {
+/** Posts the message to FORM_ENDPOINT, which forwards it to my inbox. Throws if it was not accepted. */
+async function sendMessage(values: Values) {
+  const name = values.name.trim();
+
+  const response = await fetch(FORM_ENDPOINT, {
     method: "POST",
     headers: { "Content-Type": "application/json", Accept: "application/json" },
     body: JSON.stringify({
-      name: values.name.trim(),
+      name,
+      // FormSubmit uses a field called "email" as the Reply-To, so I can answer straight from my inbox
       email: values.email.trim(),
       topic: values.topic,
       message: values.message.trim(),
+      _subject: `${values.topic} — new message from ${name}`,
+      _template: "table",
+      _captcha: "false",
     }),
   });
-  if (!response.ok) throw new Error(`Form service answered ${response.status}`);
+
+  // Some services answer 200 with {"success": "false"} (e.g. a form that is not activated yet)
+  const result = await response.json().catch(() => null);
+  const refused = result?.success === false || result?.success === "false";
+  if (!response.ok || refused) throw new Error(`Message was not accepted (${response.status})`);
 }
 
+/** A ready-to-send email with the visitor's message, used as a fallback if sending fails. */
 export function buildMailto(values: Pick<Values, "name" | "email" | "message" | "topic">) {
   const name = values.name.trim();
   const subject = `${values.topic} — message from ${name}`;
@@ -64,8 +69,6 @@ export function useContactForm() {
   const [touched, setTouched] = useState<Partial<Record<FieldName, boolean>>>({});
   const [submitted, setSubmitted] = useState(false);
   const [status, setStatus] = useState<Status>("idle");
-
-  const mode: DeliveryMode = ENDPOINT ? "service" : "email-app";
 
   // An error is shown once the field was left, or after the first send attempt
   const allErrors = validate(values);
@@ -97,8 +100,7 @@ export function useContactForm() {
 
     setStatus("sending");
     try {
-      if (ENDPOINT) await postToService(ENDPOINT, values);
-      else window.location.href = buildMailto(values);
+      await sendMessage(values);
       setStatus("sent");
     } catch {
       setStatus("error");
@@ -112,5 +114,5 @@ export function useContactForm() {
     setStatus("idle");
   };
 
-  return { values, errors, status, mode, setField, blur, submit, reset };
+  return { values, errors, status, setField, blur, submit, reset };
 }

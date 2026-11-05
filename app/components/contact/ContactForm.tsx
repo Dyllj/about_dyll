@@ -3,7 +3,7 @@ import FormSuccess from "./FormSuccess";
 import { SendIcon } from "./Icons";
 import TopicPicker from "./TopicPicker";
 import { CONTACT, MESSAGE_MAX } from "./content";
-import { useContactForm } from "./UseContactForm";
+import { buildMailto, useContactForm } from "./UseContactForm";
 
 const styles = {
   card: "relative overflow-hidden rounded-4xl border border-[#e1e4ea] bg-white p-6 shadow-2xl shadow-brand/10 sm:p-9",
@@ -16,9 +16,9 @@ const styles = {
 /** The message form: topic chips, floating-label fields, validation and a send button. */
 export default function ContactForm() {
   const form = useContactForm();
-  const { values, errors, status, mode } = form;
+  const { values, errors, status } = form;
 
-  if (status === "sent") return <FormSuccess mode={mode} onReset={form.reset} />;
+  if (status === "sent") return <FormSuccess onReset={form.reset} />;
 
   const sending = status === "sending";
 
@@ -93,7 +93,11 @@ export default function ContactForm() {
 
         {status === "error" && (
           <p role="alert" className="rounded-2xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
-            Something went wrong while sending. Please try again, or email me directly at{" "}
+            Sorry, your message could not be sent.{" "}
+            <a href={buildMailto(values)} className="font-semibold underline">
+              Send it from your email app instead
+            </a>{" "}
+            or write to{" "}
             <a href={`mailto:${CONTACT.email}`} className="font-semibold underline">
               {CONTACT.email}
             </a>
@@ -120,11 +124,7 @@ export default function ContactForm() {
             )}
           </button>
 
-          <p className="text-sm text-zinc-500">
-            {mode === "service"
-              ? "I'll reply to the email you enter."
-              : "Sending opens your email app with everything filled in."}
-          </p>
+          <p className="text-sm text-zinc-500">I&apos;ll reply to the email you enter.</p>
         </div>
       </div>
     </form>

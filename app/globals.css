@@ -33,6 +33,10 @@
   --animate-pulse-ring: pulse-ring 2.7s ease-out infinite;
   --animate-scroll-up: scroll-up 7s ease-in-out infinite alternate;
 
+  /* Contact page: success check mark */
+  --animate-pop: pop 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  --animate-draw: draw 0.5s 0.25s ease-out both;
+
   @keyframes rise {
     from {
       opacity: 0;
@@ -100,6 +104,19 @@
   @keyframes scroll-up {
     to {
       transform: translateY(-96px);
+    }
+  }
+
+  @keyframes pop {
+    from {
+      opacity: 0;
+      transform: scale(0.4);
+    }
+  }
+
+  @keyframes draw {
+    from {
+      stroke-dashoffset: 1;
     }
   }
 }
