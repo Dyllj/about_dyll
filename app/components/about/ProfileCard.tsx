@@ -11,7 +11,7 @@ const styles = {
   photo: "object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105",
   fade: "absolute inset-x-0 bottom-0 h-1/2 bg-linear-to-t from-black/70 to-transparent",
   nameplate:
-    "absolute inset-x-4 bottom-4 rounded-2xl border border-white/25 bg-white/15 p-4 text-white backdrop-blur-md",
+    "profile-nameplate absolute inset-x-4 bottom-4 rounded-2xl border p-4 backdrop-blur-md",
   status:
     "absolute -right-3 top-8 flex animate-float items-center gap-2 rounded-full border border-white bg-white/90 px-4 py-2 text-sm font-semibold text-zinc-800 shadow-xl shadow-brand/10 backdrop-blur motion-reduce:animate-none",
 };
@@ -37,7 +37,7 @@ export default function ProfileCard() {
 
         <div className={styles.nameplate}>
           <p className="text-xl font-bold leading-tight">{PROFILE.name}</p>
-          <p className="mt-1 text-sm text-white/80">
+          <p className="profile-nameplate__subtitle mt-1 text-sm">
             {PROFILE.role} · {PROFILE.location}
           </p>
         </div>

@@ -10,7 +10,7 @@ const ICONS: Record<ChannelIcon, ReactNode> = {
 };
 
 const styles = {
-  card: "group flex items-center gap-3 rounded-3xl border border-[#e1e4ea] bg-[#eef0f3] p-3 transition duration-300 hover:-translate-y-1 hover:border-brand/40 hover:bg-white hover:shadow-xl hover:shadow-brand/10",
+  card: "group flex items-center gap-3 rounded-3xl border border-theme-border bg-surface-muted p-3 transition duration-300 hover:-translate-y-1 hover:border-brand/40 hover:bg-white hover:shadow-xl hover:shadow-brand/10",
   link: "flex min-w-0 flex-1 items-center gap-4 rounded-2xl p-1 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand",
   tile: "grid size-12 shrink-0 place-items-center rounded-2xl bg-white text-brand shadow-sm transition-colors duration-300 group-hover:bg-brand group-hover:text-white",
   title: "block text-xs font-medium uppercase tracking-[0.14em] text-zinc-500",

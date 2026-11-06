@@ -42,7 +42,7 @@ export default function Header() {
             the toggle has a blur/transform (its full-screen effect stays intact) */}
         <div
           aria-hidden="true"
-          className={`absolute inset-0 -z-10 rounded-full border border-[#e1e4ea] bg-white/80 backdrop-blur-xl transition-shadow duration-300 ${
+          className={`absolute inset-0 -z-10 rounded-full border border-theme-border bg-white/80 backdrop-blur-xl transition-shadow duration-300 ${
             scrolled ? "shadow-[0_20px_40px_-20px_rgba(11,11,11,0.28)]" : ""
           }`}
         />
@@ -66,7 +66,7 @@ export default function Header() {
 
         <PageNav />
 
-        <span aria-hidden="true" className="hidden h-8 w-px bg-[#e1e4ea] sm:block" />
+        <span aria-hidden="true" className="hidden h-8 w-px bg-theme-border sm:block" />
         <div className="pr-2 sm:pr-3">
           <TogglButton />
         </div>

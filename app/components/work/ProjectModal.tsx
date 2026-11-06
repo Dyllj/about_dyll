@@ -19,14 +19,14 @@ type ProjectModalProps = {
 
 const styles = {
   dialog:
-    "m-auto max-h-[90dvh] w-[min(92vw,56rem)] overflow-y-auto rounded-4xl border border-[#e1e4ea] bg-white p-0 text-zinc-900 shadow-2xl shadow-black/30 backdrop:bg-zinc-950/55 backdrop:backdrop-blur-sm open:animate-dialog-in motion-reduce:animate-none",
+    "m-auto max-h-[90dvh] w-[min(92vw,56rem)] overflow-y-auto rounded-4xl border border-theme-border bg-white p-0 text-zinc-900 shadow-2xl shadow-black/30 backdrop:bg-zinc-950/55 backdrop:backdrop-blur-sm open:animate-dialog-in motion-reduce:animate-none",
   close:
     "absolute right-4 top-4 grid size-10 place-items-center rounded-full bg-white/85 text-zinc-800 shadow-lg shadow-black/15 backdrop-blur transition duration-300 hover:scale-110 hover:bg-white hover:text-brand focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white",
   primary:
     "group/cta inline-flex h-12 items-center gap-2 rounded-full bg-brand px-7 text-[15px] font-semibold text-white shadow-lg shadow-brand/30 transition duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-brand/40 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand",
   secondary:
     "inline-flex h-12 items-center gap-2 rounded-full border-2 border-zinc-200 px-6 text-[15px] font-semibold text-zinc-800 transition-colors duration-300 hover:border-brand hover:text-brand focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand",
-  step: "group/step flex min-w-0 flex-1 items-center gap-3 rounded-2xl border border-zinc-200 p-4 text-left transition duration-300 hover:border-brand/40 hover:bg-[#eef0f3] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand",
+  step: "group/step flex min-w-0 flex-1 items-center gap-3 rounded-2xl border border-zinc-200 p-4 text-left transition duration-300 hover:border-brand/40 hover:bg-surface-muted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand",
 };
 
 /** Full details for one project, in a native <dialog> (focus trap and Esc come for free). */

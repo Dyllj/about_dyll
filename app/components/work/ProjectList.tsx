@@ -15,7 +15,7 @@ type ProjectListProps = {
 };
 
 const pagerButton =
-  "grid size-8 place-items-center rounded-full border border-[#e1e4ea] bg-white text-zinc-700 transition duration-300 hover:border-brand hover:text-brand disabled:pointer-events-none disabled:opacity-40 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand";
+  "grid size-8 place-items-center rounded-full border border-theme-border bg-white text-zinc-700 transition duration-300 hover:border-brand hover:text-brand disabled:pointer-events-none disabled:opacity-40 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand";
 
 /** "More projects" column with simple pagination. */
 export default function ProjectList({

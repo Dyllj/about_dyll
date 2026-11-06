@@ -6,7 +6,7 @@ import { CONTACT, MESSAGE_MAX } from "./content";
 import { buildMailto, useContactForm } from "./UseContactForm";
 
 const styles = {
-  card: "relative overflow-hidden rounded-4xl border border-[#e1e4ea] bg-white p-6 shadow-2xl shadow-brand/10 sm:p-9",
+  card: "relative overflow-hidden rounded-4xl border border-theme-border bg-white p-6 shadow-2xl shadow-brand/10 sm:p-9",
   glow: "pointer-events-none absolute -right-24 -top-24 size-72 rounded-full bg-brand/10 blur-3xl",
   plane: "pointer-events-none absolute -bottom-6 -right-6 size-44 -rotate-12 text-brand/[0.06]",
   submit:

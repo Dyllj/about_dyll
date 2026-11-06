@@ -57,7 +57,7 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen bg-white font-(family-name:--font-space-grotesk) text-[#0b0b0b]">
+    <div className="min-h-screen bg-background font-(family-name:--font-space-grotesk) text-foreground">
       <Header />
       <ViewComponent />
       <Footer />

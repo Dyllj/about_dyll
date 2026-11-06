@@ -39,7 +39,7 @@ export default function ScreenshotFrame({ image, sizes, priority = false, size }
       >
         <div
           aria-hidden="true"
-          className={`flex items-center bg-[#eef0f3] ${wide ? "gap-1.5 px-3 py-2" : "gap-0.5 px-1.5 py-1"}`}
+          className={`flex items-center bg-surface-muted ${wide ? "gap-1.5 px-3 py-2" : "gap-0.5 px-1.5 py-1"}`}
         >
           {BROWSER_DOTS.map((color) => (
             <span

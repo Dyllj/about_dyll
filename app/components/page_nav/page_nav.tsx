@@ -60,13 +60,13 @@ export default function PageNav({ onNavigate }: { onNavigate?: (view: View) => v
   return (
     <nav
       aria-label="Page navigation"
-      className="inline-flex rounded-full border border-[#e1e4ea] bg-[#eef0f3] p-1.5"
+      className="inline-flex rounded-full border border-theme-border bg-surface-muted p-1.5"
     >
       <ul ref={listRef} className="relative flex items-center gap-1 sm:gap-3" role="tablist">
         {indicator && (
           <span
             aria-hidden="true"
-            className="absolute inset-y-0 rounded-full bg-brand shadow-[0_8px_20px_-8px_rgba(0,71,255,0.7)] transition-[left,width] duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] motion-reduce:transition-none"
+            className="absolute inset-y-0 rounded-full bg-brand shadow-lg shadow-brand/40 transition-[left,width] duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] motion-reduce:transition-none"
             style={{ left: indicator.left, width: indicator.width }}
           />
         )}
@@ -88,7 +88,7 @@ export default function PageNav({ onNavigate }: { onNavigate?: (view: View) => v
                 className={`relative z-10 inline-flex rounded-full px-3 py-2 text-sm font-medium transition-colors duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand sm:px-10 sm:py-2.5 sm:text-[15px] ${
                   isActive
                     ? `text-white ${indicator ? "" : "bg-brand"}`
-                    : "text-[#0b0b0b] hover:bg-white/70"
+                    : "text-foreground hover:bg-white/70"
                 }`}
               >
                 {label}

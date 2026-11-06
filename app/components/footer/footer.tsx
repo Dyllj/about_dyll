@@ -18,11 +18,11 @@ const socials = [
 
 export default function Footer() {
   return (
-    <footer className="mt-24 bg-[#eef0f3] pb-7 pt-10">
+    <footer className="mt-24 bg-surface-muted pb-7 pt-10">
       <div className="mx-auto w-full max-w-290 px-5 sm:px-8 xl:px-0">
         <div className="flex flex-wrap items-center justify-between gap-6">
           <nav aria-label="Footer navigation">
-            <ul className="flex gap-9 text-[15px] font-medium text-[#0b0b0b]">
+            <ul className="flex gap-9 text-[15px] font-medium text-foreground">
               {links.map(({ label, href }) => (
                 <li key={label}>
                   <a href={href}>{label}</a>
@@ -46,8 +46,8 @@ export default function Footer() {
             ))}
           </ul>
         </div>
-        <hr className="my-6 border-[#cfd4dc]" />
-        <p className="text-center text-sm text-[#5b6270]">
+        <hr className="my-6 border-theme-border-muted" />
+        <p className="text-center text-sm text-muted-foreground">
           © {new Date().getFullYear()} Wendyll Jay Tautoan. All rights reserved.
         </p>
       </div>

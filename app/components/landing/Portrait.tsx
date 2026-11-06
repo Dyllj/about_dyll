@@ -10,7 +10,7 @@ const styles = {
   fastArc:
     "absolute inset-0 animate-spin rounded-full border-2 border-transparent border-t-brand [animation-duration:8s] motion-reduce:animate-none",
   orbitDot:
-    "absolute -top-1.75 left-1/2 size-3 -translate-x-1/2 rounded-full bg-brand shadow-[0_0_20px_4px_rgb(0_71_255/0.55)]",
+    "absolute -top-1.75 left-1/2 size-3 -translate-x-1/2 rounded-full bg-brand shadow-[0_0_20px_4px_var(--brand-glow)]",
   photoFrame:
     "absolute inset-4 overflow-hidden rounded-full border-4 border-white bg-zinc-900 shadow-2xl shadow-brand/20",
   photo: "object-cover object-[50%_12%]",

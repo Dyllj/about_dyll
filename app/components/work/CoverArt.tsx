@@ -1,6 +1,6 @@
 import type { Category } from "./content";
 
-const BRAND = "#0047ff";
+const BRAND = "var(--color-brand)";
 
 const palettes: Record<Category, string> = {
   IoT: "from-brand via-blue-500 to-cyan-400",
@@ -74,8 +74,8 @@ function WebArt({ transform }: { transform?: string }) {
     <g transform={transform}>
       <g className={`animate-float ${still}`}>
         <rect x="150" y="56" width="340" height="226" rx="20" fill="white" fillOpacity="0.96" />
-        <rect x="150" y="56" width="340" height="38" rx="20" fill="#eef0f3" />
-        <rect x="150" y="76" width="340" height="18" fill="#eef0f3" />
+        <rect x="150" y="56" width="340" height="38" rx="20" fill="var(--surface-muted)" />
+        <rect x="150" y="76" width="340" height="18" fill="var(--surface-muted)" />
         <circle cx="174" cy="75" r="5" fill="#ff5f57" />
         <circle cx="192" cy="75" r="5" fill="#febc2e" />
         <circle cx="210" cy="75" r="5" fill="#28c840" />
@@ -87,13 +87,13 @@ function WebArt({ transform }: { transform?: string }) {
         <rect x="192" y="170" width="96" height="8" rx="4" fill={BRAND} fillOpacity="0.35" />
         <rect x="192" y="188" width="64" height="16" rx="8" fill={BRAND} />
 
-        <rect x="368" y="112" width="98" height="100" rx="14" fill="#eef0f3" />
+        <rect x="368" y="112" width="98" height="100" rx="14" fill="var(--surface-muted)" />
         <rect x="384" y="168" width="14" height="30" rx="4" fill={BRAND} fillOpacity="0.45" />
         <rect x="406" y="146" width="14" height="52" rx="4" fill={BRAND} fillOpacity="0.7" />
         <rect x="428" y="126" width="14" height="72" rx="4" fill={BRAND} />
 
-        <rect x="174" y="232" width="292" height="10" rx="5" fill="#e1e4ea" />
-        <rect x="174" y="252" width="210" height="10" rx="5" fill="#e1e4ea" />
+        <rect x="174" y="232" width="292" height="10" rx="5" fill="var(--theme-border)" />
+        <rect x="174" y="252" width="210" height="10" rx="5" fill="var(--theme-border)" />
       </g>
 
       <g className={`animate-float [animation-delay:-3s] ${still}`}>
@@ -111,7 +111,7 @@ function MobileArt({ transform }: { transform?: string }) {
     <g transform={transform}>
       <g className={`animate-float ${still}`}>
         <rect x="250" y="34" width="140" height="292" rx="30" fill="white" />
-        <rect x="258" y="42" width="124" height="276" rx="24" fill="#eef0f3" />
+        <rect x="258" y="42" width="124" height="276" rx="24" fill="var(--surface-muted)" />
 
         {/* The nested <svg> clips the scrolling list to the phone screen */}
         <svg x="258" y="42" width="124" height="276" overflow="hidden">

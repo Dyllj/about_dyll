@@ -1,79 +1,95 @@
 "use client";
 
 import styled from "styled-components";
-import { useEffect, useRef, useState } from "react";
+import { flushSync } from "react-dom";
+import { useEffect, useState, type ChangeEvent } from "react";
+
+const getInitialTheme = () => {
+  if (typeof window === "undefined") return false;
+
+  try {
+    const savedTheme = window.localStorage.getItem("color-theme");
+    if (savedTheme === "dark" || savedTheme === "light") {
+      return savedTheme === "dark";
+    }
+  } catch (error) {
+    console.error("Unable to load the saved color theme.", error);
+  }
+
+  return document.documentElement.dataset.theme === "dark";
+};
 
 const Switch = () => {
-  const [isDark, setIsDark] = useState(false);
-  const [pixels, setPixels] = useState<{
-    color: string;
-    count: number;
-    columns: number;
-  } | null>(null);
-  const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const [isDark, setIsDark] = useState(getInitialTheme);
 
-  useEffect(
-    () => () => {
-      if (timer.current) clearTimeout(timer.current);
-    },
-    [],
-  );
+  useEffect(() => {
+    document.documentElement.dataset.theme = isDark ? "dark" : "light";
+  }, [isDark]);
 
-  const toggleTheme = () => {
-    const nextIsDark = !isDark;
-    const outgoingColor = isDark ? "#0a0a0a" : "#ffffff";
-    const columns = Math.ceil(window.innerWidth / 64);
-    const rows = Math.ceil(window.innerHeight / 64);
+  const toggleTheme = (event: ChangeEvent<HTMLInputElement>) => {
+    const nextIsDark = event.currentTarget.checked;
+    const nextTheme = nextIsDark ? "dark" : "light";
 
-    if (timer.current) clearTimeout(timer.current);
-    setPixels({ color: outgoingColor, count: columns * rows, columns });
-    setIsDark(nextIsDark);
-    document.documentElement.dataset.theme = nextIsDark ? "dark" : "light";
+    try {
+      window.localStorage.setItem("color-theme", nextTheme);
+    } catch (error) {
+      console.error("Unable to save the selected color theme.", error);
+    }
 
-    timer.current = setTimeout(() => setPixels(null), 1400);
+    const updateTheme = () => {
+      setIsDark(nextIsDark);
+      document.documentElement.dataset.theme = nextTheme;
+    };
+
+    if (
+      !window.matchMedia("(prefers-reduced-motion: reduce)").matches &&
+      typeof document.startViewTransition === "function"
+    ) {
+      document.startViewTransition(() => flushSync(updateTheme));
+    } else {
+      flushSync(updateTheme);
+    }
   };
-
-  const pixelOrder = pixels
-    ? Array.from({ length: pixels.count }, (_, index) => index).sort(
-        (first, second) =>
-          ((first * 2654435761) >>> 0) - ((second * 2654435761) >>> 0),
-      )
-    : [];
 
   return (
     <StyledWrapper>
       <div className="toggle-switch">
-        <label className="switch-label" aria-label="Toggle dark mode">
+        <label className="switch-label">
           <input
             type="checkbox"
             className="checkbox"
             checked={isDark}
             onChange={toggleTheme}
+            aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
           />
           <span className="slider" />
+          <span className="theme-icon" aria-hidden="true">
+            {isDark ? (
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.8"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M20.2 15.4A8.5 8.5 0 0 1 8.6 3.8 8.5 8.5 0 1 0 20.2 15.4Z" />
+              </svg>
+            ) : (
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.8"
+                strokeLinecap="round"
+              >
+                <circle cx="12" cy="12" r="4" />
+                <path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42" />
+              </svg>
+            )}
+          </span>
         </label>
       </div>
-      {pixels && (
-        <div
-          aria-hidden="true"
-          className="pixel-transition"
-          style={{
-            backgroundColor: pixels.color,
-            gridTemplateColumns: `repeat(${pixels.columns}, 64px)`,
-          }}
-        >
-          {pixelOrder.map((index, order) => (
-            <span
-              className="pixel-transition__cell"
-              key={index}
-              style={{
-                animationDelay: `${(order / Math.max(pixelOrder.length - 1, 1)) * 950}ms`,
-                backgroundColor: pixels.color,
-              }}
-            />
-          ))}
-        </div>
-      )}
     </StyledWrapper>
   );
 };
@@ -83,17 +99,13 @@ const StyledWrapper = styled.div`
     position: relative;
     width: 64px;
     height: 32px;
-    --light: #d8dbe0;
-    --dark: #28292c;
-    --link: rgb(27, 129, 112);
-    --link-hover: rgb(24, 94, 82);
   }
 
   .switch-label {
     position: absolute;
     width: 100%;
     height: 32px;
-    background-color: var(--dark);
+    background-color: var(--foreground);
     border-radius: 16px;
     cursor: pointer;
     border: none;
@@ -111,12 +123,13 @@ const StyledWrapper = styled.div`
     width: 100%;
     height: 100%;
     border-radius: 25px;
+    background-color: var(--foreground);
     -webkit-transition: 0.3s;
     transition: 0.3s;
   }
 
   .checkbox:checked ~ .slider {
-    background-color: var(--light);
+    background-color: var(--color-brand);
   }
 
   .slider::before {
@@ -127,15 +140,57 @@ const StyledWrapper = styled.div`
     width: 18px;
     height: 18px;
     border-radius: 50%;
-    -webkit-box-shadow: inset 8px -3px 0px 0px var(--light);
-    box-shadow: inset 8px -3px 0px 0px var(--light);
-    background-color: var(--dark);
+    background-color: var(--background);
     -webkit-transition: 0.3s;
     transition: 0.3s;
   }
 
+  .theme-icon {
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    z-index: 1;
+    display: grid;
+    width: 18px;
+    height: 18px;
+    place-items: center;
+    color: var(--foreground);
+    pointer-events: none;
+    transition: transform 0.3s ease, rotate 0.3s ease;
+  }
+
+  .theme-icon svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .checkbox:checked ~ .theme-icon {
+    transform: translateX(32px);
+  }
+
+  .checkbox:checked ~ .theme-icon svg {
+    animation: icon-appear 0.3s ease both;
+  }
+
+  .checkbox:not(:checked) ~ .theme-icon svg {
+    animation: icon-appear 0.3s ease both;
+  }
+
+  @keyframes icon-appear {
+    from {
+      opacity: 0;
+      rotate: -35deg;
+      scale: 0.7;
+    }
+    to {
+      opacity: 1;
+      rotate: 0deg;
+      scale: 1;
+    }
+  }
+
   .switch-label:has(.checkbox:focus-visible) {
-    outline: 2px solid #2563eb;
+    outline: 2px solid var(--color-brand);
     outline-offset: 3px;
   }
 
@@ -143,7 +198,7 @@ const StyledWrapper = styled.div`
     -webkit-transform: translateX(32px);
     -ms-transform: translateX(32px);
     transform: translateX(32px);
-    background-color: var(--dark);
+    background-color: var(--background);
     -webkit-box-shadow: none;
     box-shadow: none;
   }

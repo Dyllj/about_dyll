@@ -12,7 +12,7 @@ type ProjectListItemProps = {
 };
 
 const styles = {
-  card: "group flex gap-4 rounded-3xl border border-[#e1e4ea] bg-[#eef0f3] p-4 transition duration-300 hover:-translate-y-1 hover:border-brand/40 hover:bg-white hover:shadow-xl hover:shadow-brand/10",
+  card: "group flex gap-4 rounded-3xl border border-theme-border bg-surface-muted p-4 transition duration-300 hover:-translate-y-1 hover:border-brand/40 hover:bg-white hover:shadow-xl hover:shadow-brand/10",
   thumb:
     "relative size-20 shrink-0 self-start overflow-hidden rounded-2xl border border-white bg-white shadow-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand sm:size-24",
   thumbZoom: "absolute inset-0 transition-transform duration-500 group-hover:scale-110",

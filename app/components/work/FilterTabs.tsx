@@ -7,7 +7,7 @@ type FilterTabsProps = {
 };
 
 const styles = {
-  track: "relative grid grid-cols-4 rounded-full border border-[#e1e4ea] bg-white p-1 shadow-sm",
+  track: "relative grid grid-cols-4 rounded-full border border-theme-border bg-white p-1 shadow-sm",
   // Every column has the same width, so the blue pill only has to slide by --i columns
   thumb:
     "absolute inset-y-1 left-1 w-[calc((100%-0.5rem)/4)] translate-x-[calc(var(--i)*100%)] rounded-full bg-brand shadow-md shadow-brand/30 transition-transform duration-500 ease-[cubic-bezier(0.34,1.4,0.64,1)] motion-reduce:transition-none",

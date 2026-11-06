@@ -6,7 +6,7 @@ export default function Backdrop() {
       <div className="absolute -right-40 -top-40 size-136 rounded-full bg-brand/10 blur-3xl" />
       <div className="absolute -bottom-32 -left-32 size-96 rounded-full bg-sky-300/20 blur-3xl" />
       {/* --mx / --my are set by LandingView on mouse move */}
-      <div className="absolute inset-0 hidden [background:radial-gradient(520px_circle_at_var(--mx,70%)_var(--my,30%),rgb(0_71_255/0.07),transparent_60%)] lg:block" />
+      <div className="absolute inset-0 hidden [background:radial-gradient(520px_circle_at_var(--mx,70%)_var(--my,30%),var(--brand-spotlight),transparent_60%)] lg:block" />
     </div>
   );
 }

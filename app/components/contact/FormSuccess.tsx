@@ -7,7 +7,7 @@ export default function FormSuccess({ onReset }: FormSuccessProps) {
   return (
     <div
       role="status"
-      className="relative flex min-h-136 animate-swap-in flex-col items-center justify-center rounded-4xl border border-[#e1e4ea] bg-white p-8 text-center shadow-2xl shadow-brand/10 motion-reduce:animate-none sm:p-12"
+      className="relative flex min-h-136 animate-swap-in flex-col items-center justify-center rounded-4xl border border-theme-border bg-white p-8 text-center shadow-2xl shadow-brand/10 motion-reduce:animate-none sm:p-12"
     >
       <div className="relative grid size-28 place-items-center">
         {[0, 1.3].map((delay) => (

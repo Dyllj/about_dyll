@@ -21,9 +21,9 @@ type FeaturedProjectProps = {
 
 const styles = {
   panel:
-    "group relative overflow-hidden rounded-4xl border border-[#e1e4ea] bg-[#eef0f3] p-4 sm:p-5",
+    "group relative overflow-hidden rounded-4xl border border-theme-border bg-surface-muted p-4 sm:p-5",
   spotlight:
-    "pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100 [background:radial-gradient(520px_circle_at_var(--mx,50%)_var(--my,0%),rgb(0_71_255/0.09),transparent_60%)]",
+    "pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100 [background:radial-gradient(520px_circle_at_var(--mx,50%)_var(--my,0%),var(--brand-spotlight),transparent_60%)]",
   media:
     "relative aspect-video overflow-hidden rounded-3xl border border-white bg-white shadow-sm",
   counter:

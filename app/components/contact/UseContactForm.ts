@@ -39,8 +39,8 @@ async function sendMessage(values: Values) {
     headers: { "Content-Type": "application/json", Accept: "application/json" },
     body: JSON.stringify({
       name,
-      // FormSubmit uses a field called "email" as the Reply-To, so I can answer straight from my inbox
       email: values.email.trim(),
+      _replyto: values.email.trim(),
       topic: values.topic,
       message: values.message.trim(),
       _subject: `${values.topic} — new message from ${name}`,
@@ -49,10 +49,13 @@ async function sendMessage(values: Values) {
     }),
   });
 
-  // Some services answer 200 with {"success": "false"} (e.g. a form that is not activated yet)
+  // FormSubmit can return HTTP 200 when delivery is not activated, so require its
+  // explicit success response instead of treating every 2xx response as sent.
   const result = await response.json().catch(() => null);
-  const refused = result?.success === false || result?.success === "false";
-  if (!response.ok || refused) throw new Error(`Message was not accepted (${response.status})`);
+  const accepted = result?.success === true || result?.success === "true";
+  if (!response.ok || !accepted) {
+    throw new Error(`Message was not accepted (${response.status})`);
+  }
 }
 
 /** A ready-to-send email with the visitor's message, used as a fallback if sending fails. */
@@ -102,7 +105,8 @@ export function useContactForm() {
     try {
       await sendMessage(values);
       setStatus("sent");
-    } catch {
+    } catch (error) {
+      console.error("Unable to send the contact message.", error);
       setStatus("error");
     }
   };

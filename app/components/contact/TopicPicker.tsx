@@ -22,7 +22,7 @@ export default function TopicPicker({ value, onChange }: TopicPickerProps) {
               onChange={() => onChange(topic)}
               className="peer sr-only"
             />
-            <span className="inline-flex rounded-full border border-zinc-200 bg-white px-4 py-2 text-sm font-medium text-zinc-700 transition duration-300 hover:border-brand/50 hover:text-brand peer-checked:border-brand peer-checked:bg-brand peer-checked:text-white peer-checked:shadow-md peer-checked:shadow-brand/30 peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-brand">
+            <span className="inline-flex rounded-full border border-zinc-200 bg-white px-4 py-2 text-sm font-medium text-foreground transition duration-300 hover:border-brand/50 hover:text-brand peer-checked:border-brand peer-checked:bg-brand peer-checked:text-white peer-checked:shadow-md peer-checked:shadow-brand/30 peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-brand">
               {topic}
             </span>
           </label>
