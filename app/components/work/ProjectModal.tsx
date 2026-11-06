@@ -1,4 +1,4 @@
-import { useEffect, useRef, type MouseEvent } from "react";
+import { useEffect, useRef, useState, type MouseEvent } from "react";
 import { ArrowRightIcon, ArrowUpRightIcon, ChevronLeftIcon, CloseIcon, TrophyIcon } from "./Icons";
 import ProjectCover from "./ProjectCover";
 import TagList from "./TagList";
@@ -42,6 +42,12 @@ export default function ProjectModal({
   const dialogRef = useRef<HTMLDialogElement>(null);
   const isOpen = project !== null;
 
+  // Which screenshot is showing. Remembering the project it belongs to means the gallery
+  // starts on the first picture again whenever another project opens (no effect needed).
+  const [pick, setPick] = useState<{ id: string | null; index: number }>({ id: null, index: 0 });
+  const imageIndex = project && pick.id === project.id ? pick.index : 0;
+  const imageCount = project?.images?.length ?? 0;
+
   useEffect(() => {
     const dialog = dialogRef.current;
     if (!dialog) return;
@@ -75,7 +81,7 @@ export default function ProjectModal({
       {project && (
         <div key={project.id} className="animate-swap-in motion-reduce:animate-none">
           <div className="relative aspect-video overflow-hidden bg-zinc-100 sm:aspect-2/1">
-            <ProjectCover project={project} sizes="(min-width: 896px) 896px, 92vw" />
+            <ProjectCover project={project} imageIndex={imageIndex} sizes="(min-width: 896px) 560px, 58vw" priority />
 
             <div className="absolute left-4 top-4 flex flex-wrap items-center gap-2">
               <span className="rounded-full bg-zinc-900 px-3 py-1 text-[13px] font-semibold tabular-nums text-white shadow-lg shadow-black/20">
@@ -93,6 +99,31 @@ export default function ProjectModal({
               <CloseIcon />
             </button>
           </div>
+
+          {imageCount > 1 && (
+            <div
+              role="group"
+              aria-label="Project screenshots"
+              className="flex gap-3 overflow-x-auto px-6 pb-1 pt-5 sm:px-9"
+            >
+              {project.images?.map((image, index) => (
+                <button
+                  key={image.alt}
+                  type="button"
+                  onClick={() => setPick({ id: project.id, index })}
+                  aria-pressed={index === imageIndex}
+                  aria-label={`Show screenshot ${index + 1} of ${imageCount}`}
+                  className={`relative h-16 w-24 shrink-0 overflow-hidden rounded-xl border-2 bg-zinc-100 transition duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand ${
+                    index === imageIndex
+                      ? "border-brand shadow-md shadow-brand/30"
+                      : "border-transparent opacity-60 hover:opacity-100"
+                  }`}
+                >
+                  <ProjectCover project={project} imageIndex={index} sizes="80px" size="thumb" />
+                </button>
+              ))}
+            </div>
+          )}
 
           <div className="p-6 sm:p-9">
             <TagList tags={project.tags} label="Project tags" />

@@ -62,7 +62,7 @@ export default function FeaturedProject({ project, index, total, onStep, onOpen 
       {/* New key = the card re-mounts and plays its entrance animation */}
       <div key={project.id} className="relative animate-swap-in motion-reduce:animate-none">
         <div className={styles.media}>
-          <ProjectCover project={project} sizes="(min-width: 1024px) 640px, 100vw" />
+          <ProjectCover project={project} sizes="(min-width: 1024px) 400px, 60vw" priority />
 
           <div className="absolute left-4 top-4 flex flex-wrap items-center gap-2">
             <span className={styles.counter} aria-label={`Project ${index + 1} of ${total}`}>

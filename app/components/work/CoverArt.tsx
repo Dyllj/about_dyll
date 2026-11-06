@@ -15,7 +15,11 @@ const WAVE = (y: number) =>
 
 const still = "motion-reduce:animate-none";
 
-function IoTArt() {
+// When a screenshot is shown on top, the artwork's main objects move to the left and
+// shrink a little, so they stay visible next to (and partly behind) the screenshot.
+const SHIFT = "translate(-92 22) scale(0.88)";
+
+function IoTArt({ transform }: { transform?: string }) {
   const nodes = [
     [150, 100],
     [500, 95],
@@ -25,33 +29,35 @@ function IoTArt() {
 
   return (
     <>
-      <g stroke="white" strokeOpacity="0.35" strokeWidth="2" strokeDasharray="6 8" fill="none">
-        {nodes.map(([x, y]) => (
-          <path key={`${x}-${y}`} d={`M320 150 L${x} ${y}`} />
-        ))}
-      </g>
-      <g fill="white" fillOpacity="0.9">
-        {nodes.map(([x, y]) => (
-          <circle key={`${x}-${y}`} cx={x} cy={y} r="8" />
-        ))}
-      </g>
+      <g transform={transform}>
+        <g stroke="white" strokeOpacity="0.35" strokeWidth="2" strokeDasharray="6 8" fill="none">
+          {nodes.map(([x, y]) => (
+            <path key={`${x}-${y}`} d={`M320 150 L${x} ${y}`} />
+          ))}
+        </g>
+        <g fill="white" fillOpacity="0.9">
+          {nodes.map(([x, y]) => (
+            <circle key={`${x}-${y}`} cx={x} cy={y} r="8" />
+          ))}
+        </g>
 
-      {[0, 0.9, 1.8].map((delay) => (
-        <circle
-          key={delay}
-          cx="320"
-          cy="150"
-          r="44"
-          fill="none"
-          stroke="white"
-          strokeWidth="2"
-          style={{ animationDelay: `${delay}s` }}
-          className={`animate-pulse-ring origin-center [transform-fill ${still}`}
-        />
-      ))}
-      <rect x="288" y="118" width="64" height="64" rx="18" fill="white" />
-      <circle cx="320" cy="150" r="15" fill={BRAND} />
-      <circle cx="320" cy="150" r="5" fill="white" />
+        {[0, 0.9, 1.8].map((delay) => (
+          <circle
+            key={delay}
+            cx="320"
+            cy="150"
+            r="44"
+            fill="none"
+            stroke="white"
+            strokeWidth="2"
+            style={{ animationDelay: `${delay}s` }}
+            className={`animate-pulse-ring origin-center transform-fill ${still}`}
+          />
+        ))}
+        <rect x="288" y="118" width="64" height="64" rx="18" fill="white" />
+        <circle cx="320" cy="150" r="15" fill={BRAND} />
+        <circle cx="320" cy="150" r="5" fill="white" />
+      </g>
 
       <g className={`animate-wave-slow ${still}`}>
         <path d={WAVE(262)} fill="white" fillOpacity="0.18" />
@@ -63,9 +69,9 @@ function IoTArt() {
   );
 }
 
-function WebArt() {
+function WebArt({ transform }: { transform?: string }) {
   return (
-    <>
+    <g transform={transform}>
       <g className={`animate-float ${still}`}>
         <rect x="150" y="56" width="340" height="226" rx="20" fill="white" fillOpacity="0.96" />
         <rect x="150" y="56" width="340" height="38" rx="20" fill="#eef0f3" />
@@ -96,13 +102,13 @@ function WebArt() {
         <rect x="470" y="252" width="56" height="8" rx="4" fill={BRAND} />
         <rect x="470" y="266" width="38" height="6" rx="3" fill="#cbd2dc" />
       </g>
-    </>
+    </g>
   );
 }
 
-function MobileArt() {
+function MobileArt({ transform }: { transform?: string }) {
   return (
-    <>
+    <g transform={transform}>
       <g className={`animate-float ${still}`}>
         <rect x="250" y="34" width="140" height="292" rx="30" fill="white" />
         <rect x="258" y="42" width="124" height="276" rx="24" fill="#eef0f3" />
@@ -132,15 +138,23 @@ function MobileArt() {
         <rect x="418" y="110" width="62" height="8" rx="4" fill={BRAND} />
         <rect x="418" y="124" width="42" height="6" rx="3" fill="#cbd2dc" />
       </g>
-    </>
+    </g>
   );
 }
 
 /**
- * Animated stand-in artwork for projects that have no screenshot yet.
- * It fills its (relatively positioned) parent.
+ * The animated cover artwork. It fills its (relatively positioned) parent.
+ * `shifted` slides the main objects aside to make room for a screenshot.
  */
-export default function CoverArt({ category }: { category: Category }) {
+export default function CoverArt({
+  category,
+  shifted = false,
+}: {
+  category: Category;
+  shifted?: boolean;
+}) {
+  const transform = shifted ? SHIFT : undefined;
+
   return (
     <div
       aria-hidden="true"
@@ -154,9 +168,9 @@ export default function CoverArt({ category }: { category: Category }) {
         preserveAspectRatio="xMidYMid slice"
         className="absolute inset-0 size-full"
       >
-        {category === "IoT" && <IoTArt />}
-        {category === "Web" && <WebArt />}
-        {category === "Mobile" && <MobileArt />}
+        {category === "IoT" && <IoTArt transform={transform} />}
+        {category === "Web" && <WebArt transform={transform} />}
+        {category === "Mobile" && <MobileArt transform={transform} />}
       </svg>
     </div>
   );

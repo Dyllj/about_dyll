@@ -37,7 +37,7 @@ export default function ProjectListItem({ project, index, onSelect, onOpen }: Pr
           className={styles.thumb}
         >
           <span className={styles.thumbZoom}>
-            <ProjectCover project={project} sizes="96px" />
+            <ProjectCover project={project} sizes="80px" size="thumb" />
           </span>
         </button>
 
