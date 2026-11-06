@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState, type CSSProperties } from "react";
 import Logo from "../logo/logo";
 import PageNav from "../page_nav/page_nav";
-import TogglButton from "../toggle_button/toggl_button";
+import TogglButton from "../toggle_button/toggle_button";
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
