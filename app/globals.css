@@ -691,88 +691,149 @@ body {
   }
 }
 /* ---------- Backdrop (landing, About, Work, Contact) ---------- */
+/* Pick the pattern with PATTERN at the top of components/landing/Backdrop.tsx:
+   "dots" | "grid" | "waves" | "none" */
 
 :root {
-  /* Second colour of the gradient, paired with --color-brand */
+  /* Second colour of the soft wash, paired with --color-brand */
   --backdrop-accent: #38bdf8;
+  /* 1 = full strength. Dark mode is turned down a little. */
+  --backdrop-wash: 1;
 }
 
 :root[data-theme="dark"] {
   --backdrop-accent: #f59e0b;
+  --backdrop-wash: 0.7;
 }
 
-/* Colour wash that reaches all four corners plus a base tint, so no part of the
-   screen is ever plain white */
+/* A calm colour wash that touches all four corners, so no part of the screen is plain */
 .backdrop-mesh {
+  opacity: var(--backdrop-wash);
   background:
     radial-gradient(
-      60rem 42rem at 90% -6%,
-      color-mix(in srgb, var(--color-brand) 28%, transparent),
+      58rem 40rem at 92% -8%,
+      color-mix(in srgb, var(--color-brand) 14%, transparent),
       transparent 62%
     ),
     radial-gradient(
-      52rem 38rem at -6% 106%,
-      color-mix(in srgb, var(--backdrop-accent) 34%, transparent),
+      50rem 36rem at -8% 108%,
+      color-mix(in srgb, var(--backdrop-accent) 16%, transparent),
       transparent 60%
     ),
     radial-gradient(
-      44rem 30rem at -4% -4%,
-      color-mix(in srgb, var(--backdrop-accent) 20%, transparent),
+      40rem 28rem at -6% -6%,
+      color-mix(in srgb, var(--backdrop-accent) 9%, transparent),
       transparent 62%
     ),
     radial-gradient(
-      46rem 32rem at 104% 104%,
-      color-mix(in srgb, var(--color-brand) 18%, transparent),
+      42rem 30rem at 106% 106%,
+      color-mix(in srgb, var(--color-brand) 8%, transparent),
       transparent 62%
-    ),
-    linear-gradient(
-      180deg,
-      color-mix(in srgb, var(--color-brand) 6%, transparent),
-      color-mix(in srgb, var(--backdrop-accent) 8%, transparent)
     );
 }
 
-/* Two blurred glows that drift very slowly so the background feels alive */
+/* Two very soft glows that drift slowly */
 .backdrop-glow {
   position: absolute;
   border-radius: 9999px;
-  filter: blur(70px);
+  filter: blur(90px);
+  opacity: var(--backdrop-wash);
   will-change: transform;
 }
 
 .backdrop-glow-a {
-  top: -14rem;
-  right: -10rem;
-  width: 40rem;
-  height: 40rem;
-  background: color-mix(in srgb, var(--color-brand) 22%, transparent);
-  animation: backdrop-drift 22s ease-in-out infinite alternate;
+  top: -16rem;
+  right: -12rem;
+  width: 38rem;
+  height: 38rem;
+  background: color-mix(in srgb, var(--color-brand) 11%, transparent);
+  animation: backdrop-drift 44s ease-in-out infinite alternate;
 }
 
 .backdrop-glow-b {
-  bottom: -12rem;
-  left: -10rem;
-  width: 36rem;
-  height: 36rem;
-  background: color-mix(in srgb, var(--backdrop-accent) 26%, transparent);
-  animation: backdrop-drift 28s ease-in-out infinite alternate-reverse;
+  bottom: -14rem;
+  left: -12rem;
+  width: 34rem;
+  height: 34rem;
+  background: color-mix(in srgb, var(--backdrop-accent) 13%, transparent);
+  animation: backdrop-drift 52s ease-in-out infinite alternate-reverse;
 }
 
-/* Dot grid across the whole screen. It is strongest around the upper right and only
-   eases off to about a third of that at the edges, so it never disappears. */
-.backdrop-dots {
+/* Pattern layer: covers the whole screen, strongest upper right, never fully fading out */
+.backdrop-pattern {
+  position: absolute;
+  inset: 0;
+  -webkit-mask-image: radial-gradient(
+    ellipse 125% 105% at 64% 34%,
+    black 20%,
+    rgb(0 0 0 / 0.4) 100%
+  );
+  mask-image: radial-gradient(ellipse 125% 105% at 64% 34%, black 20%, rgb(0 0 0 / 0.4) 100%);
+}
+
+.backdrop-pattern::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
+/* Option 1: fine blueprint grid */
+.backdrop-pattern-grid::before {
+  background-image:
+    linear-gradient(to right, color-mix(in srgb, var(--color-brand) 9%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in srgb, var(--color-brand) 9%, transparent) 1px, transparent 1px);
+  background-size: 64px 64px;
+  background-position: center top;
+}
+
+/* Option 2: gentle flowing contour lines. The shape comes from the SVG (used as a mask),
+   the colour from background-color, so the lines follow the theme. */
+.backdrop-pattern-waves::before {
+  background-color: color-mix(in srgb, var(--color-brand) 16%, transparent);
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 1200 800%22 width=%221200%22 height=%22800%22 fill=%22none%22 stroke=%22%23000%22 stroke-width=%221.2%22%3E%3Cpath d=%22M0 20 C200 10.0 400 10.0 600 20 S1000 30.0 1200 20%22/%3E%3Cpath d=%22M0 60 C200 47.5 400 47.5 600 60 S1000 72.5 1200 60%22/%3E%3Cpath d=%22M0 100 C200 85.1 400 85.1 600 100 S1000 114.9 1200 100%22/%3E%3Cpath d=%22M0 140 C200 122.7 400 122.7 600 140 S1000 157.3 1200 140%22/%3E%3Cpath d=%22M0 180 C200 160.6 400 160.6 600 180 S1000 199.4 1200 180%22/%3E%3Cpath d=%22M0 220 C200 198.7 400 198.7 600 220 S1000 241.3 1200 220%22/%3E%3Cpath d=%22M0 260 C200 237.1 400 237.1 600 260 S1000 282.9 1200 260%22/%3E%3Cpath d=%22M0 300 C200 275.7 400 275.7 600 300 S1000 324.3 1200 300%22/%3E%3Cpath d=%22M0 340 C200 314.8 400 314.8 600 340 S1000 365.2 1200 340%22/%3E%3Cpath d=%22M0 380 C200 354.2 400 354.2 600 380 S1000 405.8 1200 380%22/%3E%3Cpath d=%22M0 420 C200 394.0 400 394.0 600 420 S1000 446.0 1200 420%22/%3E%3Cpath d=%22M0 460 C200 434.2 400 434.2 600 460 S1000 485.8 1200 460%22/%3E%3Cpath d=%22M0 500 C200 474.8 400 474.8 600 500 S1000 525.2 1200 500%22/%3E%3Cpath d=%22M0 540 C200 515.7 400 515.7 600 540 S1000 564.3 1200 540%22/%3E%3Cpath d=%22M0 580 C200 557.1 400 557.1 600 580 S1000 602.9 1200 580%22/%3E%3Cpath d=%22M0 620 C200 598.7 400 598.7 600 620 S1000 641.3 1200 620%22/%3E%3Cpath d=%22M0 660 C200 640.6 400 640.6 600 660 S1000 679.4 1200 660%22/%3E%3Cpath d=%22M0 700 C200 682.7 400 682.7 600 700 S1000 717.3 1200 700%22/%3E%3Cpath d=%22M0 740 C200 725.1 400 725.1 600 740 S1000 754.9 1200 740%22/%3E%3Cpath d=%22M0 780 C200 767.5 400 767.5 600 780 S1000 792.5 1200 780%22/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 1200 800%22 width=%221200%22 height=%22800%22 fill=%22none%22 stroke=%22%23000%22 stroke-width=%221.2%22%3E%3Cpath d=%22M0 20 C200 10.0 400 10.0 600 20 S1000 30.0 1200 20%22/%3E%3Cpath d=%22M0 60 C200 47.5 400 47.5 600 60 S1000 72.5 1200 60%22/%3E%3Cpath d=%22M0 100 C200 85.1 400 85.1 600 100 S1000 114.9 1200 100%22/%3E%3Cpath d=%22M0 140 C200 122.7 400 122.7 600 140 S1000 157.3 1200 140%22/%3E%3Cpath d=%22M0 180 C200 160.6 400 160.6 600 180 S1000 199.4 1200 180%22/%3E%3Cpath d=%22M0 220 C200 198.7 400 198.7 600 220 S1000 241.3 1200 220%22/%3E%3Cpath d=%22M0 260 C200 237.1 400 237.1 600 260 S1000 282.9 1200 260%22/%3E%3Cpath d=%22M0 300 C200 275.7 400 275.7 600 300 S1000 324.3 1200 300%22/%3E%3Cpath d=%22M0 340 C200 314.8 400 314.8 600 340 S1000 365.2 1200 340%22/%3E%3Cpath d=%22M0 380 C200 354.2 400 354.2 600 380 S1000 405.8 1200 380%22/%3E%3Cpath d=%22M0 420 C200 394.0 400 394.0 600 420 S1000 446.0 1200 420%22/%3E%3Cpath d=%22M0 460 C200 434.2 400 434.2 600 460 S1000 485.8 1200 460%22/%3E%3Cpath d=%22M0 500 C200 474.8 400 474.8 600 500 S1000 525.2 1200 500%22/%3E%3Cpath d=%22M0 540 C200 515.7 400 515.7 600 540 S1000 564.3 1200 540%22/%3E%3Cpath d=%22M0 580 C200 557.1 400 557.1 600 580 S1000 602.9 1200 580%22/%3E%3Cpath d=%22M0 620 C200 598.7 400 598.7 600 620 S1000 641.3 1200 620%22/%3E%3Cpath d=%22M0 660 C200 640.6 400 640.6 600 660 S1000 679.4 1200 660%22/%3E%3Cpath d=%22M0 700 C200 682.7 400 682.7 600 700 S1000 717.3 1200 700%22/%3E%3Cpath d=%22M0 740 C200 725.1 400 725.1 600 740 S1000 754.9 1200 740%22/%3E%3Cpath d=%22M0 780 C200 767.5 400 767.5 600 780 S1000 792.5 1200 780%22/%3E%3C/svg%3E");
+  -webkit-mask-size: 1200px 800px;
+  mask-size: 1200px 800px;
+  -webkit-mask-repeat: repeat;
+  mask-repeat: repeat;
+}
+
+/* Option 3 (default): dots in the top-right and bottom-left corners only.
+   The mask runs along the line between those two corners ("to top right"), so its
+   fade lines are parallel to the top-left to bottom-right diagonal. The dots fade out
+   as they approach that diagonal and leave an empty band across the middle. */
+.backdrop-pattern-dots {
+  -webkit-mask-image: linear-gradient(
+    to top right,
+    black 0%,
+    rgb(0 0 0 / 0.65) 10%,
+    rgb(0 0 0 / 0.3) 22%,
+    transparent 38%,
+    transparent 62%,
+    rgb(0 0 0 / 0.3) 78%,
+    rgb(0 0 0 / 0.65) 90%,
+    black 100%
+  );
+  mask-image: linear-gradient(
+    to top right,
+    black 0%,
+    rgb(0 0 0 / 0.65) 10%,
+    rgb(0 0 0 / 0.3) 22%,
+    transparent 38%,
+    transparent 62%,
+    rgb(0 0 0 / 0.3) 78%,
+    rgb(0 0 0 / 0.65) 90%,
+    black 100%
+  );
+}
+
+.backdrop-pattern-dots::before {
   background-image: radial-gradient(
     circle,
-    color-mix(in srgb, var(--color-brand) 42%, transparent) 1.5px,
+    color-mix(in srgb, var(--color-brand) 46%, transparent) 1.5px,
     transparent 1.6px
   );
   background-size: 26px 26px;
-  -webkit-mask-image: radial-gradient(
-    ellipse 130% 110% at 66% 32%,
-    black 20%,
-    rgb(0 0 0 / 0.3) 100%
-  );
-  mask-image: radial-gradient(ellipse 130% 110% at 66% 32%, black 20%, rgb(0 0 0 / 0.3) 100%);
 }
 
 @keyframes backdrop-drift {
@@ -780,7 +841,7 @@ body {
     transform: translate3d(0, 0, 0) scale(1);
   }
   to {
-    transform: translate3d(-4rem, 3rem, 0) scale(1.15);
+    transform: translate3d(-3rem, 2rem, 0) scale(1.1);
   }
 }
 
