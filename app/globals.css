@@ -385,3 +385,230 @@ body {
     animation: none;
   }
 }
+/* ---------- About page: technology tiles ---------- */
+
+.tech-tile {
+  --lift: 0px;
+  position: relative;
+  isolation: isolate;
+  height: 100%;
+  overflow: hidden;
+  border: 1px solid var(--theme-border);
+  border-radius: 1.5rem;
+  background: var(--surface);
+  padding: 1.5rem 0.75rem 1.1rem;
+  text-align: center;
+  transform: perspective(700px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg))
+    translateY(var(--lift));
+  transition:
+    transform 260ms ease-out,
+    border-color 300ms ease,
+    box-shadow 300ms ease;
+  will-change: transform;
+}
+
+/* Spotlight that follows the cursor */
+.tech-tile::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(
+    190px circle at var(--mx, 50%) var(--my, 30%),
+    color-mix(in srgb, var(--tech) 24%, transparent),
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity 300ms ease;
+}
+
+/* Diagonal shine that sweeps across once per hover */
+.tech-tile::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(
+    115deg,
+    transparent 35%,
+    color-mix(in srgb, var(--tech) 18%, white) 50%,
+    transparent 65%
+  );
+  opacity: 0.55;
+  transform: translateX(-130%);
+}
+
+.tech-orb {
+  position: relative;
+  margin-inline: auto;
+  display: grid;
+  width: 4rem;
+  height: 4rem;
+  place-items: center;
+}
+
+/* Soft colour halo that breathes */
+.tech-glow {
+  position: absolute;
+  inset: -0.5rem;
+  border-radius: 9999px;
+  background: radial-gradient(circle, color-mix(in srgb, var(--tech) 45%, transparent), transparent 68%);
+  filter: blur(6px);
+  opacity: 0.35;
+  animation: tech-breathe 4s ease-in-out infinite;
+  animation-delay: var(--float-delay);
+  transition: opacity 300ms ease;
+}
+
+/* Dashed ring with a dot that orbits */
+.tech-ring {
+  position: absolute;
+  inset: -0.35rem;
+  border: 1px dashed color-mix(in srgb, var(--tech) 55%, transparent);
+  border-radius: 9999px;
+  animation: orbit 16s linear infinite;
+  transition: border-color 300ms ease;
+}
+
+.tech-ring::before {
+  content: "";
+  position: absolute;
+  top: -3px;
+  left: calc(50% - 3px);
+  width: 6px;
+  height: 6px;
+  border-radius: 9999px;
+  background: var(--tech);
+  box-shadow: 0 0 8px var(--tech);
+}
+
+.tech-float {
+  position: relative;
+  display: grid;
+  animation: tech-float 5s ease-in-out infinite;
+  animation-delay: var(--float-delay);
+}
+
+.tech-icon {
+  display: grid;
+  width: 4rem;
+  height: 4rem;
+  place-items: center;
+  border-radius: 1rem;
+  background: color-mix(in srgb, var(--tech) 14%, var(--surface));
+  color: var(--tech);
+  transition:
+    transform 450ms cubic-bezier(0.34, 1.56, 0.64, 1),
+    background-color 300ms ease,
+    box-shadow 300ms ease;
+}
+
+.tech-name {
+  margin-top: 1rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--foreground);
+}
+
+/* Category label slides up on hover; its space is always reserved so nothing shifts */
+.tech-category {
+  margin-top: 0.15rem;
+  height: 1rem;
+  font-size: 0.6875rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--tech);
+  opacity: 0;
+  transform: translateY(6px);
+  transition:
+    opacity 300ms ease,
+    transform 300ms ease;
+}
+
+@media (hover: hover) {
+  .tech-tile:hover {
+    --lift: -6px;
+    border-color: color-mix(in srgb, var(--tech) 65%, transparent);
+    box-shadow: 0 22px 44px -20px color-mix(in srgb, var(--tech) 60%, transparent);
+  }
+
+  .tech-tile:hover::before {
+    opacity: 1;
+  }
+
+  .tech-tile:hover::after {
+    animation: tech-shine 900ms ease-out;
+  }
+
+  .tech-tile:hover .tech-icon {
+    transform: scale(1.14) rotate(-8deg);
+    box-shadow: 0 10px 24px -8px color-mix(in srgb, var(--tech) 70%, transparent);
+  }
+
+  .tech-tile:hover .tech-glow {
+    opacity: 0.9;
+  }
+
+  .tech-tile:hover .tech-ring {
+    animation-duration: 4s;
+    border-style: solid;
+  }
+
+  .tech-tile:hover .tech-category {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Keyboard / touch users get the same lift without the cursor effects */
+.tech-tile:focus-within,
+.tech-tile:active {
+  --lift: -4px;
+  border-color: color-mix(in srgb, var(--tech) 65%, transparent);
+}
+
+@keyframes tech-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes tech-breathe {
+  0%,
+  100% {
+    transform: scale(0.9);
+  }
+  50% {
+    transform: scale(1.15);
+  }
+}
+
+@keyframes tech-shine {
+  to {
+    transform: translateX(130%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tech-tile,
+  .tech-icon,
+  .tech-category {
+    transition: none;
+  }
+
+  .tech-float,
+  .tech-glow,
+  .tech-ring,
+  .tech-tile:hover::after {
+    animation: none;
+  }
+
+  .tech-tile:hover .tech-icon {
+    transform: none;
+  }
+}

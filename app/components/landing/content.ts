@@ -6,7 +6,7 @@ export const TECH_STACK = [
   { short: "Py", name: "Python" },
   { short: "SQL", name: "MySQL" },
   { short: "Sb", name: "Supabase" },
-];
+] as const;
 
 export type AchievementIcon = "graduation" | "paper" | "trophy" | "medal";
 
