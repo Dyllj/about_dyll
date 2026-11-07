@@ -612,3 +612,81 @@ body {
     transform: none;
   }
 }
+
+/* ---------- About page: technology marquee ---------- */
+
+.tech-marquee-viewport {
+  /* Break out of the page's max-width column so the strip spans the full screen.
+     The page wrapper has overflow-hidden, so the extra width never causes a sideways scrollbar. */
+  position: relative;
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  /* Room above and below so the hover lift, tilt and glow are never clipped */
+  margin-top: 1.5rem;
+  padding-block: 2rem 2.75rem;
+  overflow-x: clip;
+}
+
+/* Soft fade on both sides; mask-image also needs the -webkit- prefix for Safari */
+.tech-fade {
+  --fade: min(14%, 14rem);
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black var(--fade),
+    black calc(100% - var(--fade)),
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black var(--fade),
+    black calc(100% - var(--fade)),
+    transparent 100%
+  );
+}
+
+.tech-marquee-track {
+  display: flex;
+  width: max-content;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  animation: tech-scroll var(--marquee-duration, 77s) linear infinite;
+}
+
+/* Each item carries its own right padding, so half the track is exactly two copies */
+.tech-marquee-item {
+  flex-shrink: 0;
+  width: 9.75rem;
+  padding-right: 1rem;
+  box-sizing: border-box;
+}
+
+/* Pause while hovering or focusing so tiles are easy to inspect */
+.tech-marquee-track:hover,
+.tech-marquee-track:focus-within {
+  animation-play-state: paused;
+}
+
+@keyframes tech-scroll {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tech-marquee-track {
+    animation: none;
+  }
+
+  .tech-marquee-viewport {
+    overflow-x: auto;
+  }
+
+  /* A static row scrolled by hand shouldn't have its first tiles faded out */
+  .tech-fade {
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+}

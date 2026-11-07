@@ -2,11 +2,18 @@ export const TECH_STACK = [
   { short: "R", name: "React" },
   { short: "JS", name: "JavaScript" },
   { short: "TS", name: "TypeScript" },
+  { short: "N", name: "Node.js" },
+  { short: "Tw", name: "Tailwind CSS" },
   { short: "php", name: "PHP" },
   { short: "Py", name: "Python" },
   { short: "SQL", name: "MySQL" },
+  { short: "Fb", name: "Firebase" },
   { short: "Sb", name: "Supabase" },
-] as const;
+  { short: "IoT", name: "IoT" },
+  { short: "Git", name: "Git" },
+  { short: "GH", name: "GitHub" },
+  { short: "Cl", name: "Claude" },
+];
 
 export type AchievementIcon = "graduation" | "paper" | "trophy" | "medal";
 
