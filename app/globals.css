@@ -690,3 +690,102 @@ body {
     mask-image: none;
   }
 }
+/* ---------- Backdrop (landing, About, Work, Contact) ---------- */
+
+:root {
+  /* Second colour of the gradient, paired with --color-brand */
+  --backdrop-accent: #38bdf8;
+}
+
+:root[data-theme="dark"] {
+  --backdrop-accent: #f59e0b;
+}
+
+/* Colour wash that reaches all four corners plus a base tint, so no part of the
+   screen is ever plain white */
+.backdrop-mesh {
+  background:
+    radial-gradient(
+      60rem 42rem at 90% -6%,
+      color-mix(in srgb, var(--color-brand) 28%, transparent),
+      transparent 62%
+    ),
+    radial-gradient(
+      52rem 38rem at -6% 106%,
+      color-mix(in srgb, var(--backdrop-accent) 34%, transparent),
+      transparent 60%
+    ),
+    radial-gradient(
+      44rem 30rem at -4% -4%,
+      color-mix(in srgb, var(--backdrop-accent) 20%, transparent),
+      transparent 62%
+    ),
+    radial-gradient(
+      46rem 32rem at 104% 104%,
+      color-mix(in srgb, var(--color-brand) 18%, transparent),
+      transparent 62%
+    ),
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--color-brand) 6%, transparent),
+      color-mix(in srgb, var(--backdrop-accent) 8%, transparent)
+    );
+}
+
+/* Two blurred glows that drift very slowly so the background feels alive */
+.backdrop-glow {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(70px);
+  will-change: transform;
+}
+
+.backdrop-glow-a {
+  top: -14rem;
+  right: -10rem;
+  width: 40rem;
+  height: 40rem;
+  background: color-mix(in srgb, var(--color-brand) 22%, transparent);
+  animation: backdrop-drift 22s ease-in-out infinite alternate;
+}
+
+.backdrop-glow-b {
+  bottom: -12rem;
+  left: -10rem;
+  width: 36rem;
+  height: 36rem;
+  background: color-mix(in srgb, var(--backdrop-accent) 26%, transparent);
+  animation: backdrop-drift 28s ease-in-out infinite alternate-reverse;
+}
+
+/* Dot grid across the whole screen. It is strongest around the upper right and only
+   eases off to about a third of that at the edges, so it never disappears. */
+.backdrop-dots {
+  background-image: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--color-brand) 42%, transparent) 1.5px,
+    transparent 1.6px
+  );
+  background-size: 26px 26px;
+  -webkit-mask-image: radial-gradient(
+    ellipse 130% 110% at 66% 32%,
+    black 20%,
+    rgb(0 0 0 / 0.3) 100%
+  );
+  mask-image: radial-gradient(ellipse 130% 110% at 66% 32%, black 20%, rgb(0 0 0 / 0.3) 100%);
+}
+
+@keyframes backdrop-drift {
+  from {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  to {
+    transform: translate3d(-4rem, 3rem, 0) scale(1.15);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .backdrop-glow {
+    animation: none;
+  }
+}

@@ -1,22 +1,22 @@
 "use client";
 
-import { useEffect, useRef, useState, type CSSProperties } from "react";
+import { useEffect, useState } from "react";
 import Logo from "../logo/logo";
 import PageNav from "../page_nav/page_nav";
 import TogglButton from "../toggle_button/toggle_button";
 
+// Dark shadow for depth + accent glow (--brand-glow is blue in light mode, yellow in dark mode)
+const SCROLLED_SHADOW =
+  "shadow-[0_14px_34px_-12px_rgba(11,11,11,0.35),0_8px_22px_-8px_color-mix(in_srgb,var(--brand-glow)_32%,transparent)]";
+
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
-  const progressRef = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
     let frame = 0;
 
     const update = () => {
       frame = 0;
-      const max = document.documentElement.scrollHeight - window.innerHeight;
-      const progress = max > 0 ? Math.min(window.scrollY / max, 1) : 0;
-      progressRef.current?.style.setProperty("--progress", progress.toFixed(3));
       setScrolled(window.scrollY > 24);
     };
 
@@ -38,24 +38,16 @@ export default function Header() {
     <header className="sticky top-3 z-50 px-3 py-3 sm:top-4 sm:px-8">
       {/* One floating "island" that groups logo, nav and theme toggle */}
       <div className="relative isolate mx-auto flex w-fit max-w-full items-center gap-1.5 p-1.5 sm:gap-3">
-        {/* Glass + progress live on their own layers so nothing that contains
-            the toggle has a blur/transform (its full-screen effect stays intact) */}
+        {/* The glass lives on its own layer so nothing that contains the toggle has a
+            blur/transform (its full-screen effect stays intact). Once the page is
+            scrolled it gets a two-part shadow: a dark drop shadow for depth, plus a
+            soft glow in the theme's accent colour so it stays visible in dark mode too. */}
         <div
           aria-hidden="true"
           className={`absolute inset-0 -z-10 rounded-full border border-theme-border bg-white/80 backdrop-blur-xl transition-shadow duration-300 ${
-            scrolled ? "shadow-[0_20px_40px_-20px_rgba(11,11,11,0.28)]" : ""
+            scrolled ? SCROLLED_SHADOW : ""
           }`}
         />
-        <span
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0 -z-10 overflow-hidden rounded-full"
-        >
-          <span
-            ref={progressRef}
-            style={{ "--progress": 0 } as CSSProperties}
-            className="absolute inset-x-0 bottom-0 h-0.75 origin-left scale-x-(--progress) bg-brand"
-          />
-        </span>
 
         {/* Logo badge */}
         <div className="grid size-12 shrink-0 place-items-center sm:size-14">

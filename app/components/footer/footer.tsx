@@ -18,7 +18,7 @@ const socials = [
 
 export default function Footer() {
   return (
-    <footer className="mt-24 bg-surface-muted pb-7 pt-10">
+    <footer className="relative z-10 mt-24 bg-surface-muted pb-7 pt-10">
       <div className="mx-auto w-full max-w-290 px-5 sm:px-8 xl:px-0">
         <div className="flex flex-wrap items-center justify-between gap-6">
           <nav aria-label="Footer navigation">

@@ -10,8 +10,8 @@ import { useWorkBrowser } from "../work/useWorkBrowser";
 
 const styles = {
   page: "relative isolate overflow-hidden",
-  // The same dot grid and soft blobs as the landing page, limited to the top
-  backdrop: "absolute inset-x-0 top-0 -z-10 h-176",
+  // Full-screen backdrop: fixed to the viewport so it never ends partway down a long page
+  backdrop: "fixed inset-0 -z-10",
   main: "relative mx-auto w-full max-w-[1160px] px-5 pb-8 pt-10 sm:px-8 sm:pt-14 xl:px-0",
   // Featured card on the left, "More projects" on the right
   grid: "mt-10 grid items-start gap-6 lg:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)]",

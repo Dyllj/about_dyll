@@ -37,7 +37,7 @@ export default function Home() {
   const [isCanvasMode, setIsCanvasMode] = useState(false);
 
   useEffect(() => {
-    const handleHashChange = () => {
+    const syncViewFromHash = () => {
       const isCanvas = hasValidCanvasHash();
       setIsCanvasMode(isCanvas);
       if (isCanvas) {
@@ -45,9 +45,24 @@ export default function Home() {
       }
     };
 
-    handleHashChange();
+    // Switching pages only changes the hash, so the browser keeps the old scroll
+    // position. Jump to the top of the new page instantly (not smoothly).
+    const handleHashChange = () => {
+      syncViewFromHash();
+      window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+    };
+
+    // Stop the browser from restoring an old scroll position on back/forward,
+    // which would fight with the scroll-to-top above.
+    const previousRestoration = window.history.scrollRestoration;
+    window.history.scrollRestoration = "manual";
+
+    syncViewFromHash();
     window.addEventListener("hashchange", handleHashChange);
-    return () => window.removeEventListener("hashchange", handleHashChange);
+    return () => {
+      window.removeEventListener("hashchange", handleHashChange);
+      window.history.scrollRestoration = previousRestoration;
+    };
   }, []);
 
   const ViewComponent = canvasViewComponents[activeView];
