@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Generator: visioncortex VTracer 0.6.4 -->
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="200" height="200">
+<path d="M0 0 C15.61 11.92 26.99 29.52 30.15 49.05 C31.97 71.33 27.95 90.52 14.28 108.43 C2.41 122.38 -14.38 133.6 -32.85 136.05 C-55.44 137.64 -75.92 134.23 -93.62 119.07 C-94.35 118.4 -95.09 117.74 -95.85 117.05 C-96.53 116.46 -97.22 115.87 -97.92 115.26 C-110.17 103.98 -118.72 86.94 -120.07 70.33 C-120.95 48.12 -117.26 28.9 -102.23 11.58 C-74.56 -17.81 -33.42 -22.83 0 0 Z " fill="#DDDBDB" transform="translate(144.84765625,38.9453125)"/>
+<path d="M0 0 C2.31 0 4.62 0 7 0 C7.01 0.63 7.01 1.27 7.02 1.92 C7.08 8.51 7.17 15.09 7.26 21.68 C7.3 24.14 7.32 26.6 7.35 29.06 C7.38 32.59 7.43 36.12 7.49 39.65 C7.49 40.75 7.5 41.86 7.51 43 C7.53 44.02 7.55 45.04 7.57 46.09 C7.58 46.99 7.59 47.89 7.6 48.82 C7.73 49.54 7.86 50.26 8 51 C13.31 54.54 19.4 53.21 25.5 52.25 C32.42 50.86 38.43 48.95 43.31 43.69 C44.2 42.8 45.09 41.91 46 41 C48.17 41.33 48.17 41.33 50 42 C42.93 49.21 33.47 54.7 23.16 55.11 C22.09 55.11 21.02 55.1 19.92 55.1 C18.18 55.09 18.18 55.09 16.41 55.09 C15.2 55.08 13.99 55.07 12.75 55.06 C11.53 55.06 10.31 55.05 9.05 55.05 C6.03 55.04 3.02 55.02 0 55 C0 54.34 0 53.68 0 53 C0.99 52.5 0.99 52.5 2 52 C2.33 35.5 2.66 19 3 2 C2.01 1.67 1.02 1.34 0 1 C0 0.67 0 0.34 0 0 Z " fill="#0A0A0A" transform="translate(61,63)"/>
+<path d="M0 0 C2.97 0 5.94 0 9 0 C8.01 1.48 8.01 1.48 7 3 C6.69 5.11 6.69 5.11 6.71 7.45 C6.7 8.35 6.69 9.25 6.67 10.17 C6.67 11.14 6.66 12.11 6.66 13.11 C6.64 14.11 6.63 15.11 6.61 16.14 C6.57 19.34 6.53 22.55 6.5 25.75 C6.46 29.95 6.4 34.16 6.34 38.36 C6.34 39.32 6.33 40.28 6.33 41.27 C6.21 49.13 5.5 54.95 0 61 C-0.66 60.67 -1.32 60.34 -2 60 C-1.51 59.45 -1.03 58.9 -0.53 58.34 C1.31 55.52 1.39 53.93 1.43 50.59 C1.45 49.51 1.47 48.43 1.49 47.31 C1.5 46.15 1.51 44.99 1.51 43.8 C1.53 42.6 1.55 41.41 1.57 40.18 C1.62 36.37 1.65 32.56 1.69 28.75 C1.72 26.17 1.76 23.58 1.79 21 C1.88 14.67 1.94 8.33 2 2 C1.34 2 0.68 2 0 2 C0 1.34 0 0.68 0 0 Z " fill="#1D1D1D" transform="translate(132,84)"/>
+<path d="M0 0 C2.31 0 4.62 0 7 0 C6.67 4.29 6.34 8.58 6 13 C7.98 12.67 9.96 12.34 12 12 C11.34 13.32 10.68 14.64 10 16 C6.37 16 2.74 16 -1 16 C-0.34 15.67 0.32 15.34 1 15 C0.67 10.05 0.34 5.1 0 0 Z " fill="#C5C3C3" transform="translate(96,84)"/>
+<path d="M0 0 C2.17 0.33 2.17 0.33 4 1 C-3.07 8.21 -12.53 13.7 -22.84 14.11 C-23.91 14.11 -24.98 14.1 -26.08 14.1 C-27.24 14.09 -28.4 14.09 -29.59 14.09 C-30.8 14.08 -32.01 14.07 -33.25 14.06 C-34.47 14.06 -35.69 14.05 -36.95 14.05 C-39.97 14.04 -42.98 14.02 -46 14 C-45.67 13.34 -45.34 12.68 -45 12 C-43.76 12.02 -42.51 12.05 -41.23 12.07 C-21.47 12.76 -21.47 12.76 -4.25 4.37 C-3.73 3.82 -3.22 3.26 -2.69 2.69 C-1.8 1.8 -0.91 0.91 0 0 Z " fill="#878585" transform="translate(107,104)"/>
+<path d="M0 0 C7.5 0.33 13.83 3.62 18.97 9.11 C23 14.33 23 14.33 23 17 C20.66 16.76 20.66 16.76 18 16 C16.62 14.14 16.62 14.14 15.44 11.81 C11.77 5.76 6.36 3.62 0 1 C0 0.67 0 0.34 0 0 Z " fill="#222222" transform="translate(91,64)"/>
+<path d="M0 0 C0.99 0 1.98 0 3 0 C3 4.29 3 8.58 3 13 C6.47 12.5 6.47 12.5 10 12 C9.67 12.99 9.34 13.98 9 15 C5.37 15 1.74 15 -2 15 C-1.34 14.67 -0.68 14.34 0 14 C0 9.38 0 4.76 0 0 Z " fill="#4A4949" transform="translate(117,85)"/>
+<path d="M0 0 C0.66 0 1.32 0 2 0 C2 4.29 2 8.58 2 13 C4.64 12.34 7.28 11.68 10 11 C9.34 12.32 8.68 13.64 8 15 C4.37 15 0.74 15 -3 15 C-2.34 14.34 -1.68 13.68 -1 13 C-0.54 9.88 -0.54 9.88 -0.38 6.38 C-0.3 5.19 -0.23 4 -0.15 2.77 C-0.1 1.86 -0.05 0.94 0 0 Z " fill="#313131" transform="translate(98,85)"/>
+<path d="M0 0 C0.99 0 1.98 0 3 0 C6 4.22 6 4.22 6 7 C6.66 7 7.32 7 8 7 C8.33 9.64 8.66 12.28 9 15 C7.02 15 5.04 15 3 15 C3.66 14.67 4.32 14.34 5 14 C4.53 8.29 3.06 4.84 0 0 Z " fill="#313030" transform="translate(74,85)"/>
+<path d="M0 0 C2.19 0.31 2.19 0.31 4 1 C2.75 2.13 1.5 3.25 0.25 4.38 C-0.45 5 -1.14 5.63 -1.86 6.27 C-3.88 7.9 -5.57 9.1 -8 10 C-8.99 9.67 -9.98 9.34 -11 9 C-10.46 8.6 -9.91 8.2 -9.36 7.79 C-8.64 7.26 -7.92 6.73 -7.19 6.19 C-6.48 5.67 -5.77 5.14 -5.04 4.61 C-2.98 3.09 -2.98 3.09 -1.49 1.24 C-1 0.83 -0.51 0.42 0 0 Z " fill="#1A1A1A" transform="translate(107,104)"/>
+<path d="M0 0 C7.26 0 14.52 0 22 0 C22 0.33 22 0.66 22 1 C14.74 1 7.48 1 0 1 C0 0.67 0 0.34 0 0 Z " fill="#DDDBDB" transform="translate(89,176)"/>
+<path d="M0 0 C0.33 0 0.66 0 1 0 C1 7.26 1 14.52 1 22 C0.67 22 0.34 22 0 22 C0 14.74 0 7.48 0 0 Z " fill="#DDDBDB" transform="translate(176,89)"/>
+<path d="M0 0 C0.33 0 0.66 0 1 0 C1 7.26 1 14.52 1 22 C0.67 22 0.34 22 0 22 C0 14.74 0 7.48 0 0 Z " fill="#DCDADA" transform="translate(23,89)"/>
+<path d="M0 0 C6.93 0 13.86 0 21 0 C21 0.33 21 0.66 21 1 C14.07 1 7.14 1 0 1 C0 0.67 0 0.34 0 0 Z " fill="#DDDBDB" transform="translate(89,23)"/>
+<path d="M0 0 C0.99 0 1.98 0 3 0 C3.33 0.66 3.66 1.32 4 2 C5.65 2 7.3 2 9 2 C8.34 2.66 7.68 3.32 7 4 C3.38 3.62 3.38 3.62 0 3 C0 2.01 0 1.02 0 0 Z " fill="#5F5E5E" transform="translate(121,143)"/>
+<path d="M0 0 C1.65 0 3.3 0 5 0 C3.35 2.64 1.7 5.28 0 8 C-1.43 5.14 -0.6 3.07 0 0 Z " fill="#464646" transform="translate(83,84)"/>
+<path d="M0 0 C1.65 0 3.3 0 5 0 C5 0.33 5 0.66 5 1 C3.35 1 1.7 1 0 1 C0 0.67 0 0.34 0 0 Z " fill="#DDDCDC" transform="translate(83,24)"/>
+<path d="M0 0 C1 4 1 4 1 4 Z " fill="#DDDBDB" transform="translate(24,113)"/>
+<path d="M0 0 C1 4 1 4 1 4 Z " fill="#DDDBDB" transform="translate(175,112)"/>
+<path d="M0 0 C1 4 1 4 1 4 Z " fill="#DDDBDB" transform="translate(175,84)"/>
+<path d="M0 0 C4 1 4 1 4 1 Z " fill="#DDDBDB" transform="translate(112,24)"/>
+<path d="M0 0 C3 1 3 1 3 1 Z " fill="#DDDBDB" transform="translate(113,175)"/>
+<path d="M0 0 C3 1 3 1 3 1 Z " fill="#DDDBDB" transform="translate(84,175)"/>
+<path d="M0 0 C3 1 3 1 3 1 Z " fill="#DDDBDB" transform="translate(79,174)"/>
+<path d="M0 0 C3 1 3 1 3 1 Z " fill="#DDDBDB" transform="translate(121,173)"/>
+<path d="M0 0 C3 1 3 1 3 1 Z " fill="#DEDBDB" transform="translate(76,173)"/>
+<path d="" fill="#DCDADA" transform="translate(0,0)"/>
+<path d="" fill="#DDDBDB" transform="translate(0,0)"/>
+<path d="" fill="#DEDCDC" transform="translate(0,0)"/>
+<path d="" fill="#DDDBDB" transform="translate(0,0)"/>
+<path d="" fill="#DDDCDC" transform="translate(0,0)"/>
+<path d="" fill="#DDDBDB" transform="translate(0,0)"/>
+<path d="" fill="#DDDBDB" transform="translate(0,0)"/>
+<path d="" fill="#DDDCDC" transform="translate(0,0)"/>
+<path d="M0 0 C3 1 3 1 3 1 Z " fill="#DDDBDB" transform="translate(73,27)"/>
+<path d="M0 0 C3 1 3 1 3 1 Z " fill="#DDDCDC" transform="translate(121,26)"/>
+<path d="M0 0 C3 1 3 1 3 1 Z " fill="#DDDBDB" transform="translate(76,26)"/>
+<path d="M0 0 C3 1 3 1 3 1 Z " fill="#DDDBDB" transform="translate(117,25)"/>
+<path d="M0 0 C3 1 3 1 3 1 Z " fill="#DCDBDB" transform="translate(80,25)"/>
+<path d="M0 0 C2 1 2 1 2 1 Z " fill="#DDDADA" transform="translate(118,174)"/>
+<path d="M0 0 C2 1 2 1 2 1 Z " fill="#DEDBDB" transform="translate(124,172)"/>
+<path d="M0 0 C2 1 2 1 2 1 Z " fill="#DCDBDB" transform="translate(74,172)"/>
+<path d="M0 0 C2 1 2 1 2 1 Z " fill="#DDDBDB" transform="translate(127,171)"/>
+<path d="M0 0 C2 1 2 1 2 1 Z " fill="#DCDBDB" transform="translate(71,171)"/>
+<path d="M0 0 C2 1 2 1 2 1 Z " fill="#DCDBDB" transform="translate(129,170)"/>
+<path d="M0 0 C2 1 2 1 2 1 Z " fill="#DCDCDC" transform="translate(69,170)"/>
+<path d="M0 0 C2 1 2 1 2 1 Z " fill="#DDDADA" transform="translate(137,166)"/>
+<path d="M0 0 C2 1 2 1 2 1 Z " fill="#DEDBDB" transform="translate(61,166)"/>
+<path d="M0 0 C2 1 2 1 2 1 Z " fill="#DDDBDB" transform="translate(59,165)"/>
+<path d="M0 0 C2 1 2 1 2 1 Z " fill="#DDDBDB" transform="translate(56,163)"/>
+<path d="M0 0 C2 1 2 1 2 1 Z " fill="#DDDBDB" transform="translate(146,160)"/>
+<path d="M0 0 C2 1 2 1 2 1 Z " fill="#DCDCDC" transform="translate(52,160)"/>
+<path d="" fill="#DDDBDB" transform="translate(0,0)"/>
+<path d="" fill="#DDDBDB" transform="translate(0,0)"/>
+<path d="" fill="#DDDADA" transform="translate(0,0)"/>
+<path d="" fill="#DCDBDB" transform="translate(0,0)"/>
+<path d="" fill="#DCDBDB" transform="translate(0,0)"/>
+<path d="" fill="#DDDDDD" transform="translate(0,0)"/>
+<path d="" fill="#DEDBDB" transform="translate(0,0)"/>
+<path d="" fill="#DDDCDC" transform="translate(0,0)"/>
+<path d="" fill="#DDDADA" transform="translate(0,0)"/>
+<path d="" fill="#DDDBDB" transform="translate(0,0)"/>
+<path d="" fill="#DDDBDB" transform="translate(0,0)"/>
+<path d="" fill="#DDDBDB" transform="translate(0,0)"/>
+<path d="" fill="#DDDBDB" transform="translate(0,0)"/>
+<path d="" fill="#DEDBDB" transform="translate(0,0)"/>
+<path d="" fill="#DDDBDB" transform="translate(0,0)"/>
+<path d="" fill="#DDDBDB" transform="translate(0,0)"/>
+<path d="" fill="#DDDBDB" transform="translate(0,0)"/>
+<path d="" fill="#DCDBDB" transform="translate(0,0)"/>
+<path d="" fill="#DCDBDB" transform="translate(0,0)"/>
+<path d="" fill="#DDDBDB" transform="translate(0,0)"/>
+<path d="" fill="#DEDBDB" transform="translate(0,0)"/>
+<path d="" fill="#DCDBDB" transform="translate(0,0)"/>
+<path d="" fill="#D7DBDB" transform="translate(0,0)"/>
+<path d="M0 0 C2 1 2 1 2 1 Z " fill="#DDDBDB" transform="translate(147,40)"/>
+<path d="M0 0 C2 1 2 1 2 1 Z " fill="#DDDBDB" transform="translate(56,36)"/>
+<path d="M0 0 C2 1 2 1 2 1 Z " fill="#DCDBDB" transform="translate(137,33)"/>
+<path d="M0 0 C2 1 2 1 2 1 Z " fill="#DCDBDB" transform="translate(61,33)"/>
+<path d="M0 0 C2 1 2 1 2 1 Z " fill="#DEDBDB" transform="translate(129,29)"/>
+<path d="M0 0 C2 1 2 1 2 1 Z " fill="#DDDBDB" transform="translate(69,29)"/>
+<path d="M0 0 C2 1 2 1 2 1 Z " fill="#DDDCDC" transform="translate(127,28)"/>
+<path d="M0 0 C2 1 2 1 2 1 Z " fill="#DDDBDB" transform="translate(71,28)"/>
+<path d="M0 0 C2 1 2 1 2 1 Z " fill="#DDDADA" transform="translate(124,27)"/>
+<path d="" fill="#DDDBDB" transform="translate(0,0)"/>
+<path d="" fill="#DDDCDC" transform="translate(0,0)"/>
+<path d="" fill="#DDDBDB" transform="translate(0,0)"/>
+<path d="" fill="#DDDADA" transform="translate(0,0)"/>
+<path d="" fill="#DEDCDC" transform="translate(0,0)"/>
+<path d="" fill="#DEDBDB" transform="translate(0,0)"/>
+<path d="" fill="#DDDBDB" transform="translate(0,0)"/>
+<path d="" fill="#DDDBDB" transform="translate(0,0)"/>
+<path d="" fill="#DDDBDB" transform="translate(0,0)"/>
+<path d="" fill="#DDDADA" transform="translate(0,0)"/>
+<path d="" fill="#DEDBDB" transform="translate(0,0)"/>
+<path d="" fill="#DDDCDC" transform="translate(0,0)"/>
+<path d="" fill="#DEDBDB" transform="translate(0,0)"/>
+<path d="" fill="#DEDBDB" transform="translate(0,0)"/>
+<path d="" fill="#DDDBDB" transform="translate(0,0)"/>
+<path d="" fill="#DCDBDB" transform="translate(0,0)"/>
+<path d="" fill="#DDDCDC" transform="translate(0,0)"/>
+<path d="" fill="#DDDBDB" transform="translate(0,0)"/>
+<path d="" fill="#DDDBDB" transform="translate(0,0)"/>
+<path d="" fill="#DDDCDC" transform="translate(0,0)"/>
+<path d="" fill="#DDDBDB" transform="translate(0,0)"/>
+<path d="" fill="#DDDBDB" transform="translate(0,0)"/>
+<path d="" fill="#DDDBDB" transform="translate(0,0)"/>
+<path d="" fill="#DDDADA" transform="translate(0,0)"/>
+<path d="" fill="#DDDBDB" transform="translate(0,0)"/>
+<path d="" fill="#DDDBDB" transform="translate(0,0)"/>
+<path d="" fill="#DCDBDB" transform="translate(0,0)"/>
+<path d="" fill="#DCDADA" transform="translate(0,0)"/>
+<path d="" fill="#DCDADA" transform="translate(0,0)"/>
+<path d="" fill="#DDDADA" transform="translate(0,0)"/>
+<path d="" fill="#DEDBDB" transform="translate(0,0)"/>
+<path d="" fill="#DDD9D9" transform="translate(0,0)"/>
+<path d="" fill="#DEDCDC" transform="translate(0,0)"/>
+<path d="" fill="#DDDBDB" transform="translate(0,0)"/>
+<path d="" fill="#DDDCDC" transform="translate(0,0)"/>
+<path d="" fill="#DEDCDC" transform="translate(0,0)"/>
+<path d="" fill="#DDDBDB" transform="translate(0,0)"/>
+<path d="" fill="#DDDCDC" transform="translate(0,0)"/>
+<path d="" fill="#DDDBDB" transform="translate(0,0)"/>
+<path d="" fill="#DDDBDB" transform="translate(0,0)"/>
+<path d="" fill="#DDDBDB" transform="translate(0,0)"/>
+<path d="" fill="#DDDBDB" transform="translate(0,0)"/>
+<path d="" fill="#DEDBDB" transform="translate(0,0)"/>
+<path d="" fill="#DEDCDC" transform="translate(0,0)"/>
+<path d="" fill="#DCDBDB" transform="translate(0,0)"/>
+<path d="" fill="#DDDCDC" transform="translate(0,0)"/>
+<path d="" fill="#DEDBDB" transform="translate(0,0)"/>
+<path d="" fill="#DEDCDC" transform="translate(0,0)"/>
+<path d="" fill="#DDDBDB" transform="translate(0,0)"/>
+<path d="" fill="#DDDBDB" transform="translate(0,0)"/>
+<path d="" fill="#DDDCDC" transform="translate(0,0)"/>
+<path d="" fill="#DDDBDB" transform="translate(0,0)"/>
+<path d="" fill="#DCDBDB" transform="translate(0,0)"/>
+<path d="" fill="#DDDBDB" transform="translate(0,0)"/>
+<path d="" fill="#DDDBDB" transform="translate(0,0)"/>
+<path d="" fill="#DDDCDC" transform="translate(0,0)"/>
+<path d="" fill="#DDDBDB" transform="translate(0,0)"/>
+<path d="" fill="#DDDBDB" transform="translate(0,0)"/>
+<path d="" fill="#DEDBDB" transform="translate(0,0)"/>
+<path d="" fill="#DDDCDC" transform="translate(0,0)"/>
+<path d="" fill="#DDDBDB" transform="translate(0,0)"/>
+<path d="" fill="#DEDCDC" transform="translate(0,0)"/>
+<path d="" fill="#DDDADA" transform="translate(0,0)"/>
+<path d="" fill="#DDDCDC" transform="translate(0,0)"/>
+<path d="" fill="#DEDBDB" transform="translate(0,0)"/>
+<path d="" fill="#DEDBDB" transform="translate(0,0)"/>
+<path d="" fill="#DDDBDB" transform="translate(0,0)"/>
+<path d="" fill="#DDDCDC" transform="translate(0,0)"/>
+<path d="" fill="#DBDBDB" transform="translate(0,0)"/>
+<path d="" fill="#DCDBDB" transform="translate(0,0)"/>
+<path d="" fill="#DCDCDC" transform="translate(0,0)"/>
+<path d="" fill="#DDDBDB" transform="translate(0,0)"/>
+<path d="" fill="#DDDCDC" transform="translate(0,0)"/>
+<path d="" fill="#DCDBDB" transform="translate(0,0)"/>
+<path d="" fill="#DDDCDC" transform="translate(0,0)"/>
+<path d="" fill="#DCDADA" transform="translate(0,0)"/>
+<path d="" fill="#DCDADA" transform="translate(0,0)"/>
+<path d="" fill="#DDDADA" transform="translate(0,0)"/>
+<path d="" fill="#DDDADA" transform="translate(0,0)"/>
+<path d="" fill="#DCDADA" transform="translate(0,0)"/>
+<path d="" fill="#DDDBDB" transform="translate(0,0)"/>
+<path d="" fill="#DDDCDC" transform="translate(0,0)"/>
+<path d="" fill="#DCDBDB" transform="translate(0,0)"/>
+<path d="" fill="#DEDBDB" transform="translate(0,0)"/>
+<path d="" fill="#DDDBDB" transform="translate(0,0)"/>
+<path d="" fill="#DCDBDB" transform="translate(0,0)"/>
+<path d="" fill="#DEDBDB" transform="translate(0,0)"/>
+<path d="" fill="#DCDBDB" transform="translate(0,0)"/>
+<path d="" fill="#DDDBDB" transform="translate(0,0)"/>
+<path d="" fill="#DDDBDB" transform="translate(0,0)"/>
+<path d="" fill="#DEDBDB" transform="translate(0,0)"/>
+<path d="" fill="#DEDBDB" transform="translate(0,0)"/>
+<path d="" fill="#DCDBDB" transform="translate(0,0)"/>
+<path d="" fill="#DDDBDB" transform="translate(0,0)"/>
+<path d="" fill="#DDDBDB" transform="translate(0,0)"/>
+<path d="" fill="#DDDCDC" transform="translate(0,0)"/>
+<path d="" fill="#DEDBDB" transform="translate(0,0)"/>
+<path d="" fill="#DCDBDB" transform="translate(0,0)"/>
+<path d="" fill="#DDDCDC" transform="translate(0,0)"/>
+<path d="" fill="#DEDBDB" transform="translate(0,0)"/>
+<path d="" fill="#DDDBDB" transform="translate(0,0)"/>
+<path d="" fill="#DDDBDB" transform="translate(0,0)"/>
+<path d="" fill="#DDDBDB" transform="translate(0,0)"/>
+<path d="" fill="#DDDBDB" transform="translate(0,0)"/>
+<path d="" fill="#DDDBDB" transform="translate(0,0)"/>
+<path d="" fill="#DDDADA" transform="translate(0,0)"/>
+<path d="" fill="#DDDBDB" transform="translate(0,0)"/>
+<path d="" fill="#DDDBDB" transform="translate(0,0)"/>
+</svg>
