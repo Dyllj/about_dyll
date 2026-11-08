@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState, type MouseEvent } from "react";
+import { LuCheck } from "react-icons/lu";
 import { ArrowRightIcon, ArrowUpRightIcon, ChevronLeftIcon, CloseIcon, TrophyIcon } from "./Icons";
 import ProjectCover from "./ProjectCover";
-import TagList from "./TagList";
+import TechChips from "./TechChips";
 import type { Project } from "./content";
 
 type ProjectModalProps = {
@@ -19,13 +20,16 @@ type ProjectModalProps = {
 
 const styles = {
   dialog:
-    "m-auto max-h-[90dvh] w-[min(92vw,56rem)] overflow-y-auto rounded-4xl border border-theme-border bg-white p-0 text-zinc-900 shadow-2xl shadow-black/30 backdrop:bg-zinc-950/55 backdrop:backdrop-blur-sm open:animate-dialog-in motion-reduce:animate-none",
+    "m-auto max-h-[90dvh] w-[min(92vw,56rem)] overflow-y-auto rounded-4xl border border-theme-border bg-white p-0 text-zinc-900 shadow-2xl shadow-black/30 backdrop:bg-zinc-950/55 backdrop:backdrop-blur-sm open:animate-dialog-in motion-reduce:animate-none [scrollbar-width:none] [&::-webkit-scrollbar]:hidden",
   close:
     "absolute right-4 top-4 grid size-10 place-items-center rounded-full bg-white/85 text-zinc-800 shadow-lg shadow-black/15 backdrop-blur transition duration-300 hover:scale-110 hover:bg-white hover:text-brand focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white",
   primary:
     "group/cta inline-flex h-12 items-center gap-2 rounded-full bg-brand px-7 text-[15px] font-semibold text-white shadow-lg shadow-brand/30 transition duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-brand/40 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand",
   secondary:
     "inline-flex h-12 items-center gap-2 rounded-full border-2 border-zinc-200 px-6 text-[15px] font-semibold text-zinc-800 transition-colors duration-300 hover:border-brand hover:text-brand focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand",
+  // Slim scroll indicator that floats over the content instead of the native scrollbar
+  scrollThumb:
+    "absolute right-1.5 top-5 w-1.5 rounded-full bg-zinc-700/55 opacity-0 ring-1 ring-white/60 transition-opacity duration-300",
   step: "group/step flex min-w-0 flex-1 items-center gap-3 rounded-2xl border border-zinc-200 p-4 text-left transition duration-300 hover:border-brand/40 hover:bg-surface-muted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand",
 };
 
@@ -40,6 +44,8 @@ export default function ProjectModal({
   onStep,
 }: ProjectModalProps) {
   const dialogRef = useRef<HTMLDialogElement>(null);
+  const thumbRef = useRef<HTMLDivElement>(null);
+  const hideThumbTimer = useRef<number | undefined>(undefined);
   const isOpen = project !== null;
 
   // Which screenshot is showing. Remembering the project it belongs to means the gallery
@@ -65,6 +71,33 @@ export default function ProjectModal({
     };
   }, [isOpen]);
 
+  // Positions the floating scroll indicator and fades it out shortly after scrolling stops.
+  // It writes straight to the element's style, so scrolling never re-renders React.
+  const showScrollThumb = () => {
+    const dialog = dialogRef.current;
+    const thumb = thumbRef.current;
+    if (!dialog || !thumb) return;
+
+    const { scrollHeight, clientHeight, scrollTop } = dialog;
+    if (scrollHeight <= clientHeight + 1) return;
+
+    const inset = 20; // keeps the indicator clear of the rounded corners
+    const trackHeight = clientHeight - inset * 2;
+    const height = Math.max(36, (trackHeight * clientHeight) / scrollHeight);
+    const offset = (scrollTop / (scrollHeight - clientHeight)) * (trackHeight - height);
+
+    thumb.style.height = `${height}px`;
+    thumb.style.transform = `translateY(${offset}px)`;
+    thumb.style.opacity = "1";
+
+    window.clearTimeout(hideThumbTimer.current);
+    hideThumbTimer.current = window.setTimeout(() => {
+      thumb.style.opacity = "0";
+    }, 900);
+  };
+
+  useEffect(() => () => window.clearTimeout(hideThumbTimer.current), []);
+
   // A click that lands on the dialog element itself (not its content) hit the backdrop
   const closeOnBackdrop = (event: MouseEvent<HTMLDialogElement>) => {
     if (event.target === event.currentTarget) onClose();
@@ -76,8 +109,14 @@ export default function ProjectModal({
       aria-labelledby="project-modal-title"
       onClose={onClose}
       onClick={closeOnBackdrop}
+      onScroll={showScrollThumb}
       className={styles.dialog}
     >
+      {/* Zero-height sticky row, so the indicator stays in view while the dialog scrolls */}
+      <div aria-hidden="true" className="pointer-events-none sticky top-0 z-30 h-0">
+        <div ref={thumbRef} className={styles.scrollThumb} />
+      </div>
+
       {project && (
         <div key={project.id} className="animate-swap-in motion-reduce:animate-none">
           <div className="relative aspect-video overflow-hidden bg-zinc-100 sm:aspect-2/1">
@@ -126,15 +165,59 @@ export default function ProjectModal({
           )}
 
           <div className="p-6 sm:p-9">
-            <TagList tags={project.tags} label="Project tags" />
+            <p className="text-[13px] font-semibold uppercase tracking-[0.14em] text-brand">
+              {[project.type, ...project.categories].filter(Boolean).join("  ·  ")}
+            </p>
 
             <h2
               id="project-modal-title"
-              className="mt-4 text-3xl font-bold leading-tight tracking-tight sm:text-4xl"
+              className="mt-2 text-3xl font-bold leading-tight tracking-tight sm:text-4xl"
             >
               {project.title}
             </h2>
+
+            {project.role && (
+              <p className="mt-3 text-[15px] text-zinc-500">
+                My role: <span className="font-semibold text-zinc-800">{project.role}</span>
+              </p>
+            )}
+
             <p className="mt-4 max-w-2xl text-lg leading-relaxed text-zinc-600">{project.description}</p>
+
+            {project.highlights && project.highlights.length > 0 && (
+              <section aria-labelledby="project-highlights" className="mt-8">
+                <h3 id="project-highlights" className="text-xs font-semibold uppercase tracking-[0.14em] text-zinc-500">
+                  Highlights
+                </h3>
+                <ul className="mt-4 space-y-3">
+                  {project.highlights.map((highlight) => (
+                    <li key={highlight} className="flex gap-3 text-[15px] leading-relaxed text-zinc-700">
+                      <span className="mt-0.5 grid size-5 shrink-0 place-items-center rounded-full bg-brand/10 text-brand">
+                        <LuCheck className="size-3.5" aria-hidden="true" />
+                      </span>
+                      {highlight}
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            )}
+
+            <section
+              aria-labelledby="project-stack"
+              className="mt-8 rounded-3xl border border-theme-border bg-surface-muted p-5 sm:p-6"
+            >
+              <h3 id="project-stack" className="text-xs font-semibold uppercase tracking-[0.14em] text-zinc-500">
+                Tech stack
+              </h3>
+              <div className="mt-4 space-y-4">
+                {project.stack.map((group) => (
+                  <div key={group.label} className="grid gap-2 sm:grid-cols-[9.5rem_1fr] sm:items-start sm:gap-4">
+                    <p className="pt-1 text-sm font-semibold text-zinc-800">{group.label}</p>
+                    <TechChips items={group.items} label={`${group.label} technologies`} />
+                  </div>
+                ))}
+              </div>
+            </section>
 
             {(project.liveUrl || project.repoUrl) && (
               <div className="mt-7 flex flex-wrap gap-3">

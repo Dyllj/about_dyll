@@ -7,8 +7,8 @@ import {
   TrophyIcon,
 } from "./Icons";
 import ProjectCover from "./ProjectCover";
-import TagList from "./TagList";
-import type { Project } from "./content";
+import TechChips from "./TechChips";
+import { stackItems, stackSample, type Project } from "./content";
 
 type FeaturedProjectProps = {
   project: Project;
@@ -34,7 +34,7 @@ const styles = {
     "inline-flex items-center gap-1.5 rounded-full border border-amber-200 bg-amber-100 px-3 py-1 text-[13px] font-semibold text-amber-900 shadow-lg shadow-black/10",
   arrow:
     "grid size-10 place-items-center rounded-full bg-white/85 text-zinc-800 shadow-lg shadow-black/15 backdrop-blur transition duration-300 hover:scale-110 hover:bg-white hover:text-brand focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white",
-  title: "mt-4 text-3xl font-bold leading-tight tracking-tight text-zinc-900 outline-none sm:text-4xl",
+  title: "mt-2 text-3xl font-bold leading-tight tracking-tight text-zinc-900 outline-none sm:text-4xl",
   description: "mt-3 max-w-xl text-base leading-relaxed text-zinc-600",
   primary:
     "group/cta inline-flex h-12 items-center gap-2 rounded-full bg-brand px-7 text-[15px] font-semibold text-white shadow-lg shadow-brand/30 transition duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-brand/40 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand",
@@ -90,12 +90,24 @@ export default function FeaturedProject({ project, index, total, onStep, onOpen 
         </div>
 
         <div className="px-1 pb-1 pt-6 sm:px-2">
-          <TagList tags={project.tags} label="Project tags" />
+          <p className="text-[13px] font-semibold uppercase tracking-[0.14em] text-brand">
+            {[project.type, ...project.categories].filter(Boolean).join("  ·  ")}
+          </p>
 
           <h2 id="featured-title" tabIndex={-1} className={styles.title}>
             {project.title}
           </h2>
-          <p className={styles.description}>{project.description}</p>
+          <p className={styles.description}>{project.summary}</p>
+
+          <div className="mt-5">
+            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-zinc-500">Built with</p>
+            <TechChips
+              items={stackSample(project, 8)}
+              total={stackItems(project).length}
+              label="Tech stack"
+              className="mt-2.5"
+            />
+          </div>
 
           <div className="mt-7 flex flex-wrap items-center gap-3">
             {project.liveUrl ? (

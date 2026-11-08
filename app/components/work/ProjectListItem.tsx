@@ -1,7 +1,7 @@
 import { ArrowRightIcon } from "./Icons";
 import ProjectCover from "./ProjectCover";
-import TagList from "./TagList";
-import type { Project } from "./content";
+import TechChips from "./TechChips";
+import { stackItems, stackSample, type Project } from "./content";
 
 type ProjectListItemProps = {
   project: Project;
@@ -42,14 +42,24 @@ export default function ProjectListItem({ project, index, onSelect, onOpen }: Pr
         </button>
 
         <div className="min-w-0 flex-1">
+          {project.type && (
+            <p className="mb-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-brand">
+              {project.type}
+            </p>
+          )}
           <h3>
             <button type="button" onClick={onSelect} className={styles.title}>
               {project.title}
             </button>
           </h3>
 
-          <TagList tags={project.tags} label={`${project.title} tags`} className="mt-2" />
-          <p className="mt-3 line-clamp-2 text-sm leading-relaxed text-zinc-600">{project.description}</p>
+          <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-zinc-600">{project.summary}</p>
+          <TechChips
+            items={stackSample(project, 4)}
+            total={stackItems(project).length}
+            label={`${project.title} tech stack`}
+            className="mt-3"
+          />
 
           <button type="button" onClick={onOpen} className={styles.details}>
             See full details
