@@ -12,19 +12,6 @@ export const CONTACT = {
   status: "Available",
 };
 
-/**
- * Where the contact form posts its messages.
- *
- * By default this is FormSubmit (https://formsubmit.co), a free service that needs no
- * account or API key: it emails every message to CONTACT.email. The first message you
- * send makes FormSubmit email you a link to activate the form (check spam too).
- *
- * To use another service (Formspree, Web3Forms, your own API...), set
- * NEXT_PUBLIC_CONTACT_ENDPOINT in .env.local and in Vercel. It must accept a JSON POST.
- */
-export const FORM_ENDPOINT =
-  process.env.NEXT_PUBLIC_CONTACT_ENDPOINT || `https://formsubmit.co/ajax/${CONTACT.email}`;
-
 export type ChannelIcon = "mail" | "github" | "linkedin";
 
 export type Channel = {

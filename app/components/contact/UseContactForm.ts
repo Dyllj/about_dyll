@@ -1,7 +1,8 @@
 "use client";
 
+import emailjs from "@emailjs/browser";
 import { useState, type FormEvent } from "react";
-import { CONTACT, FORM_ENDPOINT, TOPICS, type Topic } from "./content";
+import { CONTACT, TOPICS, type Topic } from "./content";
 
 export type FieldName = "name" | "email" | "message";
 export type Status = "idle" | "sending" | "sent" | "error";
@@ -30,31 +31,35 @@ function validate(values: Values): Errors {
   return errors;
 }
 
-/** Posts the message to FORM_ENDPOINT, which forwards it to my inbox. Throws if it was not accepted. */
+/** Sends the message through EmailJS. Throws if the service is not configured or rejects it. */
 async function sendMessage(values: Values) {
-  const name = values.name.trim();
+  const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
+  const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
+  const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
 
-  const response = await fetch(FORM_ENDPOINT, {
-    method: "POST",
-    headers: { "Content-Type": "application/json", Accept: "application/json" },
-    body: JSON.stringify({
-      name,
-      email: values.email.trim(),
-      _replyto: values.email.trim(),
+  if (!serviceId || !templateId || !publicKey) {
+    throw new Error(
+      "EmailJS isn't configured. Add the service ID, template ID, and public key to the environment.",
+    );
+  }
+
+  const name = values.name.trim();
+  const response = await emailjs.send(
+    serviceId,
+    templateId,
+    {
+      from_name: name,
+      from_email: values.email.trim(),
+      reply_to: values.email.trim(),
       topic: values.topic,
       message: values.message.trim(),
-      _subject: `${values.topic} — new message from ${name}`,
-      _template: "table",
-      _captcha: "false",
-    }),
-  });
+      subject: `${values.topic} — new message from ${name}`,
+    },
+    { publicKey },
+  );
 
-  // FormSubmit can return HTTP 200 when delivery is not activated, so require its
-  // explicit success response instead of treating every 2xx response as sent.
-  const result = await response.json().catch(() => null);
-  const accepted = result?.success === true || result?.success === "true";
-  if (!response.ok || !accepted) {
-    throw new Error(`Message was not accepted (${response.status})`);
+  if (response.status !== 200) {
+    throw new Error(`EmailJS rejected the message (${response.status}).`);
   }
 }
 
@@ -72,6 +77,7 @@ export function useContactForm() {
   const [touched, setTouched] = useState<Partial<Record<FieldName, boolean>>>({});
   const [submitted, setSubmitted] = useState(false);
   const [status, setStatus] = useState<Status>("idle");
+  const [errorMessage, setErrorMessage] = useState("");
 
   // An error is shown once the field was left, or after the first send attempt
   const allErrors = validate(values);
@@ -107,6 +113,11 @@ export function useContactForm() {
       setStatus("sent");
     } catch (error) {
       console.error("Unable to send the contact message.", error);
+      setErrorMessage(
+        error instanceof Error && error.message.startsWith("EmailJS isn't configured")
+          ? error.message
+          : "Sorry, your message could not be sent. Please try again or use the email link below.",
+      );
       setStatus("error");
     }
   };
@@ -115,8 +126,9 @@ export function useContactForm() {
     setValues(INITIAL_VALUES);
     setTouched({});
     setSubmitted(false);
+    setErrorMessage("");
     setStatus("idle");
   };
 
-  return { values, errors, status, setField, blur, submit, reset };
+  return { values, errors, status, errorMessage, setField, blur, submit, reset };
 }

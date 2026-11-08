@@ -16,7 +16,7 @@ const styles = {
 /** The message form: topic chips, floating-label fields, validation and a send button. */
 export default function ContactForm() {
   const form = useContactForm();
-  const { values, errors, status } = form;
+  const { values, errors, status, errorMessage } = form;
 
   if (status === "sent") return <FormSuccess onReset={form.reset} />;
 
@@ -93,7 +93,7 @@ export default function ContactForm() {
 
         {status === "error" && (
           <p role="alert" className="rounded-2xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
-            Sorry, your message could not be sent.{" "}
+            {errorMessage}{" "}
             <a href={buildMailto(values)} className="font-semibold underline">
               Send it from your email app instead
             </a>{" "}
