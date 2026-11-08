@@ -16,6 +16,12 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+## SEO and public routes
+
+The site publishes crawlable pages at `/`, `/about`, `/work`, and `/contact`, plus a generated `/sitemap.xml` and `/robots.txt`. Each page has a canonical URL, a unique title and description, and social-sharing metadata. The home page also includes Person and WebSite structured data.
+
+The production origin is configured in `app/seo.ts` as `https://about-dyll.vercel.app`. Update `SITE_URL` there if the production domain changes; canonical links, sitemap URLs, robots metadata, and structured data all use that value. After deployment, verify the site in Google Search Console and submit `https://about-dyll.vercel.app/sitemap.xml`.
+
 ## Contact form email setup
 
 The contact form sends directly from the browser through [EmailJS](https://www.emailjs.com/). Complete the EmailJS dashboard setup and configure the environment variables before using the form; otherwise submissions show a configuration error and provide a `mailto:` fallback.

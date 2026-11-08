@@ -17,11 +17,6 @@ const styles = {
 };
 
 export default function LandingView() {
-  // page.tsx switches views on the `hashchange` event, so set the hash directly
-  const goTo = (view: "work" | "contact") => () => {
-    window.location.hash = view;
-  };
-
   // Feeds --mx / --my to the cursor spotlight in <Backdrop />
   const trackCursor = (event: MouseEvent<HTMLDivElement>) => {
     const { left, top } = event.currentTarget.getBoundingClientRect();
@@ -39,7 +34,7 @@ export default function LandingView() {
 
       <main className={styles.main}>
         <div className={styles.hero}>
-          <HeroCopy onGetInTouch={goTo("contact")} onViewWork={goTo("work")} />
+          <HeroCopy />
           <Portrait />
         </div>
       </main>

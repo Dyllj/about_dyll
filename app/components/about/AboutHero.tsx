@@ -1,11 +1,7 @@
+import Link from "next/link";
 import ProfileCard from "./ProfileCard";
 import Reveal from "./Reveal";
 import { PROFILE } from "./content";
-
-type AboutHeroProps = {
-  onGetInTouch: () => void;
-  onViewWork: () => void;
-};
 
 const styles = {
   section: "grid items-center gap-14 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:gap-16",
@@ -28,7 +24,7 @@ const FACTS = [
 ];
 
 /** Intro: headline, bio, quick facts and calls to action, next to the portrait. */
-export default function AboutHero({ onGetInTouch, onViewWork }: AboutHeroProps) {
+export default function AboutHero() {
   return (
     <section aria-labelledby="about-heading" className={styles.section}>
       <div>
@@ -73,12 +69,12 @@ export default function AboutHero({ onGetInTouch, onViewWork }: AboutHeroProps) 
           </dl>
 
           <div className="mt-8 flex flex-wrap items-center gap-4">
-            <button type="button" onClick={onGetInTouch} className={styles.primaryButton}>
+            <Link href="/contact" className={styles.primaryButton}>
               Get in Touch
-            </button>
-            <button type="button" onClick={onViewWork} className={styles.secondaryButton}>
+            </Link>
+            <Link href="/work" className={styles.secondaryButton}>
               View my work
-            </button>
+            </Link>
           </div>
         </Reveal>
       </div>

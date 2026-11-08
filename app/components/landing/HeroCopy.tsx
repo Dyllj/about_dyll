@@ -1,7 +1,4 @@
-type HeroCopyProps = {
-  onGetInTouch: () => void;
-  onViewWork: () => void;
-};
+import Link from "next/link";
 
 const styles = {
   section: "max-w-2xl",
@@ -41,7 +38,7 @@ function ArrowRightIcon() {
   );
 }
 
-export default function HeroCopy({ onGetInTouch, onViewWork }: HeroCopyProps) {
+export default function HeroCopy() {
   return (
     <section aria-labelledby="home-heading" className={styles.section}>
       <p className={styles.pill} style={fonts.eyebrow}>
@@ -60,13 +57,13 @@ export default function HeroCopy({ onGetInTouch, onViewWork }: HeroCopyProps) {
       </h1>
 
       <div className={styles.actions}>
-        <button type="button" onClick={onGetInTouch} className={styles.primaryButton}>
+        <Link href="/contact" className={styles.primaryButton}>
           Get in Touch
           <ArrowRightIcon />
-        </button>
-        <button type="button" onClick={onViewWork} className={styles.secondaryButton}>
+        </Link>
+        <Link href="/work" className={styles.secondaryButton}>
           View my work
-        </button>
+        </Link>
       </div>
     </section>
   );

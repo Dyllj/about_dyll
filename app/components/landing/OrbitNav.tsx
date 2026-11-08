@@ -1,4 +1,5 @@
 import { NAV_ITEMS } from "../nav/nav-items";
+import Link from "next/link";
 
 /**
  * Where each item starts on the portrait ring, in degrees clockwise from the top.
@@ -50,7 +51,7 @@ export default function OrbitNav() {
       <ol className={styles.ring}>
         {NAV_ITEMS.map(({ label, href, icon }) => (
           <li key={label} style={pointOnRing(RING_ANGLES[label] ?? 0)} className={styles.item}>
-            <a href={href} className={styles.link}>
+            <Link href={href} className={styles.link}>
               <span className={styles.upright}>
                 <span className={styles.circle}>
                   <svg
@@ -68,7 +69,7 @@ export default function OrbitNav() {
                 </span>
                 <span className={styles.label}>{label}</span>
               </span>
-            </a>
+            </Link>
           </li>
         ))}
       </ol>

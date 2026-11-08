@@ -4,14 +4,13 @@ import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import Header from "./components/header/Header";
 import Footer from "./components/footer/footer";
+import LandingView from "./components/views/LandingView";
 
 type CanvasView = "about" | "work" | "contact";
 
 const AboutView = dynamic(() => import("./components/views/AboutView"), { ssr: false });
 const WorkView = dynamic(() => import("./components/views/WorkView"), { ssr: false });
 const ContactView = dynamic(() => import("./components/views/ContactView"), { ssr: false });
-const LandingView = dynamic(() => import("./components/views/LandingView"), { ssr: false });
-
 const canvasViewComponents: Record<CanvasView, React.ComponentType> = {
   about: AboutView,
   work: WorkView,

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Reveal from "./Reveal";
 
 const styles = {
@@ -7,7 +8,7 @@ const styles = {
 };
 
 /** Closing call to action that points visitors to the contact page. */
-export default function AboutCta({ onGetInTouch, className = "" }: { onGetInTouch: () => void; className?: string }) {
+export default function AboutCta({ className = "" }: { className?: string }) {
   return (
     <Reveal className={className}>
       <section aria-labelledby="about-cta-heading" className={styles.card}>
@@ -24,13 +25,12 @@ export default function AboutCta({ onGetInTouch, className = "" }: { onGetInTouc
           <p className="mx-auto mt-4 max-w-xl text-lg text-zinc-600">
             Have an idea or an opportunity in mind? I&apos;d love to hear about it.
           </p>
-          <button
-            type="button"
-            onClick={onGetInTouch}
+          <Link
+            href="/contact"
             className="btn-progress mt-8 inline-flex items-center justify-center whitespace-nowrap"
           >
             Get in Touch
-          </button>
+          </Link>
         </div>
       </section>
     </Reveal>

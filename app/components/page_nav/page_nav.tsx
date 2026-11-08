@@ -1,6 +1,8 @@
 "use client";
 
-import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
 type View = "about" | "work" | "contact";
 
@@ -10,19 +12,32 @@ const navigationItems: { label: string; view: View }[] = [
   { label: "Contact", view: "contact" },
 ];
 
-const getViewFromHash = (): View => {
-  if (typeof window === "undefined") return "about";
-  const hash = window.location.hash.slice(1);
-  return (["about", "work", "contact"] as View[]).includes(hash as View)
-    ? (hash as View)
-    : "about";
+const routeByView: Record<View, string> = {
+  about: "/about",
+  work: "/work",
+  contact: "/contact",
 };
 
-export default function PageNav({ onNavigate }: { onNavigate?: (view: View) => void }) {
-  const [activeView, setActiveView] = useState<View>("about");
+export default function PageNav() {
+  const pathname = usePathname();
+  const routeView = navigationItems.find(({ view }) => routeByView[view] === pathname)?.view;
+  const [legacyHashView, setLegacyHashView] = useState<View>("about");
+  const activeView = routeView ?? legacyHashView;
   const listRef = useRef<HTMLUListElement>(null);
-  const itemRefs = useRef<Partial<Record<View, HTMLButtonElement | null>>>({});
+  const itemRefs = useRef<Partial<Record<View, HTMLAnchorElement | null>>>({});
   const [indicator, setIndicator] = useState<{ left: number; width: number } | null>(null);
+
+  useEffect(() => {
+    const syncLegacyHash = () => {
+      const hash = window.location.hash.slice(1);
+      const matchedView = navigationItems.find(({ view }) => view === hash)?.view;
+      setLegacyHashView(matchedView ?? "about");
+    };
+
+    syncLegacyHash();
+    window.addEventListener("hashchange", syncLegacyHash);
+    return () => window.removeEventListener("hashchange", syncLegacyHash);
+  }, []);
 
   // slide the blue pill under whichever tab is active; re-measure whenever the
   // nav changes size (font loading, breakpoints) so it never drifts
@@ -37,32 +52,12 @@ export default function PageNav({ onNavigate }: { onNavigate?: (view: View) => v
     return () => observer.disconnect();
   }, [activeView]);
 
-  useEffect(() => {
-    const handleHashChange = () => {
-      const view = getViewFromHash();
-      setActiveView(view);
-      onNavigate?.(view);
-    };
-
-    handleHashChange();
-    window.addEventListener("hashchange", handleHashChange);
-    return () => window.removeEventListener("hashchange", handleHashChange);
-  }, [onNavigate]);
-
-  const navigate = useCallback((view: View) => {
-    if (typeof window !== "undefined" && window.location.hash !== `#${view}`) {
-      window.location.hash = view;
-    } else {
-      onNavigate?.(view);
-    }
-  }, [onNavigate]);
-
   return (
     <nav
       aria-label="Page navigation"
       className="inline-flex rounded-full border border-theme-border bg-surface-muted p-1.5 max-[380px]:p-1"
     >
-      <ul ref={listRef} className="relative flex items-center gap-1 max-[380px]:gap-0 sm:gap-3" role="tablist">
+      <ul ref={listRef} className="relative flex items-center gap-1 max-[380px]:gap-0 sm:gap-3">
         {indicator && (
           <span
             aria-hidden="true"
@@ -74,17 +69,13 @@ export default function PageNav({ onNavigate }: { onNavigate?: (view: View) => v
           const isActive = activeView === view;
 
           return (
-            <li key={label} role="presentation">
-              <button
-                type="button"
-                role="tab"
-                aria-selected={isActive}
-                aria-controls={`${view}-view`}
-                id={`${view}-tab`}
+            <li key={label}>
+              <Link
+                href={routeByView[view]}
+                aria-current={isActive ? "page" : undefined}
                 ref={(el) => {
                   itemRefs.current[view] = el;
                 }}
-                onClick={() => navigate(view)}
                 className={`relative z-10 inline-flex rounded-full px-3 py-2 text-sm font-medium transition-colors duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand max-[380px]:px-2 max-[380px]:text-xs sm:px-10 sm:py-2.5 sm:text-[15px] ${
                   isActive
                     ? `text-white ${indicator ? "" : "bg-brand"}`
@@ -92,7 +83,7 @@ export default function PageNav({ onNavigate }: { onNavigate?: (view: View) => v
                 }`}
               >
                 {label}
-              </button>
+              </Link>
             </li>
           );
         })}

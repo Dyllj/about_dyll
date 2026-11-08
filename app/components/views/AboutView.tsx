@@ -15,11 +15,6 @@ const styles = {
 };
 
 export default function AboutView() {
-  // page.tsx switches views on the `hashchange` event, so set the hash directly
-  const goTo = (view: "work" | "contact") => () => {
-    window.location.hash = view;
-  };
-
   return (
     <div className={styles.page}>
       <div className={styles.backdrop}>
@@ -28,11 +23,11 @@ export default function AboutView() {
 
       {/* id is referenced by the About tab in PageNav (aria-controls) */}
       <main className={styles.main} id="about-view">
-        <AboutHero onGetInTouch={goTo("contact")} onViewWork={goTo("work")} />
+        <AboutHero />
         <StatsBand className="mt-20" />
         <TechGrid className="mt-24" />
         <AchievementsGrid className="mt-24" />
-        <AboutCta className="mt-24" onGetInTouch={goTo("contact")} />
+        <AboutCta className="mt-24" />
       </main>
     </div>
   );

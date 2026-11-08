@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { FaFacebook, FaGithub, FaInstagram, FaLinkedin } from "react-icons/fa";
 import { LuArrowUp, LuArrowUpRight, LuMail, LuMapPin } from "react-icons/lu";
 import { CONTACT } from "../contact/content";
@@ -7,9 +8,9 @@ import Logo from "../logo/logo";
 
 const links = [
   { label: "Home", href: "/" },
-  { label: "About", href: "/#about" },
-  { label: "Work", href: "/#work" },
-  { label: "Contact", href: "/#contact" },
+  { label: "About", href: "/about" },
+  { label: "Work", href: "/work" },
+  { label: "Contact", href: "/contact" },
 ];
 
 const socials = [
@@ -81,13 +82,13 @@ export default function Footer() {
             <ul className="mt-5 space-y-3.5">
               {links.map(({ label, href }) => (
                 <li key={label}>
-                  <a href={href} className={styles.navLink}>
+                  <Link href={href} className={styles.navLink}>
                     <span
                       aria-hidden="true"
                       className="h-px w-0 bg-brand transition-all duration-300 group-hover:w-4"
                     />
                     {label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
