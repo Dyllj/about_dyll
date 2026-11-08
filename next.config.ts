@@ -3,6 +3,9 @@ import type { NextConfig } from "next";
 const isProduction = process.env.NODE_ENV === "production";
 
 const nextConfig: NextConfig = {
+  turbopack: {
+    root: process.cwd(),
+  },
   images: {
     // AVIF is the smallest format but the slowest to encode, so only use it in
     // production builds. `next dev` sticks to WebP to keep local reloads quick.
