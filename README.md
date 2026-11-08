@@ -37,19 +37,43 @@ Use an inbox you control. For higher-volume production use, choose a transaction
 3. Set **From Name** to `{{from_name}}`. Keep **From Email** as the address provided by the connected email service; do not use the visitor's address as the sender.
 4. Set **Reply To** to `{{reply_to}}`, so replying to a message goes to the visitor.
 5. Use `{{subject}}` for the email subject.
-6. Add the message details to the email body. These are the exact variables sent by the form:
+6. Replace the starter template body with a message that follows the website form, for example:
+
+   ```text
+   A new {{topic}} message was received through the portfolio contact form.
+
+   Name: {{name}}
+   Email: {{email}}
+   Topic: {{topic}}
+
+   Message:
+   {{message}}
+
+   Sent: {{time}}
+   ```
+
+   If you prefer separate name fields, `{{firstName}}` and `{{lastName}}` are also provided. The contact form has one name field, so the first word is sent as `firstName` and the remaining words as `lastName`.
+
+   The form uses `emailjs.send()` and passes template parameters directly. The HTML/JavaScript sample shown by EmailJS for `sendForm()` is not used by this Next.js form; do not paste it into the app.
+
+7. These are the exact variables sent by the form:
 
    | Template variable | Value |
    | --- | --- |
+   | `{{name}}` | Visitor's full name |
+   | `{{firstName}}` | First word of the visitor's name |
+   | `{{lastName}}` | Remaining words of the visitor's name |
+   | `{{email}}` | Visitor's email address |
+   | `{{topic}}` | Selected contact topic |
+   | `{{message}}` | Visitor's message |
+   | `{{time}}` | Submission time in Cebu/Manila time |
    | `{{from_name}}` | Visitor's name |
    | `{{from_email}}` | Visitor's email address |
    | `{{reply_to}}` | Visitor's email address (use this in Reply To) |
-   | `{{topic}}` | Selected contact topic |
    | `{{subject}}` | Generated subject, including topic and visitor name |
-   | `{{message}}` | Visitor's message |
 
-7. Save the template, use EmailJS's **Test It** feature with sample values, and copy the template ID.
-8. Submit a test through the website after configuring its credentials (step 4 below). Confirm the received email has the expected subject, body, and Reply To address.
+8. Save the template, use EmailJS's **Test It** feature with sample values, and copy the template ID.
+9. Submit a test through the website after configuring its credentials (step 4 below). Confirm the received email has the expected subject, body, and Reply To address.
 
 ### 3. Add credentials for local development
 

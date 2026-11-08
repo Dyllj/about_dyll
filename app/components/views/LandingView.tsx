@@ -5,9 +5,12 @@ import Backdrop from "../landing/Backdrop";
 import HeroCopy from "../landing/HeroCopy";
 import Portrait from "../landing/Portrait";
 import AchievementsMarquee from "../landing/AchievementsMarquee";
+import TogglButton from "../toggle_button/toggle_button";
 
 const styles = {
   page: "relative flex min-h-screen flex-col overflow-hidden bg-white",
+  themeToggle:
+    "absolute right-4 top-4 z-20 rounded-full border border-theme-border bg-surface/80 p-2 shadow-lg shadow-brand/10 backdrop-blur-xl sm:right-8 sm:top-8",
   main: "relative z-10 mx-auto flex w-full max-w-7xl flex-1 items-center px-6 py-16 sm:px-10 lg:px-16 lg:py-20",
   // Text | portrait on large screens. On mobile the portrait comes first.
   hero: "grid w-full items-center gap-12 lg:grid-cols-[minmax(0,1fr)_auto] lg:gap-14",
@@ -29,6 +32,10 @@ export default function LandingView() {
   return (
     <div onMouseMove={trackCursor} className={styles.page}>
       <Backdrop />
+
+      <div className={styles.themeToggle}>
+        <TogglButton />
+      </div>
 
       <main className={styles.main}>
         <div className={styles.hero}>

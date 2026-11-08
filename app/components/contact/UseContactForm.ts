@@ -31,36 +31,70 @@ function validate(values: Values): Errors {
   return errors;
 }
 
-/** Sends the message through EmailJS. Throws if the service is not configured or rejects it. */
-async function sendMessage(values: Values) {
-  const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
-  const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
-  const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
-
-  if (!serviceId || !templateId || !publicKey) {
-    throw new Error(
-      "EmailJS isn't configured. Add the service ID, template ID, and public key to the environment.",
-    );
+/** Thrown when the EmailJS environment variables are missing or empty. */
+class EmailConfigError extends Error {
+  constructor() {
+    super("EmailJS isn't configured. Add the service ID, template ID, and public key to the environment.");
+    this.name = "EmailConfigError";
   }
+}
+
+/** Reads the EmailJS credentials. Each variable is referenced literally so Next.js can inline it at build time. */
+function getEmailConfig() {
+  const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID?.trim();
+  const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID?.trim();
+  const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY?.trim();
+
+  if (!serviceId || !templateId || !publicKey) throw new EmailConfigError();
+  return { serviceId, templateId, publicKey };
+}
+
+/** Turns an EmailJS failure into a message a visitor can act on. */
+function describeSendError(error: unknown): string {
+  if (error instanceof EmailConfigError) return error.message;
+
+  // EmailJS rejects with { status, text }; limitRate rejects with { status: 429 }
+  const status = typeof error === "object" && error !== null && "status" in error ? Number(error.status) : 0;
+  if (status === 429) return "You're sending messages too quickly. Please wait a few seconds and try again.";
+  if (status === 403) return "The email service refused this request. Please use the email link below.";
+  return "Sorry, your message could not be sent. Please try again or use the email link below.";
+}
+
+/** Sends the message through EmailJS. Rejects if the service is not configured or EmailJS refuses it. */
+async function sendMessage(values: Values) {
+  const { serviceId, templateId, publicKey } = getEmailConfig();
 
   const name = values.name.trim();
-  const response = await emailjs.send(
+  const email = values.email.trim();
+  const [firstName = "", ...lastNameParts] = name.split(/\s+/);
+
+  await emailjs.send(
     serviceId,
     templateId,
     {
+      firstName,
+      lastName: lastNameParts.join(" "),
+      name,
+      email,
       from_name: name,
-      from_email: values.email.trim(),
-      reply_to: values.email.trim(),
+      from_email: email,
+      reply_to: email,
       topic: values.topic,
       message: values.message.trim(),
       subject: `${values.topic} — new message from ${name}`,
+      time: new Date().toLocaleString("en-PH", {
+        timeZone: CONTACT.timeZone,
+        dateStyle: "medium",
+        timeStyle: "short",
+      }),
     },
-    { publicKey },
+    {
+      publicKey,
+      // Refuse automated browsers and rapid repeat sends (EmailJS rejects with status 429)
+      blockHeadless: true,
+      limitRate: { id: "contact-form", throttle: 10_000 },
+    },
   );
-
-  if (response.status !== 200) {
-    throw new Error(`EmailJS rejected the message (${response.status}).`);
-  }
 }
 
 /** A ready-to-send email with the visitor's message, used as a fallback if sending fails. */
@@ -113,11 +147,7 @@ export function useContactForm() {
       setStatus("sent");
     } catch (error) {
       console.error("Unable to send the contact message.", error);
-      setErrorMessage(
-        error instanceof Error && error.message.startsWith("EmailJS isn't configured")
-          ? error.message
-          : "Sorry, your message could not be sent. Please try again or use the email link below.",
-      );
+      setErrorMessage(describeSendError(error));
       setStatus("error");
     }
   };
