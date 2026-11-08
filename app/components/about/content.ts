@@ -38,7 +38,7 @@ export const ACHIEVEMENT_CARDS: Achievement[] = [
     category: "Education",
     title: "Cum Laude Graduate (2025–2026)",
     description:
-      "Graduated cum laude with a Bachelor of Science in Information Technology, earning Latin honors for consistent academic excellence.",
+      "A proud finish to years of steady study: I earned my Bachelor of Science in Information Technology with Cum Laude honors.",
     image: {
       src: cumLaudeImg,
       alt: "Latin Honors banner for Wendyll Jay H. Tautoan, Bachelor of Science in Information Technology, Cum Laude",
@@ -49,7 +49,7 @@ export const ACHIEVEMENT_CARDS: Achievement[] = [
     category: "Research",
     title: "Best Paper Award",
     description:
-      "Won Best Paper at the 6th International Research Congress, hosted by St. Michael's College, Inc. in Iligan City, for AlerTech, a mobile incident reporting app built as a capstone project. I served as Project Coordinator.",
+      "AlerTech, our mobile platform for real-time community issue reporting, earned Best Paper at the 6th International Research Congress at St. Michael's College, Inc., in Iligan City. I coordinated the capstone project behind it.",
     image: {
       src: bestPaperImg,
       alt: "Receiving the Best Paper certificate at the 6th International Research Congress",
@@ -59,7 +59,8 @@ export const ACHIEVEMENT_CARDS: Achievement[] = [
   {
     category: "Competition",
     title: "Seminar R.A.I.S.E. — 1st Place",
-    description: "Took first place in the Seminar R.A.I.S.E. competition.",
+    description:
+      "A first-place finish at Seminar R.A.I.S.E.—a proud moment of teamwork and recognition that I'll carry with me beyond the stage.",
     image: {
       src: raiseImg,
       alt: "Three students at the Seminar R.A.I.S.E. event, one speaking into a microphone",
@@ -69,7 +70,7 @@ export const ACHIEVEMENT_CARDS: Achievement[] = [
     category: "Research",
     title: "Researcher of the Year",
     description:
-      "Named Researcher of the Year in recognition of outstanding research work.",
+      "Named Researcher of the Year for my research work—an honor that reflects the curiosity and persistence behind every question worth exploring.",
     image: {
       src: researcherImg,
       alt: "Congratulations graphic for Wendyll Tautoan, Best Paper at the 6th International Research Congress",

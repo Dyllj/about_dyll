@@ -13,9 +13,10 @@ const styles = {
     "absolute left-4 top-4 rounded-full bg-brand px-3.5 py-1.5 text-[13px] font-medium text-white shadow-lg shadow-black/20",
   index:
     "absolute right-4 top-4 rounded-full border border-white/50 bg-white/70 px-3 py-1 text-xs font-semibold tracking-wider text-zinc-800 backdrop-blur",
-  body: "flex flex-1 flex-col p-7",
+  body: "flex flex-1 flex-col p-6 sm:p-7",
   title: "text-2xl font-bold leading-tight tracking-tight text-zinc-900",
-  description: "mt-3 text-[15px] leading-relaxed text-zinc-600",
+  description:
+    "mt-4 border-l-2 border-brand/25 pl-4 text-[15px] leading-7 text-zinc-600 transition-colors duration-300 group-hover:border-brand/60 group-hover:text-zinc-700",
 };
 
 /** Achievement cards: large photo on top, details underneath. */
