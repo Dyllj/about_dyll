@@ -65,7 +65,7 @@ export const metadata: Metadata = {
     images: [{ url: SOCIAL_IMAGE, alt: "Portrait of Wendyll Jay Tautoan" }],
   },
   icons: {
-    icon: "/about_dyll_assets/LOGO.svg",
+    icon: "/about_dyll_assets/W.png",
   },
 };
 
