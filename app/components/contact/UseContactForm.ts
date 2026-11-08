@@ -20,6 +20,7 @@ type Errors = Partial<Record<FieldName, string>>;
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const FIELD_ORDER: FieldName[] = ["name", "email", "message"];
+const EMAIL_SEND_COOLDOWN_MS = 10_000;
 
 const INITIAL_VALUES: Values = { name: "", email: "", message: "", topic: TOPICS[0], company: "" };
 
@@ -55,7 +56,7 @@ function describeSendError(error: unknown): string {
 
   // EmailJS rejects with { status, text }; limitRate rejects with { status: 429 }
   const status = typeof error === "object" && error !== null && "status" in error ? Number(error.status) : 0;
-  if (status === 429) return "You're sending messages too quickly. Please wait a few seconds and try again.";
+  if (status === 429) return "You're sending messages too quickly. Please wait 10 seconds before trying again.";
   if (status === 403) return "The email service refused this request. Please use the email link below.";
   return "Sorry, your message could not be sent. Please try again or use the email link below.";
 }
@@ -90,9 +91,9 @@ async function sendMessage(values: Values) {
     },
     {
       publicKey,
-      // Refuse automated browsers and rapid repeat sends (EmailJS rejects with status 429)
+      // EmailJS persists this per-browser cooldown and rejects rapid repeats with status 429.
       blockHeadless: true,
-      limitRate: { id: "contact-form", throttle: 10_000 },
+      limitRate: { id: "contact-form", throttle: EMAIL_SEND_COOLDOWN_MS },
     },
   );
 }

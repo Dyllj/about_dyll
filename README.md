@@ -114,6 +114,8 @@ For Vercel:
 
 For another hosting provider, add the same three variables to its build environment and trigger a new production build/deployment.
 
+The contact form also uses EmailJS's browser SDK rate limiter to enforce a 10-second cooldown between send requests in the same browser profile. This is client-side throttling, not a server-side abuse-prevention boundary; keep EmailJS account/provider sending limits enabled for overall protection.
+
 ### Troubleshooting
 
 - **“EmailJS isn't configured”**: one or more variables are missing or empty. Check spelling and environment selection, then restart/rebuild.
