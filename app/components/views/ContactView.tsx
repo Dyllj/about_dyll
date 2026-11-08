@@ -13,7 +13,7 @@ const styles = {
   backdrop: "fixed inset-0 -z-10",
   main: "relative mx-auto w-full max-w-[1160px] px-5 pb-8 pt-10 sm:px-8 sm:pt-14 xl:px-0",
   // Intro and channels on the left, form on the right
-  grid: "grid items-start gap-14 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:gap-16",
+  grid: "grid grid-cols-1 items-start gap-14 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:gap-16",
 };
 
 export default function ContactView() {
@@ -26,7 +26,7 @@ export default function ContactView() {
       {/* id is referenced by the Contact tab in PageNav (aria-controls) */}
       <main className={styles.main} id="contact-view">
         <div className={styles.grid}>
-          <div>
+          <div className="min-w-0">
             <Reveal>
               <ContactHeader />
             </Reveal>
@@ -38,7 +38,7 @@ export default function ContactView() {
             </Reveal>
           </div>
 
-          <Reveal delay={150}>
+          <Reveal delay={150} className="min-w-0">
             <ContactForm />
           </Reveal>
         </div>

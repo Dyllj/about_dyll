@@ -45,7 +45,7 @@ export default function AvailabilityCard() {
             {CONTACT.location}
           </p>
 
-          <p className="mt-3 flex items-center gap-3 text-5xl font-bold leading-none tracking-tight tabular-nums">
+          <p className="mt-3 flex items-center gap-3 text-4xl font-bold leading-none tracking-tight tabular-nums sm:text-5xl">
             {daytime ? <SunIcon width={32} height={32} /> : <MoonIcon width={32} height={32} />}
             <time>{label}</time>
           </p>

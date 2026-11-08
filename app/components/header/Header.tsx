@@ -35,9 +35,9 @@ export default function Header() {
   }, []);
 
   return (
-    <header className="sticky top-3 z-50 px-3 py-3 sm:top-4 sm:px-8">
+    <header className="sticky top-3 z-50 px-3 py-3 max-[380px]:px-1 sm:top-4 sm:px-8">
       {/* One floating "island" that groups logo, nav and theme toggle */}
-      <div className="relative isolate mx-auto flex w-fit max-w-full items-center gap-1.5 p-1.5 sm:gap-3">
+      <div className="relative isolate mx-auto flex w-fit max-w-full items-center gap-1.5 p-1.5 max-[380px]:gap-0 max-[380px]:p-1 sm:gap-3">
         {/* The glass lives on its own layer so nothing that contains the toggle has a
             blur/transform (its full-screen effect stays intact). Once the page is
             scrolled it gets a two-part shadow: a dark drop shadow for depth, plus a
@@ -50,8 +50,8 @@ export default function Header() {
         />
 
         {/* Logo badge */}
-        <div className="grid size-12 shrink-0 place-items-center sm:size-14">
-          <div className="[&_img]:size-9 sm:[&_img]:size-11">
+        <div className="grid size-12 shrink-0 place-items-center max-[380px]:size-10 sm:size-14">
+          <div className="[&_img]:size-9 max-[380px]:[&_img]:size-7 sm:[&_img]:size-11">
             <Logo />
           </div>
         </div>

@@ -12,7 +12,7 @@ export default function ContactHeader() {
 
       <h1
         id="contact-heading"
-        className="mt-6 text-5xl font-bold leading-[1.05] tracking-tight text-zinc-900 sm:text-6xl xl:text-7xl"
+        className="mt-6 text-4xl font-bold leading-[1.05] tracking-tight text-zinc-900 sm:text-6xl xl:text-7xl"
       >
         Let&apos;s build something <span className="hero-underline text-brand">meaningful.</span>
       </h1>
