@@ -8,6 +8,7 @@ import cumLaudeImg from "@/public/about_dyll_assets/Cum Laude.png";
 import bestPaperImg from "@/public/about_dyll_assets/Best Paper.png";
 import raiseImg from "@/public/about_dyll_assets/RAISE seminar.jpg";
 import researcherImg from "@/public/about_dyll_assets/Researcher of the Year.jpg";
+import { PROJECTS } from "../work/content";
 
 export const PROFILE = {
   name: "Wendyll Jay Tautoan",
@@ -79,10 +80,8 @@ export const ACHIEVEMENT_CARDS: Achievement[] = [
   },
 ];
 
-// The achievements number is derived so it never goes out of date.
-// Replace the two 0s with your real numbers.
 export const STATS = [
-  { value: 0, label: "Projects" },
-  { value: 0, label: "Years of experience" },
+  { value: PROJECTS.length, label: "Projects" },
+  { value: 1, label: "Years of experience" },
   { value: ACHIEVEMENT_CARDS.length, label: "Achievements" },
 ];

@@ -17,12 +17,12 @@ const styles = {
   // and it pauses while an icon is hovered or focused so it is easy to click.
   ring: "group/orbit pointer-events-none absolute inset-0 list-none animate-orbit hover:[animation-play-state:paused] focus-within:[animation-play-state:paused] motion-reduce:animate-none",
   item: "absolute -translate-x-1/2 -translate-y-1/2",
-  link: "pointer-events-auto group relative block rounded-full focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand",
+  link: "orbit-nav-link pointer-events-auto group relative block rounded-full focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand",
   // Turns the opposite way at the same speed so the icon and label stay upright
   upright:
     "animate-orbit-counter block group-hover/orbit:[animation-play-state:paused] group-focus-within/orbit:[animation-play-state:paused] motion-reduce:animate-none",
   circle:
-    "flex size-12 items-center justify-center rounded-full border-2 border-brand/20 bg-white/90 text-zinc-700 shadow-lg shadow-brand/10 backdrop-blur-md transition-[transform,color,background-color,border-color] duration-300 ease-in-out sm:size-14 " +
+    "orbit-nav-circle flex size-12 items-center justify-center rounded-full border-2 border-brand/20 bg-white/90 text-foreground shadow-lg shadow-brand/10 backdrop-blur-md transition-[transform,color,background-color,border-color] duration-300 ease-in-out sm:size-14 " +
     "group-hover:scale-110 group-hover:border-brand group-hover:bg-brand group-hover:text-white " +
     "group-focus-visible:scale-110 group-focus-visible:border-brand group-focus-visible:bg-brand group-focus-visible:text-white " +
     "motion-reduce:transition-none",

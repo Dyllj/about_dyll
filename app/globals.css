@@ -180,6 +180,12 @@
   color: var(--background);
 }
 
+:root[data-theme="dark"] .orbit-nav-link:is(:hover, :focus-visible) .orbit-nav-circle {
+  border-color: var(--color-brand);
+  background-color: var(--surface-muted);
+  color: var(--foreground);
+}
+
 .profile-nameplate {
   border-color: var(--profile-nameplate-border);
   background-color: var(--profile-nameplate-background);
