@@ -2,7 +2,9 @@
 
 import styled from "styled-components";
 import { flushSync } from "react-dom";
-import { useEffect, useState, type ChangeEvent } from "react";
+import { useEffect, useSyncExternalStore, type ChangeEvent } from "react";
+
+const THEME_CHANGE_EVENT = "color-theme-change";
 
 const getInitialTheme = () => {
   if (typeof window === "undefined") return false;
@@ -18,6 +20,18 @@ const getInitialTheme = () => {
 
   return document.documentElement.dataset.theme === "dark";
 };
+
+const subscribeToTheme = (onStoreChange: () => void) => {
+  window.addEventListener(THEME_CHANGE_EVENT, onStoreChange);
+  window.addEventListener("storage", onStoreChange);
+
+  return () => {
+    window.removeEventListener(THEME_CHANGE_EVENT, onStoreChange);
+    window.removeEventListener("storage", onStoreChange);
+  };
+};
+
+const getServerTheme = () => false;
 
 const SunIcon = () => (
   <svg
@@ -47,10 +61,11 @@ const MoonIcon = () => (
 );
 
 const Switch = () => {
-  const [isDark, setIsDark] = useState(getInitialTheme);
+  const isDark = useSyncExternalStore(subscribeToTheme, getInitialTheme, getServerTheme);
 
   useEffect(() => {
-    document.documentElement.dataset.theme = isDark ? "dark" : "light";
+    const initialTheme = getInitialTheme();
+    document.documentElement.dataset.theme = initialTheme ? "dark" : "light";
   }, [isDark]);
 
   const toggleTheme = (event: ChangeEvent<HTMLInputElement>) => {
@@ -64,8 +79,8 @@ const Switch = () => {
     }
 
     const updateTheme = () => {
-      setIsDark(nextIsDark);
       document.documentElement.dataset.theme = nextTheme;
+      window.dispatchEvent(new Event(THEME_CHANGE_EVENT));
     };
 
     if (

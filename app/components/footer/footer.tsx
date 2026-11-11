@@ -15,7 +15,11 @@ const links = [
 
 const socials = [
   { label: "GitHub", href: "https://github.com/Dyllj", icon: FaGithub },
-  { label: "LinkedIn", href: "https://www.linkedin.com", icon: FaLinkedin },
+  {
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/in/wendyll-jay-tautoan-742083408/",
+    icon: FaLinkedin,
+  },
   { label: "Instagram", href: "https://www.instagram.com", icon: FaInstagram },
   { label: "Facebook", href: "https://www.facebook.com", icon: FaFacebook },
 ];

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Noto_Sans_Hebrew, Space_Grotesk } from "next/font/google";
 import { SITE_NAME, SITE_URL, SOCIAL_IMAGE } from "./seo";
+import StyledComponentsRegistry from "./lib/StyledComponentsRegistry";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -104,13 +105,15 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${geistSans.variable} ${geistMono.variable} ${spaceGrotesk.variable} ${notoSansHebrew.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(structuredData).replace(/</g, "\\u003c"),
-          }}
-        />
-        {children}
+        <StyledComponentsRegistry>
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify(structuredData).replace(/</g, "\\u003c"),
+            }}
+          />
+          {children}
+        </StyledComponentsRegistry>
       </body>
     </html>
   );
