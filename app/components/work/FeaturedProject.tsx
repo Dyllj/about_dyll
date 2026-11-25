@@ -128,6 +128,18 @@ export default function FeaturedProject({ project, index, total, onStep, onOpen 
                 <ArrowRightIcon className="size-4 transition-transform duration-300 group-hover/more:translate-x-1" />
               </button>
             )}
+            {project.repoUrl && (
+              <a
+                href={project.repoUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`Source code for ${project.title}`}
+                className={styles.secondary}
+              >
+                Source code
+                <ArrowUpRightIcon className="size-4" />
+              </a>
+            )}
           </div>
         </div>
       </div>

@@ -1,4 +1,4 @@
-import { ArrowRightIcon } from "./Icons";
+import { ArrowRightIcon, ArrowUpRightIcon } from "./Icons";
 import ProjectCover from "./ProjectCover";
 import TechChips from "./TechChips";
 import { stackItems, stackSample, type Project } from "./content";
@@ -20,6 +20,8 @@ const styles = {
     "text-left text-lg font-semibold leading-snug tracking-tight text-zinc-900 transition-colors hover:text-brand focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand",
   details:
     "group/link mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-brand focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand",
+  externalLink:
+    "inline-flex items-center gap-1 text-sm font-semibold text-zinc-700 transition-colors hover:text-brand focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand",
 };
 
 /** One row in the "More projects" column. */
@@ -61,10 +63,36 @@ export default function ProjectListItem({ project, index, onSelect, onOpen }: Pr
             className="mt-3"
           />
 
-          <button type="button" onClick={onOpen} className={styles.details}>
-            See full details
-            <ArrowRightIcon className="size-4 transition-transform duration-300 group-hover/link:translate-x-1" />
-          </button>
+          <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-2">
+            {project.liveUrl && (
+              <a
+                href={project.liveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`Live site for ${project.title}`}
+                className={styles.externalLink}
+              >
+                Live site
+                <ArrowUpRightIcon className="size-3.5" />
+              </a>
+            )}
+            {project.repoUrl && (
+              <a
+                href={project.repoUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`Source code for ${project.title}`}
+                className={styles.externalLink}
+              >
+                Source code
+                <ArrowUpRightIcon className="size-3.5" />
+              </a>
+            )}
+            <button type="button" onClick={onOpen} className={styles.details}>
+              See full details
+              <ArrowRightIcon className="size-4 transition-transform duration-300 group-hover/link:translate-x-1" />
+            </button>
+          </div>
         </div>
       </article>
     </li>

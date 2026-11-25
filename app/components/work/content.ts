@@ -118,6 +118,7 @@ export const PROJECTS: Project[] = [
       "Device health monitoring: a scheduled cloud function checks every 2 minutes that each sensor is still reporting.",
       "Admin dashboard with live status, charts, historical data, contact management and PDF/Excel report generation, protected by Firebase Authentication.",
     ],
+    repoUrl: "https://github.com/Dyllj/flood_monitoring_system",
     stack: [
       { label: "Hardware & IoT", items: ["ESP8266", "ESP32", "LoRa", "Ultrasonic sensor", "Arduino C++"] },
       { label: "Frontend", items: ["React", "Vite", "Recharts", "styled-components", "jsPDF", "SheetJS"] },
@@ -148,6 +149,8 @@ export const PROJECTS: Project[] = [
       "Transactional email notifications through the Resend API.",
       "Led the capstone team as Project Coordinator; the paper won Best Paper Award at the 6th International Research Congress.",
     ],
+    liveUrl: "https://alertech.vercel.app",
+    repoUrl: "https://github.com/Dyllj/alertech",
     // TODO: add the mobile framework and the backend runtime/database (not public, so not listed).
     stack: [
       { label: "AI", items: ["Gemini AI"] },
@@ -176,6 +179,8 @@ export const PROJECTS: Project[] = [
       "Intern, admin, schedule and holiday management, plus printable DTR reports from both web and mobile.",
       "One shared Supabase backend modelling attendance, interns, QR codes, reports and holidays in PostgreSQL.",
     ],
+    liveUrl: "https://njsbdtr.vercel.app",
+    repoUrl: "https://github.com/Dyllj/njsb_dtr",
     stack: [
       {
         label: "Web",
@@ -228,6 +233,8 @@ export const PROJECTS: Project[] = [
       "Contact form wired to EmailJS, so visitors can reach me without leaving the page.",
       "Pages for Home, About, Skills and Technologies, designed to be responsive on every screen size.",
     ],
+    liveUrl: "https://wendyll-jay.vercel.app",
+    repoUrl: "https://github.com/Dyllj/Wendyll_Jay",
     stack: [
       {
         label: "Frontend",
@@ -258,6 +265,7 @@ export const PROJECTS: Project[] = [
       "Native touches such as haptic feedback on the tab bar, with themed light and dark components.",
       "One codebase targeting iOS, Android and the web.",
     ],
+    repoUrl: "https://github.com/Dyllj/ProjectApp/tree/master",
     stack: [
       {
         label: "Mobile",
