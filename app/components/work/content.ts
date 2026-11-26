@@ -107,6 +107,7 @@ export const PROJECTS: Project[] = [
     title: "IoT-based Flood Monitoring System",
     type: "Capstone Project",
     categories: ["IoT", "Web"],
+    role: "Full-Stack Web Developer",
     featured: true,
     summary:
       "An end-to-end flood early-warning platform: LoRa water-level sensors, a Firebase cloud backend, automatic SMS alerts and a real-time React dashboard.",
@@ -170,6 +171,7 @@ export const PROJECTS: Project[] = [
     title: "NJSB Intern DTR",
     type: "Full-Stack Project",
     categories: ["Web", "Mobile"],
+    role: "Full-Stack Developer",
     summary:
       "A full-stack attendance system for interns: QR-code check-ins on a React Native app, an admin web dashboard with analytics, and generated daily time records.",
     description:
@@ -203,6 +205,7 @@ export const PROJECTS: Project[] = [
     title: "IoT-based Water Level Monitoring System",
     type: "Team Project",
     categories: ["IoT", "Web"],
+    role: "IOT Developer",
     summary:
       "A team-built IoT prototype that measures water levels with sensors and streams the readings to a web dashboard for remote monitoring.",
     description:
@@ -225,6 +228,7 @@ export const PROJECTS: Project[] = [
     title: "Personal Portfolio Website",
     type: "Personal Project",
     categories: ["Web"],
+    role: "Developer/Designer",
     summary:
       "A responsive, animated portfolio built with React, Vite and Tailwind CSS, with GSAP and Motion animations and a working contact form.",
     description:
@@ -257,6 +261,7 @@ export const PROJECTS: Project[] = [
     title: "Mobile App Portfolio",
     type: "Personal Project",
     categories: ["Mobile"],
+    role: "Developer",
     summary:
       "A cross-platform portfolio app built with Expo and React Native, with Home, About, Skills and Contact tabs and file-based navigation.",
     description:
