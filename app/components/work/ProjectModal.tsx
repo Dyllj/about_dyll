@@ -123,7 +123,7 @@ export default function ProjectModal({
             <ProjectCover project={project} imageIndex={imageIndex} sizes="(min-width: 896px) 560px, 58vw" priority />
 
             <div className="absolute left-4 top-4 flex flex-wrap items-center gap-2">
-              <span className="rounded-full bg-zinc-900 px-3 py-1 text-[13px] font-semibold tabular-nums text-white shadow-lg shadow-black/20">
+              <span className="rounded-full bg-zinc-900 px-3 py-1 text-[13px] font-semibold tabular-nums text-[#ffffff] shadow-lg shadow-black/20">
                 {index + 1} / {total}
               </span>
               {project.award && (

@@ -118,6 +118,7 @@ export const PROJECTS: Project[] = [
       "Device health monitoring: a scheduled cloud function checks every 2 minutes that each sensor is still reporting.",
       "Admin dashboard with live status, charts, historical data, contact management and PDF/Excel report generation, protected by Firebase Authentication.",
     ],
+    liveUrl: "https://floodmonitor-292dc.web.app",
     repoUrl: "https://github.com/Dyllj/flood_monitoring_system",
     stack: [
       { label: "Hardware & IoT", items: ["ESP8266", "ESP32", "LoRa", "Ultrasonic sensor", "Arduino C++"] },

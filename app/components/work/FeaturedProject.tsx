@@ -27,7 +27,7 @@ const styles = {
   media:
     "relative aspect-video overflow-hidden rounded-3xl border border-white bg-white shadow-sm",
   counter:
-    "rounded-full bg-zinc-900 px-3 py-1 text-[13px] font-semibold tabular-nums text-white shadow-lg shadow-black/20",
+    "rounded-full bg-zinc-900 px-3 py-1 text-[13px] font-semibold tabular-nums text-[#ffffff] shadow-lg shadow-black/20",
   featuredChip:
     "rounded-full bg-brand px-3 py-1 text-[13px] font-semibold text-white shadow-lg shadow-brand/30",
   awardChip:
